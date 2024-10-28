@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "amiga",
+            "includePath": [
+                "../AmigaOS.MUI.cpp.wrapper/wrappers/src/",
+                "${workspaceFolder}/app/src/**",
+                "/opt/amiga/m68k-amigaos/ndk-include/",
+                "/opt/amiga/m68k-amigaos/include/",
+                "/opt/amiga/m68k-amigaos/vbcc/include"
+            ],
+            "defines": [],
+            "compilerPath": "m68k-amigaos-g++",
+            "cStandard": "c11",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x86",
+            "compilerArgs": [
+                "-lamiga",
+                "-noixemul"
+            ],
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}
