@@ -20,7 +20,7 @@ IdentifyBaseScope::IdentifyBaseScope(const bool optional)
         throw std::runtime_error(error);
     }
 
-    if (!(IdentifyBase = OpenLibrary("identify.library", 6)))
+    if (!(IdentifyBase = OpenLibrary("identify.library", 44)))
     {
         if (optional)
             return;
