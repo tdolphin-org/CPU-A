@@ -6,6 +6,7 @@
 
 #include "Content.hpp"
 
+#include "AOS/Identify/Library.hpp"
 #include "FileResources/CPUImages.hpp"
 #include "MUI/Balance.hpp"
 #include "MUI/Core/MakeObject.hpp"
@@ -15,7 +16,8 @@
 namespace Components
 {
     Content::Content()
-      : mCPUNameText(ValueText("Full name (and revision) of CPU"))
+      : mCPUVendorText(ValueText("Vendor of CPU"))
+      , mCPUModelText(ValueText("Full name (and revision) of CPU"))
       , mCPUVoltageText(ValueText("Core Voltage"))
       , mCPUTDPText(ValueText("Maximal Thermal Design Power"))
       , mCPUTechnologyText(ValueText("Production technology"))
@@ -43,12 +45,11 @@ namespace Components
                                                   .horizontal()
                                                   .tagChild(MUI::GroupBuilder()
                                                                 .tagChild(MUI::GroupBuilder()
-                                                                              .horizontal()
-                                                                              .tagChild(LabelText(MUIX_R "Name"))
-                                                                              .tagChild(mCPUNameText)
-                                                                              .object())
-                                                                .tagChild(MUI::GroupBuilder()
                                                                               .tagColumns(4)
+                                                                              .tagChild(LabelText(MUIX_R "Vendor"))
+                                                                              .tagChild(mCPUVendorText)
+                                                                              .tagChild(LabelText(MUIX_R "Model"))
+                                                                              .tagChild(mCPUModelText)
                                                                               .tagChild(LabelText(MUIX_R "Voltage"))
                                                                               .tagChild(mCPUVoltageText)
                                                                               .tagChild(LabelText(MUIX_R "Technology"))
@@ -107,14 +108,19 @@ namespace Components
             { "About", mAboutGroup },
         })
     {
-        // TODO get/detect real values
-        // mock values
-        mCPUNameText.setContents("Motorola 68000");
-        mCPUClockText.setContents("8 MHz");
-        mCPUVoltageText.setContents("5 V");
-        mCPUTechnologyText.setContents("2.0-3.5 \xB5m");
-        mCPUTDPText.setContents("~0.7-1.5 W");
-        mCPUPremiereYearText.setContents("1979");
+        auto cpus = AOS::Identify::Library::GetAllCPUs();
+
+        if (!cpus.empty())
+        {
+            // TODO get/detect real values
+            mCPUVendorText.setContents("Motorola");
+            mCPUModelText.setContents(cpus.at(0).model);
+            mCPUClockText.setContents(cpus.at(0).clock);
+            mCPUVoltageText.setContents("5 V");
+            mCPUTechnologyText.setContents("2.0-3.5 \xB5m");
+            mCPUTDPText.setContents("~0.7-1.5 W");
+            mCPUPremiereYearText.setContents("1979");
+        }
     }
 
     MUI::Text Content::LabelText(const std::string &label)

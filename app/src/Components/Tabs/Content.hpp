@@ -15,7 +15,8 @@ namespace Components
 {
     class Content : public Root<MUI::Group>
     {
-        MUI::Text mCPUNameText;
+        MUI::Text mCPUVendorText;
+        MUI::Text mCPUModelText;
         MUI::Text mCPUTDPText;
         MUI::Text mCPUVoltageText;
         MUI::Text mCPUTechnologyText;
