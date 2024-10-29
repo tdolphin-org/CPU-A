@@ -22,9 +22,6 @@ DEBUG_FLAGS =
 CPP_FLAGS = $(DEBUG_FLAGS) $(MORE_CPP_FLAGS_X) -std=c++17 -Isrc -I${MUICPP_PATH}/wrappers/src -O1
 LFLAGS = -L${MUICPP_PATH}/wrappers/lib/$(SUB_BUILD_PATH) -lMUIcpp $(MORE_LFLAGS_X) -lstdc++ -noixemul
 
-C_FLAGS = -Isrc -Wall -noixemul -O1\
-	-fomit-frame-pointer -fverbose-asm -mno-prototype -Wformat -Wunused -Wuninitialized -Wconversion -Wstrict-prototypes
-
 dir_guard = mkdir -p $(@D)
 
 BINPATH = out/$(SUB_BUILD_PATH)
@@ -33,7 +30,7 @@ include makefile.gen.version.mk
 
 MODULES_COMPONENTS = Components Components/Core Components/Tabs
 
-MODULES = $(MODULES_COMPONENTS) FileResources
+MODULES = $(MODULES_COMPONENTS) FileResources AOS/Identify
 
 SRC_DIRS = src $(addprefix src/,$(MODULES))
 SRCS = $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.cpp))

@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include "AOS/Identify/IdentifyBaseScope.hpp"
 #include "Components/Application.hpp"
 #include "Core/Singleton.hpp"
 #include "MUI/Core/MuiMasterBaseScope.hpp"
@@ -14,8 +15,9 @@ class AppCore
 {
     friend class td::Singleton<AppCore>;
 
-    // open MUI library, close on destructor
-    MuiMasterBaseScope muiBase;
+    // open libraries, close on destructor
+    MuiMasterBaseScope muiBaseScope;
+    IdentifyBaseScope identifyBaseScope;
 
     Components::Application mApplication;
 
