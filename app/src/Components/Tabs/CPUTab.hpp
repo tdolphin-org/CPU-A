@@ -6,14 +6,15 @@
 
 #pragma once
 
-#include "TabsContainer.hpp"
+#include "../Core/Root.hpp"
 
+#include "MUI/Group.hpp"
 #include "MUI/Image.hpp"
 #include "MUI/Text.hpp"
 
 namespace Components
 {
-    class Content : public Root<MUI::Group>
+    class CPUTab : public Root<MUI::Group>
     {
         MUI::Text mCPUVendorText;
         MUI::Text mCPUModelText;
@@ -29,19 +30,11 @@ namespace Components
         MUI::Text mCPUL1Data;
         MUI::Text mCPULevel2;
         MUI::Text mCPULevel3;
-        MUI::Group mCPUGroup;
 
-        MUI::Group mMainboardGroup;
-        MUI::Group mMemoryGroup;
-        MUI::Group mGraphicsGroup;
-        MUI::Group mExpansionsGroup;
-        MUI::Group mBenchGroup;
-        MUI::Group mAboutGroup;
-
-        TabsContainer mComponent;
+        MUI::Group mComponent;
 
       public:
-        Content();
+        CPUTab();
 
         MUI::Text LabelText(const std::string &label);
         MUI::Text ValueText(const std::string &help, const std::string &defaultValue = "--");
@@ -49,7 +42,7 @@ namespace Components
       protected:
         MUI::Group &muiRoot() const
         {
-            return mComponent;
+            return const_cast<MUI::Group &>(mComponent);
         }
     };
 }

@@ -9,7 +9,7 @@
 #include "Core/Root.hpp"
 #include "MUI/Text.hpp"
 #include "MUI/Window.hpp"
-#include "Tabs/Content.hpp"
+#include "Content.hpp"
 
 namespace Components
 {
