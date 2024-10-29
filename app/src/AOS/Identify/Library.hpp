@@ -22,7 +22,7 @@ namespace AOS::Identify
     struct CpuInfo
     {
         CpuType type;
-        std::string name;
+        std::string model;
         std::string revision;
         std::string clock;
     };

@@ -34,7 +34,5 @@ int main(int argc, char **argv)
         return RETURN_FAIL;
     }
 
-    std::cout << "Application finished!" << std::endl;
-
     return RETURN_OK;
 }
