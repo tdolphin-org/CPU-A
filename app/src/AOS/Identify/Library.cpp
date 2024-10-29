@@ -6,14 +6,35 @@
 
 #include "Library.hpp"
 
-#include <proto/identify.h>
 #include <libraries/identify.h>
+#include <proto/identify.h>
 
 namespace AOS::Identify
 {
-    std::string Library::cpuName()
+
+    std::vector<CpuInfo> Library::GetAllCPUs()
     {
-        auto result = IdHardware(IDHW_CPU, nullptr);
-        return result;
+        return { {
+                     CpuType::MC68k,
+                     IdHardware(IDHW_CPU, nullptr),
+                     IdHardware(IDHW_CPUREV, nullptr),
+                     IdHardware(IDHW_CPUCLOCK, nullptr),
+                 },
+                 {
+                     CpuType::PowerPC,
+                     IdHardware(IDHW_POWERPC, nullptr),
+                     "",
+                     IdHardware(IDHW_PPCCLOCK, nullptr),
+                 } };
+    }
+
+    std::string Library::libIdHardware(const enum IDHW idhw) noexcept
+    {
+        return IdHardware((ULONG)idhw, nullptr);
+    }
+
+    unsigned long Library::libIdHardwareNum(const enum IDHW idhw) noexcept
+    {
+        return IdHardwareNum((ULONG)idhw, nullptr);
     }
 }
