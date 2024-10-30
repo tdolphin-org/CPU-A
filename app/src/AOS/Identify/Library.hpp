@@ -6,7 +6,11 @@
 
 #pragma once
 
+#include "ValueType/IDCPU.hpp"
+#include "ValueType/IDFPU.hpp"
 #include "ValueType/IDHW.hpp"
+#include "ValueType/IDMMU.hpp"
+#include "ValueType/IDPPC.hpp"
 
 #include <string>
 #include <vector>
@@ -30,6 +34,11 @@ namespace AOS::Identify
     struct Library
     {
         static std::vector<CpuInfo> GetAllCPUs();
+
+        static IDCPU GetCPU() noexcept;
+        static IDFPU GetFPU() noexcept;
+        static IDMMU GetMMU() noexcept;
+        static IDPPC GetPowerPC() noexcept;
 
         /// @brief identify:IdHardware()
         static std::string libIdHardware(const enum IDHW idhw) noexcept;

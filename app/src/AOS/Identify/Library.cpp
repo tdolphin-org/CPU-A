@@ -28,6 +28,26 @@ namespace AOS::Identify
                  } };
     }
 
+    IDCPU Library::GetCPU() noexcept
+    {
+        return static_cast<IDCPU>(IdHardwareNum(IDHW_CPU, nullptr));
+    }
+
+    IDFPU Library::GetFPU() noexcept
+    {
+        return static_cast<IDFPU>(IdHardwareNum(IDHW_FPU, nullptr));
+    }
+
+    IDMMU Library::GetMMU() noexcept
+    {
+        return static_cast<IDMMU>(IdHardwareNum(IDHW_MMU, nullptr));
+    }
+
+    IDPPC Library::GetPowerPC() noexcept
+    {
+        return static_cast<IDPPC>(IdHardwareNum(IDHW_POWERPC, nullptr));
+    }
+
     std::string Library::libIdHardware(const enum IDHW idhw) noexcept
     {
         return IdHardware((ULONG)idhw, nullptr);
