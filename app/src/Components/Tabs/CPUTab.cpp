@@ -150,19 +150,4 @@ namespace Components
             mCPUThreads.setContents(std::to_string(cpuSpec.totalThreads));
         }
     }
-
-    MUI::Text CPUTab::LabelText(const std::string &label)
-    {
-        return MUI::TextBuilder().tagContents(label).tagFrame(MUI::Frame::String).tagPhantomHoriz(true).tagWeight(0).object();
-    }
-
-    MUI::Text CPUTab::ValueText(const std::string &help, const std::string &defaultValue)
-    {
-        return MUI::TextBuilder()
-            .tagFrame(MUI::Frame::String)
-            .tagContents(defaultValue)
-            .tagBackground(MUI::ImageOrBackground::StringActiveBack)
-            .tagShortHelp(help)
-            .object();
-    }
 }

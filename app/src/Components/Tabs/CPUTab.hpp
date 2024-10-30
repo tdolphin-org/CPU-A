@@ -7,15 +7,16 @@
 #pragma once
 
 #include "../Core/Root.hpp"
+#include "TabBase.hpp"
 
+#include "MUI/Cycle.hpp"
 #include "MUI/Group.hpp"
 #include "MUI/Image.hpp"
-#include "MUI/Cycle.hpp"
 #include "MUI/Text.hpp"
 
 namespace Components
 {
-    class CPUTab : public Root<MUI::Group>
+    class CPUTab : public Root<MUI::Group>, public TabBase
     {
         static const char *mCPUs[];
 
@@ -43,9 +44,6 @@ namespace Components
 
       public:
         CPUTab();
-
-        MUI::Text LabelText(const std::string &label);
-        MUI::Text ValueText(const std::string &help, const std::string &defaultValue = "--");
 
       protected:
         MUI::Group &muiRoot() const
