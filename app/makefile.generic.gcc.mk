@@ -30,7 +30,7 @@ include makefile.gen.version.mk
 
 MODULES_COMPONENTS = Components Components/Core Components/Tabs
 
-MODULES = $(MODULES_COMPONENTS) FileResources TextResources AOS/Identify
+MODULES = $(MODULES_COMPONENTS) FileResources TextResources DataInfo AOS/Identify
 
 SRC_DIRS = src $(addprefix src/,$(MODULES))
 SRCS = $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.cpp))
