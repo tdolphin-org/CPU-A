@@ -26,7 +26,12 @@ namespace AOS::Identify
     struct CpuInfo
     {
         CpuType type;
-        std::string model;
+        union
+        {
+            enum IDCPU m68k;
+            enum IDPPC ppc;
+        } model;
+        std::string modelName;
         std::string revision;
         std::string clock;
     };
@@ -35,10 +40,10 @@ namespace AOS::Identify
     {
         static std::vector<CpuInfo> GetAllCPUs();
 
-        static IDCPU GetCPU() noexcept;
-        static IDFPU GetFPU() noexcept;
-        static IDMMU GetMMU() noexcept;
-        static IDPPC GetPowerPC() noexcept;
+        static enum IDCPU GetCPU() noexcept;
+        static enum IDFPU GetFPU() noexcept;
+        static enum IDMMU GetMMU() noexcept;
+        static enum IDPPC GetPowerPC() noexcept;
 
         /// @brief identify:IdHardware()
         static std::string libIdHardware(const enum IDHW idhw) noexcept;

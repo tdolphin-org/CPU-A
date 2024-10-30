@@ -1,7 +1,7 @@
 //
-//  Git Desktop
+//  CPU-A
 //
-//  (c) 2022-2024 TDolphin
+//  (c) 2024 TDolphin
 //
 
 #include "Library.hpp"
@@ -16,12 +16,14 @@ namespace AOS::Identify
     {
         return { {
                      CpuType::MC68k,
+                     { .m68k { GetCPU() } },
                      IdHardware(IDHW_CPU, nullptr),
                      IdHardware(IDHW_CPUREV, nullptr),
                      IdHardware(IDHW_CPUCLOCK, nullptr),
                  },
                  {
                      CpuType::PowerPC,
+                     { .ppc { GetPowerPC() } },
                      IdHardware(IDHW_POWERPC, nullptr),
                      "",
                      IdHardware(IDHW_PPCCLOCK, nullptr),

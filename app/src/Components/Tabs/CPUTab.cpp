@@ -96,7 +96,7 @@ namespace Components
         {
             // TODO get/detect real values
             mCPUVendorText.setContents("Motorola");
-            mCPUModelText.setContents(cpus.at(0).model);
+            mCPUModelText.setContents(cpus.at(0).modelName);
             mCPUClockText.setContents(cpus.at(0).clock);
             mCPUVoltageText.setContents("5 V");
             mCPUTechnologyText.setContents("2.0-3.5 \xB5m");
