@@ -34,6 +34,7 @@ namespace AOS::Identify
         std::string modelName;
         std::string revision;
         std::string clock;
+        std::vector<std::string> additionalUnits;
     };
 
     struct Library

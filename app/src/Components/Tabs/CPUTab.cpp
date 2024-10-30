@@ -7,9 +7,11 @@
 #include "CPUTab.hpp"
 
 #include "AOS/Identify/Library.hpp"
+#include "DataInfo/CPUSpec.hpp"
 #include "FileResources/CPUImages.hpp"
 #include "MUI/Core/MakeObject.hpp"
-#include "DataInfo/CPUSpec.hpp"
+
+#include <numeric>
 
 using namespace AOS::Identify;
 
@@ -27,10 +29,12 @@ namespace Components
     CPUTab::CPUTab()
       : mCPUVendorText(ValueText("Vendor of CPU"))
       , mCPUModelText(ValueText("Model of CPU"))
+      , mCPURevisionText(ValueText("Revision of CPU"))
       , mCPUCoreVoltageText(ValueText("CPU/Core Voltage"))
       , mCPUTDPText(ValueText("Maximal Thermal Design Power"))
       , mCPUTechnologyText(ValueText("Production technology"))
       , mCPUPremiereYearText(ValueText("Year of premiere"))
+      , mAdditionalUnits(ValueText("Additional Units like FPU, MMU"))
       , mCPUImage(MUI::ImageBuilder()
                       .tagSpecPicture(CPUImageFile::none)
                       .tagFixWidth(64)
@@ -61,7 +65,11 @@ namespace Components
                                                                                .tagChild(LabelText(MUIX_R "Vendor"))
                                                                                .tagChild(mCPUVendorText)
                                                                                .tagChild(LabelText(MUIX_R "Model"))
-                                                                               .tagChild(mCPUModelText)
+                                                                               .tagChild(MUI::GroupBuilder()
+                                                                                             .horizontal()
+                                                                                             .tagChild(mCPUModelText)
+                                                                                             .tagChild(mCPURevisionText)
+                                                                                             .object())
                                                                                .tagChild(LabelText(MUIX_R "Core Voltage"))
                                                                                .tagChild(mCPUCoreVoltageText)
                                                                                .tagChild(LabelText(MUIX_R "Technology"))
@@ -75,6 +83,11 @@ namespace Components
                                                                  .object())
                                                    .tagChild(mCPUImage)
                                                    .object())
+                                     .object())
+                       .tagChild(MUI::GroupBuilder()
+                                     .tagFrame(MUI::Frame::ReadList)
+                                     .tagFrameTitle("Additional/Integrated Units")
+                                     .tagChild(mAdditionalUnits)
                                      .object())
                        .tagChild(MUI::GroupBuilder()
                                      .horizontal()
@@ -121,14 +134,18 @@ namespace Components
         {
             auto &cpuSpec = DataInfo::cpuMC68k2spec.at(cpus.at(0).model.m68k);
 
-            mCPUVendorText.setContents("Motorola");
+            mCPUVendorText.setContents(cpuSpec.vendor);
             mCPUModelText.setContents(cpus.at(0).modelName);
+            mCPURevisionText.setContents(cpus.at(0).revision);
             mCPUClockText.setContents(cpus.at(0).clock);
             mCPUCoreVoltageText.setContents(cpuSpec.coreVoltage);
             mCPUTechnologyText.setContents(cpuSpec.technology);
             mCPUTDPText.setContents(cpuSpec.tdp);
             mCPUPremiereYearText.setContents(cpuSpec.premiere);
             mCPUImage.setSpecPicture(cpu2image.at(cpus.at(0).model.m68k));
+            mAdditionalUnits.setContents(
+                std::accumulate(cpus.at(0).additionalUnits.begin(), cpus.at(0).additionalUnits.end(), std::string(""),
+                                [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; }));
             mCPUCores.setContents(std::to_string(cpuSpec.totalCores));
             mCPUThreads.setContents(std::to_string(cpuSpec.totalThreads));
         }
