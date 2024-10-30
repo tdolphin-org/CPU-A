@@ -10,8 +10,21 @@
 #include "FileResources/CPUImages.hpp"
 #include "MUI/Core/MakeObject.hpp"
 
+#include <map>
+
+using namespace AOS::Identify;
+
+std::map<IDCPU, std::string> cpu2image = {
+    { IDCPU::MC68000, CPUImageFile::mc68000 },   { IDCPU::MC68010, CPUImageFile::mc68010 },   { IDCPU::MC68020, CPUImageFile::mc68020 },
+    { IDCPU::MC68030, CPUImageFile::mc68030 },   { IDCPU::MC68EC030, CPUImageFile::mc68030 }, { IDCPU::MC68040, CPUImageFile::mc68040 },
+    { IDCPU::MC68LC040, CPUImageFile::mc68040 }, { IDCPU::MC68060, CPUImageFile::mc68060 },   { IDCPU::MC68LC060, CPUImageFile::mc68060 },
+    { IDCPU::FPGA, CPUImageFile::fpga },         { IDCPU::EMU68, CPUImageFile::emu68 },
+};
+
 namespace Components
 {
+    const char *CPUTab::mCPUs[] = { "MC68k", "PowerPC", nullptr };
+
     CPUTab::CPUTab()
       : mCPUVendorText(ValueText("Vendor of CPU"))
       , mCPUModelText(ValueText("Model of CPU"))
@@ -20,7 +33,7 @@ namespace Components
       , mCPUTechnologyText(ValueText("Production technology"))
       , mCPUPremiereYearText(ValueText("Year of premiere"))
       , mCPUImage(MUI::ImageBuilder()
-                      .tagSpecPicture(CPUImageFile::mc68000)
+                      .tagSpecPicture(CPUImageFile::none)
                       .tagFixWidth(64)
                       .tagFixHeight(64)
                       .tagFreeHoriz(true)
@@ -33,6 +46,9 @@ namespace Components
       , mCPUL1Data(ValueText("Level 1 Data Cache size"))
       , mCPULevel2(ValueText("Level 2 Cache size"))
       , mCPULevel3(ValueText("Level 3 Cache size"))
+      , mSelectionCycle(MUI::CycleBuilder().tagEntries(mCPUs).object())
+      , mCPUCores(ValueText("Total number of Cores"))
+      , mCPUThreads(ValueText("Total number of Threads"))
       , mComponent(MUI::GroupBuilder()
                        .vertical()
                        .tagChild(MUI::GroupBuilder()
@@ -88,6 +104,16 @@ namespace Components
                                                    .tagChild(mCPULevel3)
                                                    .object())
                                      .object())
+                       .tagChild(MUI::GroupBuilder()
+                                     .horizontal()
+                                     .tagFrame(MUI::Frame::ReadList)
+                                     .tagChild(LabelText("Selection"))
+                                     .tagChild(mSelectionCycle)
+                                     .tagChild(LabelText("Cores"))
+                                     .tagChild(mCPUCores)
+                                     .tagChild(LabelText("Threads"))
+                                     .tagChild(mCPUThreads)
+                                     .object())
                        .object())
     {
         auto cpus = AOS::Identify::Library::GetAllCPUs();
@@ -102,6 +128,7 @@ namespace Components
             mCPUTechnologyText.setContents("2.0-3.5 \xB5m");
             mCPUTDPText.setContents("~0.7-1.5 W");
             mCPUPremiereYearText.setContents("1979");
+            mCPUImage.setSpecPicture(cpu2image.at(cpus.at(0).model.m68k));
         }
     }
 

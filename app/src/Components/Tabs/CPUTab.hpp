@@ -10,12 +10,15 @@
 
 #include "MUI/Group.hpp"
 #include "MUI/Image.hpp"
+#include "MUI/Cycle.hpp"
 #include "MUI/Text.hpp"
 
 namespace Components
 {
     class CPUTab : public Root<MUI::Group>
     {
+        static const char *mCPUs[];
+
         MUI::Text mCPUVendorText;
         MUI::Text mCPUModelText;
         MUI::Text mCPUTDPText;
@@ -30,6 +33,9 @@ namespace Components
         MUI::Text mCPUL1Data;
         MUI::Text mCPULevel2;
         MUI::Text mCPULevel3;
+        MUI::Cycle mSelectionCycle;
+        MUI::Text mCPUCores;
+        MUI::Text mCPUThreads;
 
         MUI::Group mComponent;
 
