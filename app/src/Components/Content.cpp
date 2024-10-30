@@ -9,6 +9,7 @@
 #include "MUI/Core/MakeObject.hpp"
 #include "MUI/Text.hpp"
 #include "ProgDefines.hpp"
+#include "TextResources/Labels.hpp"
 
 namespace Components
 {
@@ -19,13 +20,13 @@ namespace Components
       , mBenchGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel("Bench")).object())
       , mAboutGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel(APP_DESCRIPTION)).object())
       , mComponent({
-            { "CPU", mCPUTab },
-            { "Mainboard", mMainboardTab },
-            { "Memory", mMemoryGroup },
-            { "Graphics", mGraphicsGroup },
-            { "Expansions", mExpansionsGroup },
-            { "Bench", mBenchGroup },
-            { "About", mAboutGroup },
+            { Label::CPUTab, mCPUTab },
+            { Label::MainboardTab, mMainboardTab },
+            { Label::MemoryTab, mMemoryGroup },
+            { Label::GraphicsTab, mGraphicsGroup },
+            { Label::ExpansionsTab, mExpansionsGroup },
+            { Label::BenchTab, mBenchGroup },
+            { Label::AboutTab, mAboutGroup },
         })
     {
     }
