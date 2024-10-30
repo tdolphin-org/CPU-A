@@ -22,7 +22,7 @@ namespace Components
         MUI::Text mCPUVendorText;
         MUI::Text mCPUModelText;
         MUI::Text mCPUTDPText;
-        MUI::Text mCPUVoltageText;
+        MUI::Text mCPUCoreVoltageText;
         MUI::Text mCPUTechnologyText;
         MUI::Text mCPUPremiereYearText;
         MUI::Image mCPUImage;

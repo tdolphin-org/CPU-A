@@ -9,8 +9,7 @@
 #include "AOS/Identify/Library.hpp"
 #include "FileResources/CPUImages.hpp"
 #include "MUI/Core/MakeObject.hpp"
-
-#include <map>
+#include "DataInfo/CPUSpec.hpp"
 
 using namespace AOS::Identify;
 
@@ -28,7 +27,7 @@ namespace Components
     CPUTab::CPUTab()
       : mCPUVendorText(ValueText("Vendor of CPU"))
       , mCPUModelText(ValueText("Model of CPU"))
-      , mCPUVoltageText(ValueText("CPU/Core Voltage"))
+      , mCPUCoreVoltageText(ValueText("CPU/Core Voltage"))
       , mCPUTDPText(ValueText("Maximal Thermal Design Power"))
       , mCPUTechnologyText(ValueText("Production technology"))
       , mCPUPremiereYearText(ValueText("Year of premiere"))
@@ -63,8 +62,8 @@ namespace Components
                                                                                .tagChild(mCPUVendorText)
                                                                                .tagChild(LabelText(MUIX_R "Model"))
                                                                                .tagChild(mCPUModelText)
-                                                                               .tagChild(LabelText(MUIX_R "Voltage"))
-                                                                               .tagChild(mCPUVoltageText)
+                                                                               .tagChild(LabelText(MUIX_R "Core Voltage"))
+                                                                               .tagChild(mCPUCoreVoltageText)
                                                                                .tagChild(LabelText(MUIX_R "Technology"))
                                                                                .tagChild(mCPUTechnologyText)
                                                                                .tagChild(LabelText(MUIX_R "Max TDP"))
@@ -120,15 +119,18 @@ namespace Components
 
         if (!cpus.empty())
         {
-            // TODO get/detect real values
+            auto &cpuSpec = DataInfo::cpuMC68k2spec.at(cpus.at(0).model.m68k);
+
             mCPUVendorText.setContents("Motorola");
             mCPUModelText.setContents(cpus.at(0).modelName);
             mCPUClockText.setContents(cpus.at(0).clock);
-            mCPUVoltageText.setContents("5 V");
-            mCPUTechnologyText.setContents("2.0-3.5 \xB5m");
-            mCPUTDPText.setContents("~0.7-1.5 W");
-            mCPUPremiereYearText.setContents("1979");
+            mCPUCoreVoltageText.setContents(cpuSpec.coreVoltage);
+            mCPUTechnologyText.setContents(cpuSpec.technology);
+            mCPUTDPText.setContents(cpuSpec.tdp);
+            mCPUPremiereYearText.setContents(cpuSpec.premiere);
             mCPUImage.setSpecPicture(cpu2image.at(cpus.at(0).model.m68k));
+            mCPUCores.setContents(std::to_string(cpuSpec.totalCores));
+            mCPUThreads.setContents(std::to_string(cpuSpec.totalThreads));
         }
     }
 
