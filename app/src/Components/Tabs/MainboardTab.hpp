@@ -7,13 +7,17 @@
 #pragma once
 
 #include "../Core/Root.hpp"
+#include "TabBase.hpp"
 
 #include "MUI/Group.hpp"
+#include "MUI/Text.hpp"
 
 namespace Components
 {
-    class MainboardTab : public Root<MUI::Group>
+    class MainboardTab : public Root<MUI::Group>, public TabBase
     {
+        MUI::Text mSystemText;
+
         MUI::Group mComponent;
 
       public:

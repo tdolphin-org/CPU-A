@@ -6,12 +6,19 @@
 
 #include "MainboardTab.hpp"
 
-#include "MUI/Core/MakeObject.hpp"
+#include "AOS/Identify/Library.hpp"
 
 namespace Components
 {
     MainboardTab::MainboardTab()
-      : mComponent(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel("Mainboard")).object())
+      : mSystemText(ValueText("Hardware System"))
+      , mComponent(
+            MUI::GroupBuilder()
+                .vertical()
+                .tagChild(
+                    MUI::GroupBuilder().tagFrame(MUI::Frame::ReadList).tagFrameTitle("Hardware System").tagChild(mSystemText).object())
+                .object())
     {
+        mSystemText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::SYSTEM));
     }
 }
