@@ -14,16 +14,16 @@ namespace AOS::Identify
 
     std::vector<CpuInfo> Library::GetAllCPUs()
     {
-        return { {
+        return { CpuInfo {
                      CpuType::MC68k,
-                     { .m68k { GetCPU() } },
+                     { .m68k = GetCPU() },
                      IdHardware(IDHW_CPU, nullptr),
                      IdHardware(IDHW_CPUREV, nullptr),
                      IdHardware(IDHW_CPUCLOCK, nullptr),
                  },
-                 {
+                 CpuInfo {
                      CpuType::PowerPC,
-                     { .ppc { GetPowerPC() } },
+                     { .ppc = GetPowerPC() },
                      IdHardware(IDHW_POWERPC, nullptr),
                      "",
                      IdHardware(IDHW_PPCCLOCK, nullptr),
