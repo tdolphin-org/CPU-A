@@ -17,6 +17,9 @@ namespace Components
     class MainboardTab : public Root<MUI::Group>, public TabBase
     {
         MUI::Text mSystemText;
+        MUI::Text mChipsetText;
+        MUI::Text mROMVersionText;
+        MUI::Text mROMSizeText;
 
         MUI::Group mComponent;
 
