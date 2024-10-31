@@ -6,9 +6,10 @@
 
 #pragma once
 
-#include "Tabs/TabsContainer.hpp"
-#include "Tabs/MainboardTab.hpp"
 #include "Tabs/CPUTab.hpp"
+#include "Tabs/MainboardTab.hpp"
+#include "Tabs/OSTab.hpp"
+#include "Tabs/TabsContainer.hpp"
 
 #include "MUI/Text.hpp"
 
@@ -21,6 +22,7 @@ namespace Components
         MUI::Group mMemoryGroup;
         MUI::Group mGraphicsGroup;
         MUI::Group mExpansionsGroup;
+        OSTab mOperatingSystemTab;
         MUI::Group mBenchGroup;
         MUI::Group mAboutGroup;
 

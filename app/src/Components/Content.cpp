@@ -25,6 +25,7 @@ namespace Components
             { Label::MemoryTab, mMemoryGroup },
             { Label::GraphicsTab, mGraphicsGroup },
             { Label::ExpansionsTab, mExpansionsGroup },
+            { Label::OperatingSystemTab, mOperatingSystemTab },
             { Label::BenchTab, mBenchGroup },
             { Label::AboutTab, mAboutGroup },
         })

@@ -20,6 +20,7 @@ namespace Label
     extern const char *MemoryTab;
     extern const char *GraphicsTab;
     extern const char *ExpansionsTab;
+    extern const char *OperatingSystemTab;
     extern const char *BenchTab;
     extern const char *AboutTab;
 }
