@@ -18,7 +18,12 @@ namespace Components
       , mGraphicsGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel("Graphics")).object())
       , mExpansionsGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel("Expansions")).object())
       , mBenchGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel("Bench")).object())
-      , mAboutGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel(APP_DESCRIPTION)).object())
+      , mAboutGroup(MUI::GroupBuilder()
+                        .vertical()
+                        .tagChild(MUI::MakeObject::HBar(0))
+                        .tagChild(MUI::MakeObject::FreeLabel(APP_DESCRIPTION))
+                        .tagChild(MUI::MakeObject::HBar(0))
+                        .object())
       , mComponent({
             { Label::CPUTab, mCPUTab },
             { Label::MainboardTab, mMainboardTab },
