@@ -18,8 +18,19 @@ namespace Components
     {
         MUI::Text mSystemText;
         MUI::Text mChipsetText;
+        MUI::Text mGaryText;
+        MUI::Text mRamseyText;
+        MUI::Text mAgnusText;
+        MUI::Text mAgnusModeText;
+        MUI::Text mDeniseText;
+        MUI::Text mDeniseRevisionText;
+        MUI::Text mPaulaText;
+        MUI::Text mRTCText;
+        MUI::Text mBatteryClockText;
         MUI::Text mROMVersionText;
         MUI::Text mROMSizeText;
+
+        // BATTCLOCK Battery Backed Up Clock
 
         MUI::Group mComponent;
 

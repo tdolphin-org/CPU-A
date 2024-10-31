@@ -7,24 +7,60 @@
 #include "MainboardTab.hpp"
 
 #include "AOS/Identify/Library.hpp"
+#include "MUI/Core/MakeObject.hpp"
 
 namespace Components
 {
     MainboardTab::MainboardTab()
-      : mSystemText(ValueText("Hardware System"))
+      : mSystemText(ValueText("Hardware System Name"))
       , mChipsetText(ValueText("Installed Chipset"))
+      , mGaryText(ValueText("Gary"))
+      , mRamseyText(ValueText("Ramsey"))
+      , mAgnusText(ValueText("Agnus Type and Revision"))
+      , mAgnusModeText(ValueText("Agnus Mode"))
+      , mDeniseText(ValueText("Denise Model"))
+      , mDeniseRevisionText(ValueText("Denise Revision"))
+      , mPaulaText(ValueText("Paula"))
+      , mRTCText(ValueText("Realtime Clock"))
+      , mBatteryClockText(ValueText("Battery Backed Up Clock"))
       , mROMVersionText(ValueText("ROM Version"))
       , mROMSizeText(ValueText("ROM Size"))
       , mComponent(MUI::GroupBuilder()
                        .vertical()
                        .tagChild(MUI::GroupBuilder()
                                      .tagFrame(MUI::Frame::ReadList)
-                                     .tagColumns(4)
                                      .tagFrameTitle("Hardware System")
+                                     .tagColumns(4)
                                      .tagChild(LabelText("Name"))
                                      .tagChild(mSystemText)
                                      .tagChild(LabelText("Chipset"))
                                      .tagChild(mChipsetText)
+                                     .object())
+                       .tagChild(MUI::GroupBuilder()
+                                     .tagFrame(MUI::Frame::ReadList)
+                                     .tagFrameTitle("Custom Chips")
+                                     .tagColumns(4)
+                                     .tagChild(LabelText("Gary"))
+                                     .tagChild(mGaryText)
+                                     .tagChild(LabelText("Ramsey"))
+                                     .tagChild(mRamseyText)
+                                     .tagChild(LabelText("Agnus"))
+                                     .tagChild(mAgnusText)
+                                     .tagChild(LabelText("Agnus Mode"))
+                                     .tagChild(mAgnusModeText)
+                                     .tagChild(LabelText("Denise"))
+                                     .tagChild(mDeniseText)
+                                     .tagChild(LabelText("Denise Revision"))
+                                     .tagChild(mDeniseRevisionText)
+                                     .object())
+                       .tagChild(MUI::GroupBuilder()
+                                     .tagFrame(MUI::Frame::ReadList)
+                                     .tagFrameTitle("Realtime Clock")
+                                     .tagColumns(4)
+                                     .tagChild(LabelText("Name"))
+                                     .tagChild(mRTCText)
+                                     .tagChild(LabelText("Backed Up"))
+                                     .tagChild(mBatteryClockText)
                                      .object())
                        .tagChild(MUI::GroupBuilder()
                                      .tagFrame(MUI::Frame::ReadList)
@@ -39,6 +75,17 @@ namespace Components
     {
         mSystemText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::SYSTEM));
         mChipsetText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::CHIPSET));
+
+        mGaryText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::GARY));
+        mRamseyText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::RAMSEY));
+        mAgnusText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::AGNUS));
+        mAgnusModeText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::AGNUSMODE));
+        mDeniseText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::DENISE));
+        mDeniseRevisionText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::DENISEREV));
+        mPaulaText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::PAULA));
+        mRTCText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::RTC));
+        mBatteryClockText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::BATTCLOCK));
+
         mROMVersionText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::ROMVER));
         mROMSizeText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::ROMSIZE));
     }
