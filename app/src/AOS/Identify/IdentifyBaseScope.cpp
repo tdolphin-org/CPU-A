@@ -6,8 +6,9 @@
 
 #include "IdentifyBaseScope.hpp"
 
-#include <proto/exec.h>
 #include <clib/identify_protos.h>
+#include <libraries/identify.h>
+#include <proto/exec.h>
 #include <stdexcept>
 
 struct Library *IdentifyBase = nullptr;
@@ -20,7 +21,7 @@ IdentifyBaseScope::IdentifyBaseScope(const bool optional)
         throw std::runtime_error(error);
     }
 
-    if (!(IdentifyBase = OpenLibrary("identify.library", 44)))
+    if (!(IdentifyBase = OpenLibrary("identify.library", IDENTIFYVERSION)))
     {
         if (optional)
             return;
