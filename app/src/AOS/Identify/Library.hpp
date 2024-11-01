@@ -37,6 +37,14 @@ namespace AOS::Identify
         std::vector<std::string> additionalUnits;
     };
 
+    struct Expansion
+    {
+        struct ConfigDev *configDev;
+        std::string manufacturerName;
+        std::string productName;
+        std::string productClass;
+    };
+
     struct Library
     {
         static std::vector<CpuInfo> GetAllCPUs();
@@ -45,6 +53,8 @@ namespace AOS::Identify
         static enum IDFPU GetFPU() noexcept;
         static enum IDMMU GetMMU() noexcept;
         static enum IDPPC GetPowerPC() noexcept;
+
+        static std::vector<Expansion> GetAllExpansions() noexcept;
 
         /// @brief identify:IdHardware()
         static std::string libIdHardware(const enum IDHW idhw) noexcept;

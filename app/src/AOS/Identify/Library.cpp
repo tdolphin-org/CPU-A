@@ -53,6 +53,28 @@ namespace AOS::Identify
         return static_cast<IDPPC>(IdHardwareNum(IDHW_POWERPC, nullptr));
     }
 
+    std::vector<Expansion> Library::GetAllExpansions() noexcept
+    {
+        std::vector<Expansion> expansions;
+
+        struct ConfigDev *pConfigDev = nullptr;
+
+        char manufacturerName[IDENTIFYBUFLEN], productName[IDENTIFYBUFLEN], productClass[IDENTIFYBUFLEN];
+
+        while (!IdExpansionTags(IDTAG_ManufStr, (unsigned long)manufacturerName, IDTAG_ProdStr, (unsigned long)productName, IDTAG_ClassStr,
+                                (unsigned long)productClass, IDTAG_Expansion, (unsigned long)&pConfigDev, TAG_DONE))
+        {
+            expansions.push_back({
+                pConfigDev,
+                manufacturerName,
+                productName,
+                productClass,
+            });
+        }
+
+        return expansions;
+    }
+
     std::string Library::libIdHardware(const enum IDHW idhw) noexcept
     {
         return IdHardware((ULONG)idhw, nullptr);
