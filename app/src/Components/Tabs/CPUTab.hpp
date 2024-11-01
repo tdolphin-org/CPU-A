@@ -6,19 +6,22 @@
 
 #pragma once
 
-#include "../Core/Root.hpp"
+#include "AOS/Identify/Library.hpp"
+#include "Components/Core/Root.hpp"
+#include "Components/MCC/ActionCycle.hpp"
 #include "TabBase.hpp"
 
-#include "MUI/Cycle.hpp"
 #include "MUI/Group.hpp"
 #include "MUI/Image.hpp"
 #include "MUI/Text.hpp"
 
 namespace Components
 {
-    class CPUTab : public Root<MUI::Group>, public TabBase
+    class CPUTab : public Root<MUI::Group>, public TabBase, public MCC::ActionCycleDispatcher
     {
         static const char *mCPUs[];
+
+        std::vector<AOS::Identify::CpuInfo> mCPUInfos;
 
         MUI::Text mCPUVendorText;
         MUI::Text mCPUModelText;
@@ -44,6 +47,15 @@ namespace Components
 
       public:
         CPUTab();
+
+        void ShowInfo(const int cpuIndex);
+
+      protected:
+        // implements pure virtual MCC::ActionCycleDispatcher
+        unsigned long OnCycle();
+
+      private:
+        void Clear();
 
       protected:
         MUI::Group &muiRoot() const

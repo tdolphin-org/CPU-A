@@ -7,6 +7,7 @@
 #include "App.hpp"
 
 #include "MUI/Context/ApplicationContext.hpp"
+#include "MUI/Core/CustomClassManager.hpp"
 
 #include <proto/alib.h>
 #include <proto/exec.h>
@@ -17,6 +18,9 @@ AppCore::AppCore() { }
 
 void AppCore::Run()
 {
+    // special class, on destructor Dispose all custom classes
+    MUI::CustomClassesLifeTimeScope customClassesLifeTimeScope;
+
     // application scope
     // do MUI_DisposeObject(..) on destructor
     MUI::ApplicationScope application(mApplication);

@@ -6,7 +6,6 @@
 
 #include "CPUTab.hpp"
 
-#include "AOS/Identify/Library.hpp"
 #include "DataInfo/CPUSpec.hpp"
 #include "FileResources/CPUImages.hpp"
 #include "MUI/Core/MakeObject.hpp"
@@ -27,7 +26,8 @@ namespace Components
     const char *CPUTab::mCPUs[] = { "MC68k", "PowerPC", nullptr };
 
     CPUTab::CPUTab()
-      : mCPUVendorText(ValueText("Vendor of CPU"))
+      : mCPUInfos(AOS::Identify::Library::GetAllCPUs())
+      , mCPUVendorText(ValueText("Vendor of CPU"))
       , mCPUModelText(ValueText("Model of CPU"))
       , mCPURevisionText(ValueText("Revision of CPU"))
       , mCPUCoreVoltageText(ValueText("CPU/Core Voltage"))
@@ -49,7 +49,7 @@ namespace Components
       , mCPUL1Data(ValueText("Level 1 Data Cache size"))
       , mCPULevel2(ValueText("Level 2 Cache size"))
       , mCPULevel3(ValueText("Level 3 Cache size"))
-      , mSelectionCycle(MUI::CycleBuilder().tagEntries(mCPUs).object())
+      , mSelectionCycle(MCC::ActionCycleBuilder().tagEntries(mCPUs).object(*this))
       , mCPUCores(ValueText("Total number of Cores"))
       , mCPUThreads(ValueText("Total number of Threads"))
       , mComponent(MUI::GroupBuilder()
@@ -128,26 +128,64 @@ namespace Components
                                      .object())
                        .object())
     {
-        auto cpus = AOS::Identify::Library::GetAllCPUs();
+        ShowInfo(0);
+    }
 
-        if (!cpus.empty())
+    void CPUTab::ShowInfo(const int cpuIndex)
+    {
+        if (mCPUInfos.empty() || cpuIndex < 0 || mCPUInfos.size() <= cpuIndex)
         {
-            auto &cpuSpec = DataInfo::cpuMC68k2spec.at(cpus.at(0).model.m68k);
-
-            mCPUVendorText.setContents(cpuSpec.vendor);
-            mCPUModelText.setContents(cpus.at(0).modelName);
-            mCPURevisionText.setContents(cpus.at(0).revision);
-            mCPUClockText.setContents(cpus.at(0).clock);
-            mCPUCoreVoltageText.setContents(cpuSpec.coreVoltage);
-            mCPUTechnologyText.setContents(cpuSpec.technology);
-            mCPUTDPText.setContents(cpuSpec.tdp);
-            mCPUPremiereYearText.setContents(cpuSpec.premiere);
-            mCPUImage.setSpecPicture(cpu2image.at(cpus.at(0).model.m68k));
-            mAdditionalUnits.setContents(
-                std::accumulate(cpus.at(0).additionalUnits.begin(), cpus.at(0).additionalUnits.end(), std::string(""),
-                                [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; }));
-            mCPUCores.setContents(std::to_string(cpuSpec.totalCores));
-            mCPUThreads.setContents(std::to_string(cpuSpec.totalThreads));
+            Clear();
+            return;
         }
+
+        auto &cpuInfo = mCPUInfos.at(cpuIndex);
+
+        if (cpuInfo.type == CpuType::PowerPC && cpuInfo.model.ppc == IDPPC::NONE)
+        {
+            Clear();
+            mCPUModelText.setContents(cpuInfo.modelName);
+            return;
+        }
+
+        auto &cpuSpec = (cpuInfo.type == CpuType::MC68k) ? DataInfo::cpuMC68k2spec.at(cpuInfo.model.m68k)
+                                                         : DataInfo::cpuPPC2spec.at(cpuInfo.model.ppc);
+
+        mCPUVendorText.setContents(cpuSpec.vendor);
+        mCPUModelText.setContents(cpuInfo.modelName);
+        mCPURevisionText.setContents(cpuInfo.revision);
+        mCPUClockText.setContents(cpuInfo.clock);
+        mCPUCoreVoltageText.setContents(cpuSpec.coreVoltage);
+        mCPUTechnologyText.setContents(cpuSpec.technology);
+        mCPUTDPText.setContents(cpuSpec.tdp);
+        mCPUPremiereYearText.setContents(cpuSpec.premiere);
+        mCPUImage.setSpecPicture(cpu2image.at(cpuInfo.model.m68k));
+        mAdditionalUnits.setContents(
+            std::accumulate(cpuInfo.additionalUnits.begin(), cpuInfo.additionalUnits.end(), std::string(""),
+                            [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; }));
+        mCPUCores.setContents(std::to_string(cpuSpec.totalCores));
+        mCPUThreads.setContents(std::to_string(cpuSpec.totalThreads));
+    }
+
+    unsigned long CPUTab::OnCycle()
+    {
+        ShowInfo(mSelectionCycle.getActive());
+        return 0;
+    }
+
+    void CPUTab::Clear()
+    {
+        mCPUVendorText.setContents("--");
+        mCPUModelText.setContents("--");
+        mCPURevisionText.setContents("--");
+        mCPUClockText.setContents("--");
+        mCPUCoreVoltageText.setContents("--");
+        mCPUTechnologyText.setContents("--");
+        mCPUTDPText.setContents("--");
+        mCPUPremiereYearText.setContents("--");
+        mCPUImage.setSpecPicture(CPUImageFile::none);
+        mAdditionalUnits.setContents("--");
+        mCPUCores.setContents("--");
+        mCPUThreads.setContents("--");
     }
 }
