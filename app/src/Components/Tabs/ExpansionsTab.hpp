@@ -7,10 +7,10 @@
 #pragma once
 
 #include "Components/Core/Root.hpp"
+#include "Components/MCC/ExpansionsList.hpp"
 #include "TabBase.hpp"
 
 #include "MUI/Group.hpp"
-#include "MUI/List.hpp"
 
 namespace Components
 {
