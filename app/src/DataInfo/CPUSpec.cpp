@@ -21,4 +21,14 @@ namespace DataInfo
         { AOS::Identify::IDCPU::FPGA, { "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", 0, 0 } },
         { AOS::Identify::IDCPU::EMU68, { "Arm", "N/A", "N/A", "N/A", "N/A", "N/A", 0, 0 } },
     };
+
+    const std::map<AOS::Identify::IDPPC, CPUSpec> cpuPPC2spec {
+        { AOS::Identify::IDPPC::PPC602, { "Motorola/IBM", "602", "3.3 V", "0.5 \xB5m", "February 1995", "~1.2 W", 1, 1 } },
+        { AOS::Identify::IDPPC::PPC603, { "Motorola/IBM", "603", "3.3 V", "0.5 \xB5m", "1994", "~2.2-3.5 W", 1, 1 } },
+        { AOS::Identify::IDPPC::PPC603E, { "Motorola/IBM", "603e", "2.5 V, 3.3 V", "0.35-0.5 \xB5m", "April 1996", "~6 W", 1, 1 } },
+        { AOS::Identify::IDPPC::PPC603P, { "Motorola/IBM", "603p", "2.5 V", "0.35 \xB5m", "?", "~4-5 W", 1, 1 } },
+        { AOS::Identify::IDPPC::PPC604, { "Motorola/IBM", "604", " 3.3 V", "0.5 \xB5m", "April 1994", "~14-17 W", 1, 1 } },
+        { AOS::Identify::IDPPC::PPC604E, { "Motorola/IBM", "604e", " 2.5 V", "0.35 \xB5m", "1996", "~16-18 W", 1, 1 } },
+        { AOS::Identify::IDPPC::PPC620, { "Motorola", "620", "3.3 V", "0.35-0.5 \xB5m", "1997", "~30 W", 1, 1 } },
+    };
 }
