@@ -19,7 +19,7 @@ MORE_LFLAGS_X = $(shell echo $(MORE_LFLAGS) | tr ',' ' ')
 # trace/debug flags
 DEBUG_FLAGS =
 
-CPP_FLAGS = $(DEBUG_FLAGS) $(MORE_CPP_FLAGS_X) -std=c++17 -Isrc -I${MUICPP_PATH}/wrappers/src -O1
+CPP_FLAGS = $(DEBUG_FLAGS) $(MORE_CPP_FLAGS_X) -std=c++17 -Isrc -I${MUICPP_PATH}/wrappers/src -I${MUICPP_PATH}/components/src -O1
 LFLAGS = -L${MUICPP_PATH}/wrappers/lib/$(SUB_BUILD_PATH) -lMUIcpp $(MORE_LFLAGS_X) -lstdc++ -noixemul
 
 dir_guard = mkdir -p $(@D)
@@ -28,14 +28,18 @@ BINPATH = out/$(SUB_BUILD_PATH)
 
 include makefile.gen.version.mk
 
-MODULES_COMPONENTS = Components Components/Core Components/Tabs
+MUI_COMPONENTS_PATH = ${MUICPP_PATH}/components
+MUI_COMPONENTS_MODULES = Components/Core Components/MCC Components/MCC/Core
+MUI_COMPONENTS_SRC_DIRS = $(addprefix $(MUI_COMPONENTS_PATH)/src/,$(MUI_COMPONENTS_MODULES))
+MUI_COMPONENTS_SRCS = $(foreach sdir,$(MUI_COMPONENTS_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
 
+MODULES_COMPONENTS = Components Components/Core Components/Tabs
 MODULES = $(MODULES_COMPONENTS) FileResources TextResources DataInfo AOS/Identify
 
 SRC_DIRS = src $(addprefix src/,$(MODULES))
 SRCS = $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.cpp))
-CSRCS = $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.c))
-OBJS = $(patsubst src/%.cpp,obj/$(SUB_BUILD_PATH)/%.o,$(SRCS)) $(patsubst src/%.c,obj/$(SUB_BUILD_PATH)/%.o,$(CSRCS))
+OBJS = $(patsubst src/%.cpp,obj/$(SUB_BUILD_PATH)/%.o,$(SRCS))\
+	$(patsubst $(MUI_COMPONENTS_PATH)/src/%.cpp,$(MUI_COMPONENTS_PATH)/obj/$(SUB_BUILD_PATH)/%.o,$(MUI_COMPONENTS_SRCS))
 
 HEADERS = src/ProgDefines.hpp
 
@@ -53,7 +57,12 @@ obj/$(SUB_BUILD_PATH)/%.o: src/%.cpp src/%.hpp $(HEADERS)
 	$(dir_guard)
 	$(CPPC) $(CPP_FLAGS) -c $< -o $@
 
+$(MUI_COMPONENTS_PATH)/obj/$(SUB_BUILD_PATH)/%.o: $(MUI_COMPONENTS_PATH)/src/%.cpp $(MUI_COMPONENTS_PATH)/src/%.hpp
+	$(dir_guard)
+	$(CPPC) $(CPP_FLAGS) -c $< -o $@
+
 clean :
+	rm -f $(MUI_COMPONENTS_PATH)/obj/$(SUB_BUILD_PATH)/*.o
 	rm -f obj/$(SUB_BUILD_PATH)/*.o
 	rm -f -R out/$(SUB_BUILD_PATH)/*
 

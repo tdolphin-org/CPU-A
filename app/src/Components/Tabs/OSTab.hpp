@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "../Core/Root.hpp"
+#include "Components/Core/Root.hpp"
 #include "TabBase.hpp"
 
 #include "MUI/Group.hpp"

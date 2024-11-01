@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include "Core/Root.hpp"
+#include "Components/Core/Root.hpp"
+#include "Content.hpp"
 #include "MUI/Text.hpp"
 #include "MUI/Window.hpp"
-#include "Content.hpp"
 
 namespace Components
 {
