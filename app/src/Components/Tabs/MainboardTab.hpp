@@ -30,8 +30,6 @@ namespace Components
         MUI::Text mROMVersionText;
         MUI::Text mROMSizeText;
 
-        // BATTCLOCK Battery Backed Up Clock
-
         MUI::Group mComponent;
 
       public:

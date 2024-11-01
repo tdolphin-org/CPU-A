@@ -160,6 +160,7 @@ namespace Components
         mCPUTDPText.setContents(cpuSpec.tdp);
         mCPUPremiereYearText.setContents(cpuSpec.premiere);
         mCPUImage.setSpecPicture(cpu2image.at(cpuInfo.model.m68k));
+        mCPUImage.Relayout();
         mAdditionalUnits.setContents(
             std::accumulate(cpuInfo.additionalUnits.begin(), cpuInfo.additionalUnits.end(), std::string(""),
                             [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; }));
@@ -184,6 +185,7 @@ namespace Components
         mCPUTDPText.setContents("--");
         mCPUPremiereYearText.setContents("--");
         mCPUImage.setSpecPicture(CPUImageFile::none);
+        mCPUImage.Relayout();
         mAdditionalUnits.setContents("--");
         mCPUCores.setContents("--");
         mCPUThreads.setContents("--");
