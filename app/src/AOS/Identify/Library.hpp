@@ -12,6 +12,7 @@
 #include "ValueType/IDMMU.hpp"
 #include "ValueType/IDPPC.hpp"
 
+#include <libraries/configvars.h>
 #include <string>
 #include <vector>
 
@@ -39,7 +40,7 @@ namespace AOS::Identify
 
     struct Expansion
     {
-        struct ConfigDev *configDev;
+        ConfigDev *configDev;
         std::string manufacturerId;
         std::string manufacturer;
         std::string productId;

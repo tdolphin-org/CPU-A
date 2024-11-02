@@ -59,7 +59,7 @@ namespace AOS::Identify
     {
         std::vector<Expansion> expansions;
 
-        struct ConfigDev *pConfigDev = nullptr;
+        ConfigDev *pConfigDev = nullptr;
 
         char manufacturerName[IDENTIFYBUFLEN], productName[IDENTIFYBUFLEN], productClass[IDENTIFYBUFLEN];
         UWORD manufacturerId = 0;
@@ -70,6 +70,12 @@ namespace AOS::Identify
                                 (unsigned long)productClass, IDTAG_Expansion, (unsigned long)&pConfigDev, TAG_DONE))
         {
             std::stringstream manufacturerIdStream, productIdStream;
+            if (pConfigDev != nullptr)
+            {
+                manufacturerId = pConfigDev->cd_Rom.er_Manufacturer;
+                productId = pConfigDev->cd_Rom.er_Product;
+            }
+
             if (manufacturerId != 0)
             {
                 manufacturerIdStream << "[0x" << std::setfill('0') << std::setw(4) << std::hex << manufacturerId << "] ";
