@@ -40,7 +40,9 @@ namespace AOS::Identify
     struct Expansion
     {
         struct ConfigDev *configDev;
+        std::string manufacturerId;
         std::string manufacturer;
+        std::string productId;
         std::string product;
         std::string productClass;
     };

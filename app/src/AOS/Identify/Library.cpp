@@ -6,8 +6,10 @@
 
 #include "Library.hpp"
 
+#include <iomanip>
 #include <libraries/identify.h>
 #include <proto/identify.h>
+#include <sstream>
 
 namespace AOS::Identify
 {
@@ -60,13 +62,30 @@ namespace AOS::Identify
         struct ConfigDev *pConfigDev = nullptr;
 
         char manufacturerName[IDENTIFYBUFLEN], productName[IDENTIFYBUFLEN], productClass[IDENTIFYBUFLEN];
+        UWORD manufacturerId = 0;
+        UBYTE productId = 0;
 
-        while (!IdExpansionTags(IDTAG_ManufStr, (unsigned long)manufacturerName, IDTAG_ProdStr, (unsigned long)productName, IDTAG_ClassStr,
+        while (!IdExpansionTags(IDTAG_ManufID, (unsigned long)&manufacturerId, IDTAG_ManufStr, (unsigned long)manufacturerName,
+                                IDTAG_ProdID, (unsigned long)&productId, IDTAG_ProdStr, (unsigned long)productName, IDTAG_ClassStr,
                                 (unsigned long)productClass, IDTAG_Expansion, (unsigned long)&pConfigDev, TAG_DONE))
         {
+            std::stringstream manufacturerIdStream, productIdStream;
+            if (manufacturerId != 0)
+            {
+                manufacturerIdStream << "[0x" << std::setfill('0') << std::setw(4) << std::hex << manufacturerId << "] ";
+                manufacturerId = 0;
+            }
+            if (productId != 0)
+            {
+                productIdStream << "[0x" << std::setfill('0') << std::setw(2) << std::hex << (int)productId << "] ";
+                productId = 0;
+            }
+
             expansions.push_back({
                 pConfigDev,
+                manufacturerIdStream.str(),
                 manufacturerName,
+                productIdStream.str(),
                 productName,
                 productClass,
             });

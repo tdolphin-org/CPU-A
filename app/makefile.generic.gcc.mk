@@ -33,7 +33,7 @@ MUI_COMPONENTS_MODULES = Components/Core Components/MCC Components/MCC/Core
 MUI_COMPONENTS_SRC_DIRS = $(addprefix $(MUI_COMPONENTS_PATH)/src/,$(MUI_COMPONENTS_MODULES))
 MUI_COMPONENTS_SRCS = $(foreach sdir,$(MUI_COMPONENTS_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
 
-MODULES_COMPONENTS = Components Components/Core Components/Tabs
+MODULES_COMPONENTS = Components Components/Core Components/Tabs Components/MCC
 MODULES = $(MODULES_COMPONENTS) FileResources TextResources DataInfo AOS/Identify
 
 SRC_DIRS = src $(addprefix src/,$(MODULES))
