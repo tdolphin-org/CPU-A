@@ -20,6 +20,7 @@ namespace Components
         MUI::Text mOSVersionText;
         MUI::Text mExecVersionText;
         MUI::Text mWBVersionText;
+        MUI::Text mPowerPCOSText;
 
         MUI::Group mComponent;
 

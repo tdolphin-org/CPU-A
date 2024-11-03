@@ -15,20 +15,23 @@ namespace Components
       , mOSVersionText(ValueText("Operating System Version"))
       , mExecVersionText(ValueText("Exec Version"))
       , mWBVersionText(ValueText("Workbench Version"))
+      , mPowerPCOSText(ValueText("PowerPC OS"))
       , mComponent(MUI::GroupBuilder()
                        .vertical()
                        .tagChild(MUI::GroupBuilder()
                                      .tagFrame(MUI::Frame::ReadList)
                                      .tagFrameTitle("Operating System")
                                      .tagColumns(4)
-                                     .tagChild(LabelText("Number"))
+                                     .tagChild(LabelText(MUIX_R "Number"))
                                      .tagChild(mOSNumberText)
-                                     .tagChild(LabelText("Version"))
+                                     .tagChild(LabelText(MUIX_R "Version"))
                                      .tagChild(mOSVersionText)
-                                     .tagChild(LabelText("Exec"))
+                                     .tagChild(LabelText(MUIX_R "Exec"))
                                      .tagChild(mExecVersionText)
-                                     .tagChild(LabelText("Workbench"))
+                                     .tagChild(LabelText(MUIX_R "Workbench"))
                                      .tagChild(mWBVersionText)
+                                     .tagChild(LabelText(MUIX_R "PowerPC OS"))
+                                     .tagChild(mPowerPCOSText)
                                      .object())
                        .object())
     {
@@ -36,5 +39,6 @@ namespace Components
         mOSNumberText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::OSNR));
         mExecVersionText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::EXECVER));
         mWBVersionText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::WBVER));
+        mWBVersionText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::PPCOS));
     }
 }

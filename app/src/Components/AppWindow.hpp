@@ -16,7 +16,6 @@ namespace Components
     class AppWindow : public Root<MUI::Window>
     {
         Content mContent;
-        MUI::Area mToolsButton;
         MUI::Area mCloseButton;
         MUI::Window mComponent;
 

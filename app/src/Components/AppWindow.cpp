@@ -18,7 +18,6 @@ namespace Components
 {
     AppWindow::AppWindow()
       : mContent()
-      , mToolsButton(MUI::MakeObject::SimpleButton("_Tools"))
       , mCloseButton(MUI::MakeObject::SimpleButton("_Close"))
       , mComponent(MUI::WindowBuilder()
                        .tagTitle(APP_NAME)
@@ -37,13 +36,11 @@ namespace Components
                                                                                    " ver. " APP_VERSION " " APP_DATE)
                                                                       .object())
                                                         .tagChild(MUI::MakeObject::HVSpace())
-                                                        .tagChild(mToolsButton)
                                                         .tagChild(mCloseButton)
                                                         .object())
                                           .object())
                        .object())
     {
-        mToolsButton.setCycleChain();
         mCloseButton.setCycleChain();
     }
 
