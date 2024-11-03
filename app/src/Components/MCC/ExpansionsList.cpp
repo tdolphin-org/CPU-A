@@ -54,13 +54,8 @@ unsigned long DisplayEntry(UNUSED struct IClass *cl, UNUSED Object *obj, UNUSED 
 
         *array++ = displayExpansionRef.product;
         *array++ = displayExpansionRef.productClass;
-        *array = displayExpansionRef.manufacturer;
-    }
-    else
-    {
-        *array++ = MUIX_C "Product";
-        *array++ = MUIX_C "Class";
-        *array = MUIX_C "Manufacturer";
+        *array++ = displayExpansionRef.manufacturer;
+        *array = displayExpansionRef.additionalInfo;
     }
 
     return 0;
