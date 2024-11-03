@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <libraries/identify.h>
 #include <proto/identify.h>
+#include <set>
 #include <sstream>
 
 namespace AOS::Identify
@@ -64,28 +65,38 @@ namespace AOS::Identify
         char manufacturerName[IDENTIFYBUFLEN], productName[IDENTIFYBUFLEN], productClass[IDENTIFYBUFLEN];
         UWORD manufacturerId = 0;
         UBYTE productId = 0;
+        ULONG classId = 0;
+
+        std::set<int> ramClassIds({ IDCID_TURBORAM, IDCID_GFXRAM, IDCID_HDRAM, IDCID_IDEHDRAM, IDCID_RAMSCSIHD, IDCID_RAM, IDCID_RAMFPU,
+                                    IDCID_RAM32, IDCID_TURBOANDRAM });
 
         while (!IdExpansionTags(IDTAG_ManufID, (unsigned long)&manufacturerId, IDTAG_ManufStr, (unsigned long)manufacturerName,
                                 IDTAG_ProdID, (unsigned long)&productId, IDTAG_ProdStr, (unsigned long)productName, IDTAG_ClassStr,
-                                (unsigned long)productClass, IDTAG_Expansion, (unsigned long)&pConfigDev, TAG_DONE))
+                                (unsigned long)productClass, IDTAG_ClassID, (unsigned long)&classId, IDTAG_Expansion,
+                                (unsigned long)&pConfigDev, TAG_DONE))
         {
-            std::stringstream manufacturerIdStream, productIdStream;
+            std::string additionalInfo;
             if (pConfigDev != nullptr)
             {
                 manufacturerId = pConfigDev->cd_Rom.er_Manufacturer;
                 productId = pConfigDev->cd_Rom.er_Product;
+
+                if (ramClassIds.find(classId) != ramClassIds.end())
+                {
+                    if (pConfigDev->cd_BoardSize % (1024 * 1024) == 0)
+                        additionalInfo = std::to_string(pConfigDev->cd_BoardSize / (1024 * 1024)) + " MiB RAM";
+                    else if (pConfigDev->cd_BoardSize % 1024 == 0)
+                        additionalInfo = std::to_string(pConfigDev->cd_BoardSize / 1024) + " KiB RAM";
+                    else
+                        additionalInfo = std::to_string(pConfigDev->cd_BoardSize) + " Bytes RAM";
+                }
             }
 
+            std::stringstream manufacturerIdStream, productIdStream;
             if (manufacturerId != 0)
-            {
                 manufacturerIdStream << "[0x" << std::setfill('0') << std::setw(4) << std::hex << manufacturerId << "] ";
-                manufacturerId = 0;
-            }
             if (productId != 0)
-            {
                 productIdStream << "[0x" << std::setfill('0') << std::setw(2) << std::hex << (int)productId << "] ";
-                productId = 0;
-            }
 
             expansions.push_back({
                 pConfigDev,
@@ -94,6 +105,7 @@ namespace AOS::Identify
                 productIdStream.str(),
                 productName,
                 productClass,
+                additionalInfo,
             });
         }
 
