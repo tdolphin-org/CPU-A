@@ -14,8 +14,7 @@
 namespace Components
 {
     Content::Content()
-      : mMemoryGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel("Memory")).object())
-      , mGraphicsGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel("Graphics")).object())
+      : mGraphicsGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel("Graphics")).object())
       , mBenchGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel("Bench")).object())
       , mAboutGroup(MUI::GroupBuilder()
                         .vertical()
@@ -26,7 +25,7 @@ namespace Components
       , mComponent({
             { Label::CPUTab, mCPUTab },
             { Label::MainboardTab, mMainboardTab },
-            { Label::MemoryTab, mMemoryGroup },
+            { Label::MemoryTab, mMemoryTab },
             { Label::GraphicsTab, mGraphicsGroup },
             { Label::ExpansionsTab, mExpansionsTab },
             { Label::OperatingSystemTab, mOperatingSystemTab },
