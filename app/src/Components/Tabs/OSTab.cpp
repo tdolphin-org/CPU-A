@@ -19,7 +19,7 @@ namespace Components
       , mComponent(MUI::GroupBuilder()
                        .vertical()
                        .tagChild(MUI::GroupBuilder()
-                                     .tagFrame(MUI::Frame::ReadList)
+                                     .tagFrame(MUI::Frame::Group)
                                      .tagFrameTitle("Operating System")
                                      .tagColumns(4)
                                      .tagChild(LabelText(MUIX_R "Number"))

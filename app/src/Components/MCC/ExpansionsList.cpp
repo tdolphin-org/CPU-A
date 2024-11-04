@@ -44,13 +44,11 @@ unsigned long DisplayEntry(UNUSED struct IClass *cl, UNUSED Object *obj, UNUSED 
 {
     static ExpansionRef displayExpansionRef;
     auto *array = msg->array;
-    std::string message;
 
     if (msg->entry)
     {
         auto expansionRef = (ExpansionRef *)msg->entry;
-        if (expansionRef)
-            displayExpansionRef = *expansionRef;
+        displayExpansionRef = *expansionRef;
 
         *array++ = displayExpansionRef.product;
         *array++ = displayExpansionRef.productClass;

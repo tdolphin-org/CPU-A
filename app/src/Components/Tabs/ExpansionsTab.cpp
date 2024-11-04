@@ -15,8 +15,8 @@ namespace Components
     const char *ExpansionsTab::titles[] = { MUIX_C "[ID] Product", MUIX_C "Class", MUIX_C "[ID] Manufacturer", MUIX_C "Info", nullptr };
 
     ExpansionsTab::ExpansionsTab()
-      : mExpansionsList(MCC::ExpansionsListBuilder().tagFormat("BAR,BAR,BAR,").tagTitleArray(titles).tagFrame(MUI::Frame::ReadList).object())
-      , mComponent(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLLabel("Expansions")).tagChild(mExpansionsList).object())
+      : mExpansionsList(MCC::ExpansionsListBuilder().tagFormat("BAR,BAR,BAR,").tagTitleArray(titles).tagFrame(MUI::Frame::Group).object())
+      , mComponent(MUI::GroupBuilder().vertical().tagChild(mExpansionsList).object())
     {
         auto expansions = AOS::Identify::Library::GetAllExpansions();
         for (auto &expansion : expansions)

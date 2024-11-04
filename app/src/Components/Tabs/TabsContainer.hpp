@@ -21,7 +21,7 @@ namespace Components
         MUI::Group mComponent;
 
       public:
-        TabsContainer(const std::vector<std::pair<std::string, MUI::Area &>> &tabs);
+        explicit TabsContainer(const std::vector<std::pair<std::string, MUI::Area &>> &tabs);
 
       protected:
         MUI::Group &muiRoot() const
