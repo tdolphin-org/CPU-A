@@ -18,7 +18,7 @@ namespace Components
       : mExpansionsList(MCC::ExpansionsListBuilder().tagFormat("BAR,BAR,BAR,").tagTitleArray(titles).tagFrame(MUI::Frame::Group).object())
       , mComponent(MUI::GroupBuilder().vertical().tagChild(mExpansionsList).object())
     {
-        auto expansions = AOS::Identify::Library::GetAllExpansions();
+        auto expansions = AOS::Identify::Library::GetExpansions();
         for (auto &expansion : expansions)
         {
             ExpansionRef expansionRef { expansion };
