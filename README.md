@@ -6,7 +6,8 @@ It is complex example of usage [MUI C++ wrapper classes](https://github.com/tdol
 ## Requirements to run on AmigaOS
 
  - [MUI5](https://github.com/amiga-mui/muidev)
- - [identify.library](https://github.com/shred/identify) (download [IdentifyUsr.lha](http://aminet.net/util/libs/IdentifyUsr.lha))
+ - [Identify.library](https://github.com/shred/identify) (download [IdentifyUsr.lha](http://aminet.net/util/libs/IdentifyUsr.lha))
+ - optional [OpenURL.library](https://github.com/jens-maus/libopenurl) (download [OpenURL.lha](http://aminet.net/comm/www/OpenURL-7.18.lha))
 
 ## WIP interface
 
