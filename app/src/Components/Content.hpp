@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include "Tabs/AboutTab.hpp"
 #include "Tabs/CPUTab.hpp"
 #include "Tabs/ExpansionsTab.hpp"
 #include "Tabs/MainboardTab.hpp"
@@ -26,7 +27,7 @@ namespace Components
         ExpansionsTab mExpansionsTab;
         OSTab mOperatingSystemTab;
         MUI::Group mBenchGroup;
-        MUI::Group mAboutGroup;
+        AboutTab mAboutTab;
 
         TabsContainer mComponent;
 
