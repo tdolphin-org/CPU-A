@@ -1,0 +1,65 @@
+//
+//  CPU-A
+//
+//  (c) 2024 TDolphin
+//
+
+#pragma once
+
+#include <libraries/identify.h>
+
+namespace AOS::Identify
+{
+    enum class ClassID
+    {
+        NONE = -1,
+        UNKNOWN = IDCID_UNKNOWN,
+        MISC = IDCID_MISC,
+        TURBO = IDCID_TURBO,
+        TURBORAM = IDCID_TURBORAM,
+        TURBOHD = IDCID_TURBOHD,
+        TURBOIDE = IDCID_TURBOIDE,
+        TURBOSCSIHD = IDCID_TURBOSCSIHD,
+        NET = IDCID_NET,
+        ARCNET = IDCID_ARCNET,
+        ETHERNET = IDCID_ETHERNET,
+        AUDIO = IDCID_AUDIO,
+        VIDEO = IDCID_VIDEO,
+        MULTIMEDIA = IDCID_MULTIMEDIA,
+        DSP = IDCID_DSP,
+        BUSBRIDGE = IDCID_BUSBRIDGE,
+        BRIDGE = IDCID_BRIDGE,
+        EMULATOR = IDCID_EMULATOR,
+        MACEMU = IDCID_MACEMU,
+        ATARIEMU = IDCID_ATARIEMU,
+        GFX = IDCID_GFX,
+        GFXRAM = IDCID_GFXRAM,
+        HD = IDCID_HD,
+        HDRAM = IDCID_HDRAM,
+        IDEHD = IDCID_IDEHD,
+        IDEHDRAM = IDCID_IDEHDRAM,
+        SCSIHD = IDCID_SCSIHD,
+        RAMSCSIHD = IDCID_RAMSCSIHD,
+        CDROM = IDCID_CDROM,
+        MODEM = IDCID_MODEM,
+        ISDN = IDCID_ISDN,
+        MULTIIO = IDCID_MULTIIO,
+        SERIAL = IDCID_SERIAL,
+        PARALLEL = IDCID_PARALLEL,
+        SCANIF = IDCID_SCANIF,
+        TABLET = IDCID_TABLET,
+        RAM = IDCID_RAM,
+        FLASHROM = IDCID_FLASHROM,
+        SCSIIDE = IDCID_SCSIIDE,
+        RAMFPU = IDCID_RAMFPU,
+        GUESS = IDCID_GUESS,
+        KICKSTART = IDCID_KICKSTART,
+        RAM32 = IDCID_RAM32,
+        TURBOANDRAM = IDCID_TURBOANDRAM,
+        ACCESS = IDCID_ACCESS,
+        INTERFACE = IDCID_INTERFACE,
+        MFMHD = IDCID_MFMHD,
+        FLOPPY = IDCID_FLOPPY,
+        USB = IDCID_USB,
+    };
+}

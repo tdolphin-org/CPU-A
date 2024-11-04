@@ -60,9 +60,12 @@ namespace AOS::Identify
         return static_cast<IDPPC>(IdHardwareNum(IDHW_POWERPC, nullptr));
     }
 
-    std::vector<Expansion> Library::GetAllExpansions() noexcept
+    std::vector<Expansion> Library::GetExpansions(const enum ClassID filterByClassId /*= ClassID::NONE*/) noexcept
     {
         std::vector<Expansion> expansions;
+
+        std::set<int> ramClassIds { IDCID_TURBORAM, IDCID_GFXRAM, IDCID_HDRAM, IDCID_IDEHDRAM,   IDCID_RAMSCSIHD,
+                                    IDCID_RAM,      IDCID_RAMFPU, IDCID_RAM32, IDCID_TURBOANDRAM };
 
         ConfigDev *pConfigDev = nullptr;
 
@@ -70,9 +73,6 @@ namespace AOS::Identify
         UWORD manufacturerId = 0;
         UBYTE productId = 0;
         ULONG classId = 0;
-
-        std::set<int> ramClassIds({ IDCID_TURBORAM, IDCID_GFXRAM, IDCID_HDRAM, IDCID_IDEHDRAM, IDCID_RAMSCSIHD, IDCID_RAM, IDCID_RAMFPU,
-                                    IDCID_RAM32, IDCID_TURBOANDRAM });
 
         while (!IdExpansionTags(IDTAG_ManufID, (unsigned long)&manufacturerId, IDTAG_ManufStr, (unsigned long)manufacturerName,
                                 IDTAG_ProdID, (unsigned long)&productId, IDTAG_ProdStr, (unsigned long)productName, IDTAG_ClassStr,
@@ -82,6 +82,9 @@ namespace AOS::Identify
             std::string additionalInfo;
             if (pConfigDev != nullptr)
             {
+                if (filterByClassId != ClassID::NONE && classId != (int)filterByClassId)
+                    continue;
+
                 manufacturerId = pConfigDev->cd_Rom.er_Manufacturer;
                 productId = pConfigDev->cd_Rom.er_Product;
 

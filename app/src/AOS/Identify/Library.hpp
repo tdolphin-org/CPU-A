@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include "ValueType/ClassID.hpp"
 #include "ValueType/IDCPU.hpp"
 #include "ValueType/IDFPU.hpp"
 #include "ValueType/IDHW.hpp"
@@ -58,7 +59,7 @@ namespace AOS::Identify
         static enum IDMMU GetMMU() noexcept;
         static enum IDPPC GetPowerPC() noexcept;
 
-        static std::vector<Expansion> GetAllExpansions() noexcept;
+        static std::vector<Expansion> GetExpansions(const enum ClassID filterByClassId = ClassID::NONE) noexcept;
 
         /// @brief identify:IdHardware()
         static std::string libIdHardware(const enum IDHW idhw) noexcept;
