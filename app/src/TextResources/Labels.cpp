@@ -23,6 +23,5 @@ namespace Label
     const char *AboutTab = "About";
 
     const char *AboutContent = MUIX_C MUIX_B APP_NAME "\n" MUIX_N "Version " APP_VERSION " " APP_DATE "\n\n" APP_DESCRIPTION
-                                                      "\n\n" APP_TDOLPHIN_COPYRIGHTS "\n\nAuthor: " AUTHORS "\n\n" MUIX_PH TDOLPHIN_WEBPAGE
-                                                      "\n" TDOLPHIN_EMAIL "\n\n" GIT_REPOSITORY_URL MUIX_PT;
+                                                      "\n\n" MUIX_B APP_TDOLPHIN_COPYRIGHTS MUIX_N "\n\nAuthor: " AUTHORS "\n";
 }

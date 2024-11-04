@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "Components/Buttons/GoUrlButton.hpp"
 #include "Components/Core/Root.hpp"
 #include "TabBase.hpp"
 
@@ -16,6 +17,8 @@ namespace Components
 {
     class AboutTab : public Root<MUI::Group>, public TabBase
     {
+        GoUrlButton mGoHomePageButton;
+        GoUrlButton mGoGitRepositoryButton;
         MUI::Group mComponent;
 
       public:
