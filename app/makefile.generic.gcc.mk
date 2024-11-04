@@ -31,16 +31,16 @@ BINPATH = out/$(SUB_BUILD_PATH)
 include makefile.gen.version.mk
 
 AOS_WRAPPER_PATH = ${AOSCPP_PATH}/wrappers
-AOS_WRAPPER_MODULES = AOS/Identify
+AOS_WRAPPER_MODULES = AOS/Identify AOS/OpenURL
 AOS_WRAPPER_SRC_DIRS = $(addprefix $(AOS_WRAPPER_PATH)/src/,$(AOS_WRAPPER_MODULES))
 AOS_WRAPPER_SRCS = $(foreach sdir,$(AOS_WRAPPER_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
 
 MUI_COMPONENTS_PATH = ${MUICPP_PATH}/components
-MUI_COMPONENTS_MODULES = Components/Core Components/MCC Components/MCC/Core
+MUI_COMPONENTS_MODULES = Components/Core Components/MCC Components/MCC/Core Components/Buttons
 MUI_COMPONENTS_SRC_DIRS = $(addprefix $(MUI_COMPONENTS_PATH)/src/,$(MUI_COMPONENTS_MODULES))
 MUI_COMPONENTS_SRCS = $(foreach sdir,$(MUI_COMPONENTS_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
 
-MODULES_COMPONENTS = Components Components/Core Components/Tabs Components/MCC
+MODULES_COMPONENTS = Components Components/Buttons Components/Core Components/Tabs Components/MCC
 MODULES = $(MODULES_COMPONENTS) FileResources TextResources DataInfo AOS/Identify
 
 SRC_DIRS = src $(addprefix src/,$(MODULES))
