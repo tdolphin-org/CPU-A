@@ -13,13 +13,12 @@
 namespace Components
 {
     Content::Content()
-      : mGraphicsGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel("Graphics")).object())
-      , mBenchGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel("Bench")).object())
+      : mBenchGroup(MUI::GroupBuilder().vertical().tagChild(MUI::MakeObject::FreeLabel("Bench")).object())
       , mComponent({
             { Label::CPUTab, mCPUTab },
             { Label::MainboardTab, mMainboardTab },
             { Label::MemoryTab, mMemoryTab },
-            { Label::GraphicsTab, mGraphicsGroup },
+            { Label::GraphicsTab, mGraphicsTab },
             { Label::ExpansionsTab, mExpansionsTab },
             { Label::OperatingSystemTab, mOperatingSystemTab },
             { Label::BenchTab, mBenchGroup },
