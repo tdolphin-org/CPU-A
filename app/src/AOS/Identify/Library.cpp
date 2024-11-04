@@ -23,7 +23,11 @@ namespace AOS::Identify
                            IdHardware(IDHW_CPUREV, nullptr),
                            IdHardware(IDHW_CPUCLOCK, nullptr),
                            {
-                               std::string("FPU:") + IdHardware(IDHW_FPU, nullptr),
+                               std::string("FPU:") + IdHardware(IDHW_FPU, nullptr) +
+                                   []() {
+                                       std::string fpuClock = IdHardware(IDHW_FPUCLOCK, nullptr);
+                                       return fpuClock == "N/A" ? "" : "@" + fpuClock;
+                                   }(),
                                std::string("MMU:") + IdHardware(IDHW_MMU, nullptr),
                            } },
                  CpuInfo {
