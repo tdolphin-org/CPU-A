@@ -26,7 +26,7 @@ namespace Components
                                      .tagFrame(MUI::Frame::Group)
                                      .tagFrameTitle("Main board RAM")
                                      .tagColumns(4)
-                                     .tagChild(LabelText(MUIX_R "Access time (ns)"))
+                                     .tagChild(LabelText(MUIX_R "Access time"))
                                      .tagChild(mMainboardRAMAccessTimeText)
                                      .tagChild(LabelText(MUIX_R "Width (bit)"))
                                      .tagChild(mMainboardRAMWidthText)

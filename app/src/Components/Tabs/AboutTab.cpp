@@ -6,7 +6,6 @@
 
 #include "AboutTab.hpp"
 
-#include "AOS/Identify/Library.hpp"
 #include "MUI/Core/MakeObject.hpp"
 #include "ProgDefines.hpp"
 #include "TextResources/Labels.hpp"
