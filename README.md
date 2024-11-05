@@ -14,7 +14,7 @@ It is complex example of usage [MUI C++ wrapper classes](https://github.com/tdol
 
 v0.1.5
 
-![CPU-A v0.1.2.cpu](/docs/assets/CPU-A.wip.0.1.5.graphics.png)
+![CPU-A v0.1.5.graphics](/docs/assets/CPU-A.wip.0.1.5.graphics.png)
 
 v0.1.2
 
