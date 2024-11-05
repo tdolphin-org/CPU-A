@@ -7,6 +7,7 @@
 #include "GraphicsTab.hpp"
 
 #include "AOS/Identify/Library.hpp"
+#include "AOS/Picasso96/Library.hpp"
 #include "MUI/Core/MakeObject.hpp"
 
 namespace Components
@@ -14,6 +15,7 @@ namespace Components
     GraphicsTab::GraphicsTab()
       : mGfxSystemText(ValueText("Graphic OS"))
       , mGraphicsCards(MUI::GroupBuilder().tagFrame(MUI::Frame::Group).tagFrameTitle("Graphics Card(s)").tagColumns(2).object())
+      , mPicasso96Boards(MUI::GroupBuilder().tagFrame(MUI::Frame::Group).tagFrameTitle("Picasso96 Board(s)").tagColumns(3).object())
       , mComponent(MUI::GroupBuilder()
                        .vertical()
                        .tagChild(MUI::GroupBuilder()
@@ -24,6 +26,7 @@ namespace Components
                                      .tagChild(mGfxSystemText)
                                      .object())
                        .tagChild(mGraphicsCards)
+                       .tagChild(mPicasso96Boards)
                        .object())
     {
         mGfxSystemText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::GFXSYS));
@@ -33,20 +36,50 @@ namespace Components
             mGraphicsCards.AddTail(LabelText("none"));
         else
         {
+            mGraphicsCards.AddTail(MUI::TextBuilder().tagContents("Name").object());
+            mGraphicsCards.AddTail(MUI::TextBuilder().tagContents("Manufacturer").object());
+
             for (auto &graphicsCard : graphicsCards)
             {
                 mGraphicsCards.AddTail(MUI::TextBuilder()
                                            .tagFrame(MUI::Frame::String)
                                            .tagBackground(MUI::ImageOrBackground::StringActiveBack)
-                                           .tagShortHelp("Name")
                                            .tagContents(graphicsCard.product)
                                            .object());
                 mGraphicsCards.AddTail(MUI::TextBuilder()
                                            .tagFrame(MUI::Frame::String)
                                            .tagBackground(MUI::ImageOrBackground::StringActiveBack)
-                                           .tagShortHelp("Manufacturer")
                                            .tagContents(graphicsCard.manufacturer)
                                            .object());
+            }
+        }
+
+        auto picassoBoards = AOS::Picasso96::Library::GetBoards();
+        if (picassoBoards.empty())
+            mPicasso96Boards.AddTail(LabelText("none"));
+        else
+        {
+            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Name").object());
+            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Video RAM").object());
+            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Video RAM Clock").object());
+
+            for (auto &picassoBoard : picassoBoards)
+            {
+                mPicasso96Boards.AddTail(MUI::TextBuilder()
+                                             .tagFrame(MUI::Frame::String)
+                                             .tagBackground(MUI::ImageOrBackground::StringActiveBack)
+                                             .tagContents(picassoBoard.name)
+                                             .object());
+                mPicasso96Boards.AddTail(MUI::TextBuilder()
+                                             .tagFrame(MUI::Frame::String)
+                                             .tagBackground(MUI::ImageOrBackground::StringActiveBack)
+                                             .tagContents(picassoBoard.memorySize)
+                                             .object());
+                mPicasso96Boards.AddTail(MUI::TextBuilder()
+                                             .tagFrame(MUI::Frame::String)
+                                             .tagBackground(MUI::ImageOrBackground::StringActiveBack)
+                                             .tagContents(picassoBoard.memoryClock)
+                                             .object());
             }
         }
     }

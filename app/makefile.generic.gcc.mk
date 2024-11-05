@@ -31,7 +31,7 @@ BINPATH = out/$(SUB_BUILD_PATH)
 include makefile.gen.version.mk
 
 AOS_WRAPPER_PATH = ${AOSCPP_PATH}/wrappers
-AOS_WRAPPER_MODULES = AOS/Identify AOS/OpenURL
+AOS_WRAPPER_MODULES = AOS/Identify AOS/OpenURL AOS/Picasso96
 AOS_WRAPPER_SRC_DIRS = $(addprefix $(AOS_WRAPPER_PATH)/src/,$(AOS_WRAPPER_MODULES))
 AOS_WRAPPER_SRCS = $(foreach sdir,$(AOS_WRAPPER_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
 

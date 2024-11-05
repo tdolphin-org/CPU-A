@@ -8,6 +8,7 @@
 
 #include "AOS/Identify/IdentifyBaseScope.hpp"
 #include "AOS/OpenURL/OpenURLBaseScope.hpp"
+#include "AOS/Picasso96/Picasso96BaseScope.hpp"
 #include "Components/Application.hpp"
 #include "Core/Singleton.hpp"
 #include "MUI/Core/MuiMasterBaseScope.hpp"
@@ -22,7 +23,8 @@ class AppCore
     // open libraries, close on destructor
     MuiMasterBaseScope muiBaseScope;
     IdentifyBaseScope identifyBaseScope;
-    OpenURLBaseScope openUrlBase;
+    OpenURLBaseScope openUrlBaseScope;
+    Picasso96BaseScope picasso96BaseScope;
 
     Components::Application mApplication;
 

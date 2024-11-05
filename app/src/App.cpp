@@ -14,7 +14,11 @@
 
 using namespace std;
 
-AppCore::AppCore() { }
+AppCore::AppCore()
+  : openUrlBaseScope(true)
+  , picasso96BaseScope(true)
+{
+}
 
 void AppCore::Run()
 {
