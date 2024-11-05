@@ -30,3 +30,8 @@ OpenURLBaseScope &AppContextCore::getOpenURLBase() const
 {
     return App::instance().openUrlBaseScope;
 }
+
+Picasso96BaseScope &AppContextCore::getPicasso96Base() const
+{
+    return App::instance().picasso96BaseScope;
+}

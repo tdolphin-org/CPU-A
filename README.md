@@ -8,6 +8,7 @@ It is complex example of usage [MUI C++ wrapper classes](https://github.com/tdol
  - [MUI5](https://github.com/amiga-mui/muidev)
  - [Identify.library](https://github.com/shred/identify) (download [IdentifyUsr.lha](http://aminet.net/util/libs/IdentifyUsr.lha))
  - optional [OpenURL.library](https://github.com/jens-maus/libopenurl) (download [OpenURL.lha](http://aminet.net/comm/www/OpenURL-7.18.lha))
+ - optional [Picasso96](http://wiki.icomp.de/wiki/P96)
 
 ## WIP interface
 

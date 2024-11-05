@@ -6,6 +6,7 @@
 
 #include "App.hpp"
 
+#include "Components/Application.hpp"
 #include "MUI/Context/ApplicationContext.hpp"
 #include "MUI/Core/CustomClassManager.hpp"
 
@@ -25,11 +26,13 @@ void AppCore::Run()
     // special class, on destructor Dispose all custom classes
     MUI::CustomClassesLifeTimeScope customClassesLifeTimeScope;
 
+    Components::Application muiApplication;
+
     // application scope
     // do MUI_DisposeObject(..) on destructor
-    MUI::ApplicationScope application(mApplication);
+    MUI::ApplicationScope application(muiApplication);
 
-    mApplication.RegisterEvents();
+    muiApplication.RegisterEvents();
 
     auto appWindow = MUI::ApplicationContext::instance().getAppWindow();
 
@@ -38,7 +41,7 @@ void AppCore::Run()
 
     // main application loop
     ULONG signals = 0;
-    while (DoMethod(mApplication.muiObject(), MUIM_Application_NewInput, &signals) != MUIV_Application_ReturnID_Quit)
+    while (DoMethod(muiApplication.muiObject(), MUIM_Application_NewInput, &signals) != MUIV_Application_ReturnID_Quit)
     {
         if (signals)
         {

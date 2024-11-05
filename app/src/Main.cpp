@@ -8,6 +8,7 @@
 
 #include "App.hpp"
 
+#include <dos/dos.h>
 #include <iostream>
 
 using namespace std;

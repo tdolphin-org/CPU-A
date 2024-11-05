@@ -8,6 +8,7 @@
 
 #include "AOS/Identify/Library.hpp"
 #include "AOS/Picasso96/Library.hpp"
+#include "AppContext.hpp"
 #include "MUI/Core/MakeObject.hpp"
 
 namespace Components
@@ -54,14 +55,20 @@ namespace Components
             }
         }
 
+        if (!AppContext::instance().getPicasso96Base().isOpen())
+        {
+            mPicasso96Boards.AddTail(LabelText("none"));
+            return;
+        }
+
         auto picassoBoards = AOS::Picasso96::Library::GetBoards();
         if (picassoBoards.empty())
             mPicasso96Boards.AddTail(LabelText("none"));
         else
         {
             mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Name").object());
-            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Video RAM").object());
-            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Video RAM Clock").object());
+            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Video Memory Size").object());
+            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Video Memory Clock").object());
 
             for (auto &picassoBoard : picassoBoards)
             {
