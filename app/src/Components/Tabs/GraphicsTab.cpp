@@ -36,7 +36,7 @@ namespace Components
 
         auto graphicsCards = AOS::Identify::Library::GetExpansions(AOS::Identify::ClassID::GFX);
         if (graphicsCards.empty())
-            mGraphicsCards.AddTail(LabelText("none"));
+            mGraphicsCards.AddTail(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
         else
         {
             mGraphicsCards.AddTail(MUI::TextBuilder().tagContents("Name").object());
@@ -59,13 +59,13 @@ namespace Components
 
         if (!AppContext::instance().getPicasso96Base().isOpen())
         {
-            mPicasso96Boards.AddTail(LabelText("none"));
+            mPicasso96Boards.AddTail(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
             return;
         }
 
         auto picassoBoards = AOS::Picasso96::Library::GetBoards();
         if (picassoBoards.empty())
-            mPicasso96Boards.AddTail(LabelText("none"));
+            mPicasso96Boards.AddTail(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
         else
         {
             mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Name").object());
