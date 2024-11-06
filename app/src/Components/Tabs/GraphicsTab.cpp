@@ -11,6 +11,8 @@
 #include "AppContext.hpp"
 #include "MUI/Core/MakeObject.hpp"
 
+#include <numeric>
+
 namespace Components
 {
     GraphicsTab::GraphicsTab()
@@ -67,8 +69,8 @@ namespace Components
         else
         {
             mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Name").object());
-            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Video Memory Size").object());
-            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Video Memory Clock").object());
+            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Video Memory Size @ Clock").object());
+            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("RGB Formats").object());
 
             for (auto &picassoBoard : picassoBoards)
             {
@@ -80,13 +82,16 @@ namespace Components
                 mPicasso96Boards.AddTail(MUI::TextBuilder()
                                              .tagFrame(MUI::Frame::String)
                                              .tagBackground(MUI::ImageOrBackground::StringActiveBack)
-                                             .tagContents(picassoBoard.memorySize)
+                                             .tagContents(picassoBoard.memorySize + " @ " + picassoBoard.memoryClock)
                                              .object());
-                mPicasso96Boards.AddTail(MUI::TextBuilder()
-                                             .tagFrame(MUI::Frame::String)
-                                             .tagBackground(MUI::ImageOrBackground::StringActiveBack)
-                                             .tagContents(picassoBoard.memoryClock)
-                                             .object());
+                mPicasso96Boards.AddTail(
+                    MUI::TextBuilder()
+                        .tagFrame(MUI::Frame::String)
+                        .tagBackground(MUI::ImageOrBackground::StringActiveBack)
+                        .tagContents(
+                            std::accumulate(picassoBoard.rgbFormats.begin(), picassoBoard.rgbFormats.end(), std::string(""),
+                                            [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; }))
+                        .object());
             }
         }
     }
