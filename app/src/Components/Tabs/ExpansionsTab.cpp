@@ -21,8 +21,15 @@ namespace Components
         auto expansions = AOS::Identify::Library::GetExpansions();
         for (auto &expansion : expansions)
         {
-            ExpansionRef expansionRef { expansion };
+            ExpansionRef expansionRef { "[" + expansion.manufacturerId + "] " + expansion.manufacturer,
+                                        "[" + expansion.productId + "] " + expansion.product, expansion.productClass,
+                                        !expansion.additionalInfo.empty() ? expansion.additionalInfo.at(0) : "" };
             mExpansionsList.InsertSingleBottom(&expansionRef);
+            for (auto i = 1; i < expansion.additionalInfo.size(); i++)
+            {
+                ExpansionRef expansionRef { "", "", "", expansion.additionalInfo.at(i) };
+                mExpansionsList.InsertSingleBottom(&expansionRef);
+            }
         }
     }
 }
