@@ -14,11 +14,17 @@
 
 using namespace AOS::Identify;
 
-std::map<IDCPU, std::string> cpu2image = {
+std::map<IDCPU, std::string> m68k_cpu2image = {
     { IDCPU::MC68000, CPUImageFile::mc68000 },   { IDCPU::MC68010, CPUImageFile::mc68010 },   { IDCPU::MC68020, CPUImageFile::mc68020 },
     { IDCPU::MC68030, CPUImageFile::mc68030 },   { IDCPU::MC68EC030, CPUImageFile::mc68030 }, { IDCPU::MC68040, CPUImageFile::mc68040 },
     { IDCPU::MC68LC040, CPUImageFile::mc68040 }, { IDCPU::MC68060, CPUImageFile::mc68060 },   { IDCPU::MC68LC060, CPUImageFile::mc68060 },
     { IDCPU::FPGA, CPUImageFile::fpga },         { IDCPU::EMU68, CPUImageFile::emu68 },
+};
+
+std::map<IDPPC, std::string> ppc_cpu2image = {
+    { IDPPC::NONE, CPUImageFile::none },     { IDPPC::OTHER, CPUImageFile::other },     { IDPPC::PPC602, CPUImageFile::ppc602 },
+    { IDPPC::PPC603, CPUImageFile::ppc603 }, { IDPPC::PPC603E, CPUImageFile::ppc603e }, { IDPPC::PPC603P, CPUImageFile::ppc603p },
+    { IDPPC::PPC604, CPUImageFile::ppc604 }, { IDPPC::PPC604E, CPUImageFile::ppc604e }, { IDPPC::PPC620, CPUImageFile::ppc620 },
 };
 
 namespace Components
@@ -159,7 +165,8 @@ namespace Components
         mCPUTechnologyText.setContents(cpuSpec.technology);
         mCPUTDPText.setContents(cpuSpec.tdp);
         mCPUPremiereYearText.setContents(cpuSpec.premiere);
-        mCPUImage.setSpecPicture(cpu2image.at(cpuInfo.model.m68k));
+        mCPUImage.setSpecPicture((cpuInfo.type == CpuType::MC68k) ? m68k_cpu2image.at(cpuInfo.model.m68k)
+                                                                  : ppc_cpu2image.at(cpuInfo.model.ppc));
         mCPUImage.Relayout();
         mAdditionalUnits.setContents(
             std::accumulate(cpuInfo.additionalUnits.begin(), cpuInfo.additionalUnits.end(), std::string(""),
