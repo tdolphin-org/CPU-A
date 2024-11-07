@@ -20,6 +20,7 @@ namespace Components
                        .vertical()
                        .tagChild(MUI::GroupBuilder()
                                      .tagFrame(MUI::Frame::Group)
+                                     .tagBackground(MUI::ImageOrBackground::WindowBack)
                                      .tagFrameTitle("Operating System")
                                      .tagColumns(4)
                                      .tagChild(LabelText(MUIX_R "Number"))

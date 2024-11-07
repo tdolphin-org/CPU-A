@@ -18,7 +18,6 @@ namespace Components
         return MUI::TextBuilder()
             .tagFrame(MUI::Frame::String)
             .tagContents(defaultValue)
-            .tagBackground(MUI::ImageOrBackground::StringActiveBack)
             .tagShortHelp(help)
             .object();
     }
