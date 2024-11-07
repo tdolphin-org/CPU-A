@@ -10,6 +10,7 @@
 #include "AOS/Picasso96/Library.hpp"
 #include "AppContext.hpp"
 #include "MUI/Core/MakeObject.hpp"
+#include "MUI/Gauge.hpp"
 
 #include <numeric>
 
@@ -17,12 +18,23 @@ namespace Components
 {
     GraphicsTab::GraphicsTab()
       : mGfxSystemText(ValueText("Graphic OS"))
-      , mGraphicsCards(MUI::GroupBuilder().tagFrame(MUI::Frame::Group).tagFrameTitle("Graphics Card(s)").tagColumns(2).object())
-      , mPicasso96Boards(MUI::GroupBuilder().tagFrame(MUI::Frame::Group).tagFrameTitle("Picasso96 Board(s)").tagColumns(3).object())
+      , mGraphicsCards(MUI::GroupBuilder()
+                           .tagFrame(MUI::Frame::Group)
+                           .tagBackground(MUI::ImageOrBackground::WindowBack)
+                           .tagFrameTitle("Graphics Card(s)")
+                           .tagColumns(2)
+                           .object())
+      , mPicasso96Boards(MUI::GroupBuilder()
+                             .tagFrame(MUI::Frame::Group)
+                             .tagBackground(MUI::ImageOrBackground::WindowBack)
+                             .tagFrameTitle("Picasso96 Board(s)")
+                             .tagColumns(4)
+                             .object())
       , mComponent(MUI::GroupBuilder()
                        .vertical()
                        .tagChild(MUI::GroupBuilder()
                                      .tagFrame(MUI::Frame::Group)
+                                     .tagBackground(MUI::ImageOrBackground::WindowBack)
                                      .tagFrameTitle("Graphic System")
                                      .tagColumns(2)
                                      .tagChild(LabelText(MUIX_R "Name"))
@@ -39,19 +51,19 @@ namespace Components
             mGraphicsCards.AddTail(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
         else
         {
-            mGraphicsCards.AddTail(MUI::TextBuilder().tagContents("Name").object());
-            mGraphicsCards.AddTail(MUI::TextBuilder().tagContents("Manufacturer").object());
+            mGraphicsCards.AddTail(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Name").object());
+            mGraphicsCards.AddTail(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Manufacturer").object());
 
             for (auto &graphicsCard : graphicsCards)
             {
                 mGraphicsCards.AddTail(MUI::TextBuilder()
                                            .tagFrame(MUI::Frame::String)
-                                           .tagBackground(MUI::ImageOrBackground::StringActiveBack)
+
                                            .tagContents(graphicsCard.product)
                                            .object());
                 mGraphicsCards.AddTail(MUI::TextBuilder()
                                            .tagFrame(MUI::Frame::String)
-                                           .tagBackground(MUI::ImageOrBackground::StringActiveBack)
+
                                            .tagContents(graphicsCard.manufacturer)
                                            .object());
             }
@@ -68,30 +80,32 @@ namespace Components
             mPicasso96Boards.AddTail(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
         else
         {
-            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Name").object());
-            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("Video Memory Size @ Clock").object());
-            mPicasso96Boards.AddTail(MUI::TextBuilder().tagContents("RGB Formats").object());
+            mPicasso96Boards.AddTail(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Name").object());
+            mPicasso96Boards.AddTail(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Chip").object());
+            mPicasso96Boards.AddTail(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("VRAM Size [used %] @ Clock").object());
+            mPicasso96Boards.AddTail(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("RGB Formats").object());
 
             for (auto &picassoBoard : picassoBoards)
             {
+                mPicasso96Boards.AddTail(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(picassoBoard.name).object());
+                mPicasso96Boards.AddTail(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(picassoBoard.chip).object());
+                mPicasso96Boards.AddTail(MUI::GaugeBuilder()
+                                             .tagHoriz(true)
+                                             .tagInfoText(picassoBoard.memorySize + " [%ld %%] @ " + picassoBoard.memoryClock)
+                                             .tagCurrent(100 - picassoBoard.freeMemoryPercent)
+                                             .object());
+
+                auto rgbFormats
+                    = std::accumulate(picassoBoard.rgbFormats.begin(), picassoBoard.rgbFormats.end(), std::string(""),
+                                      [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; });
+
                 mPicasso96Boards.AddTail(MUI::TextBuilder()
                                              .tagFrame(MUI::Frame::String)
-                                             .tagBackground(MUI::ImageOrBackground::StringActiveBack)
-                                             .tagContents(picassoBoard.name)
+                                             .tagShorten(MUI::Text_Shorten::ElideRight)
+                                             .tagSetMin(false)
+                                             .tagContents(rgbFormats)
+                                             .tagShortHelp(rgbFormats)
                                              .object());
-                mPicasso96Boards.AddTail(MUI::TextBuilder()
-                                             .tagFrame(MUI::Frame::String)
-                                             .tagBackground(MUI::ImageOrBackground::StringActiveBack)
-                                             .tagContents(picassoBoard.memorySize + " @ " + picassoBoard.memoryClock)
-                                             .object());
-                mPicasso96Boards.AddTail(
-                    MUI::TextBuilder()
-                        .tagFrame(MUI::Frame::String)
-                        .tagBackground(MUI::ImageOrBackground::StringActiveBack)
-                        .tagContents(
-                            std::accumulate(picassoBoard.rgbFormats.begin(), picassoBoard.rgbFormats.end(), std::string(""),
-                                            [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; }))
-                        .object());
             }
         }
     }
