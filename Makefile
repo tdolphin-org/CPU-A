@@ -36,6 +36,9 @@ build_aos_m68k:
 	done
 	mkdir -p $(OUT_APP_PATH)/images
 	cp -r data/images/* $(OUT_APP_PATH)/images
+	cp docs/aminet/header.readme $(OUT_APP_PATH)/CPU-A.readme
+	sed -i "s/%VERSION%/$(APP_VERSION)/g" $(OUT_APP_PATH)/CPU-A.readme
+	fold -w78 -s docs/CPU-A.readme >> $(OUT_APP_PATH)/CPU-A.readme
 
 clean.obj:
 	@for dir in $(SUB_PROJECTS); do \

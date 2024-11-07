@@ -1,0 +1,9 @@
+Short:        CPU-A System Information Tool
+Uploader:     rafal.zabdyr@tdolphin.org (Rafal Zabdyr)
+Author:       Rafal Zabdyr
+Type:         util/moni
+Version:      %VERSION%
+Architecture: m68k-amigaos >= 3.0
+Distribution: Aminet
+URL:          http://www.tdolphin.org/projects.php#cpu-a
+
