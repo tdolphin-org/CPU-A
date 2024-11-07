@@ -17,4 +17,12 @@ namespace CPUImageFile
     const char *mc68060 = "PROGDIR:images/cpu/mc68060.64x64.png";
     const char *fpga = "PROGDIR:images/cpu/fpga.64x64.png";
     const char *emu68 = "PROGDIR:images/cpu/emu68.64x64.png";
+    const char *other = "PROGDIR:images/cpu/ppc.64x64.png";
+    const char *ppc602 = "PROGDIR:images/cpu/ppc602.64x64.png";
+    const char *ppc603 = "PROGDIR:images/cpu/ppc603.64x64.png";
+    const char *ppc603e = "PROGDIR:images/cpu/ppc603e.64x64.png";
+    const char *ppc603p = "PROGDIR:images/cpu/ppc603p.64x64.png";
+    const char *ppc604 = "PROGDIR:images/cpu/ppc604.64x64.png";
+    const char *ppc604e = "PROGDIR:images/cpu/ppc604e.64x64.png";
+    const char *ppc620 = "PROGDIR:images/cpu/ppc620.64x64.png";
 }
