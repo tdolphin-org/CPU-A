@@ -1,8 +1,8 @@
 # CPU-A
 
 System Information Tool for AmigaOS.
-
-It is complex example of usage [MUI C++ wrapper classes](https://github.com/tdolphin-org/AmigaOS.MUI.cpp.wrapper).
+This tool uses Identify.library and optionally Picasso96 to gather and display useful information about the system.
+It serves as a comprehensive example of using [MUI C++ wrapper classes](https://github.com/tdolphin-org/AmigaOS.MUI.cpp.wrapper).
 
 ## Requirements to run on AmigaOS
 
