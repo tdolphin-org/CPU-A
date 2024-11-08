@@ -24,6 +24,10 @@ namespace DataInfo
         std::string tdp;
         int totalCores;
         int totalThreads;
+        long l1InstructionCache;
+        long l1DataCache;
+        long l2Cache;
+        long l3Cache;
     };
 
     extern const std::map<AOS::Identify::IDCPU, CPUSpec> cpuMC68k2spec;

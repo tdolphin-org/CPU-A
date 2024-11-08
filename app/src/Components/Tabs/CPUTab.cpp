@@ -177,6 +177,16 @@ namespace Components
         mAdditionalUnits.setContents(
             std::accumulate(cpuInfo.additionalUnits.begin(), cpuInfo.additionalUnits.end(), std::string(""),
                             [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; }));
+
+        if (cpuSpec.l1InstructionCache > 0)
+            mCPUL1Instructions.setContents(ToString::FromBytesValue(cpuSpec.l1InstructionCache));
+        if (cpuSpec.l1DataCache > 0)
+            mCPUL1Data.setContents(ToString::FromBytesValue(cpuSpec.l1DataCache));
+        if (cpuSpec.l2Cache > 0)
+            mCPULevel2.setContents(ToString::FromBytesValue(cpuSpec.l2Cache));
+        if (cpuSpec.l3Cache > 0)
+            mCPULevel3.setContents(ToString::FromBytesValue(cpuSpec.l3Cache));
+
         mCPUCores.setContents(std::to_string(cpuSpec.totalCores));
         mCPUThreads.setContents(std::to_string(cpuSpec.totalThreads));
     }
@@ -200,6 +210,10 @@ namespace Components
         mCPUImage.setSpecPicture(CPUImageFile::none);
         mCPUImage.Relayout();
         mAdditionalUnits.setContents("--");
+        mCPUL1Instructions.setContents("--");
+        mCPUL1Data.setContents("--");
+        mCPULevel2.setContents("--");
+        mCPULevel3.setContents("--");
         mCPUCores.setContents("--");
         mCPUThreads.setContents("--");
     }
