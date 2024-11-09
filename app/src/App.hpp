@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include "AOS/Graphics/GraphicsBaseScope.hpp"
 #include "AOS/Identify/IdentifyBaseScope.hpp"
 #include "AOS/OpenURL/OpenURLBaseScope.hpp"
 #include "AOS/Picasso96/Picasso96BaseScope.hpp"
@@ -24,6 +25,7 @@ class AppCore
     IdentifyBaseScope identifyBaseScope;
     OpenURLBaseScope openUrlBaseScope;
     Picasso96BaseScope picasso96BaseScope;
+    GraphicsBaseScope graphicsBaseScope;
 
     AppCore();
 
