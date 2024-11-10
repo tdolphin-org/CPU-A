@@ -39,6 +39,9 @@ build_aos_m68k:
 	cp docs/aminet/header.readme $(OUT_APP_PATH)/CPU-A.readme
 	sed -i "s/%VERSION%/$(APP_VERSION)/g" $(OUT_APP_PATH)/CPU-A.readme
 	fold -w78 -s docs/CPU-A.readme >> $(OUT_APP_PATH)/CPU-A.readme
+	cp data/icons/CPU-A.drawer.info $(OUT_PATH)/CPU-A.info
+	cp data/icons/CPU-A.info $(OUT_APP_PATH)
+	cp data/icons/CPU-A.readme.info $(OUT_APP_PATH)
 
 clean.obj:
 	@for dir in $(SUB_PROJECTS); do \
