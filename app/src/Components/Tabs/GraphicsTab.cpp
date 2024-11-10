@@ -12,6 +12,7 @@
 #include "AppContext.hpp"
 #include "MUI/Core/MakeObject.hpp"
 #include "MUI/Gauge.hpp"
+#include "MUI/Scale.hpp"
 
 #include <numeric>
 
@@ -107,8 +108,11 @@ namespace Components
 
                 mPicasso96Boards.AddTail(MUI::GaugeBuilder()
                                              .tagHoriz(true)
-                                             .tagInfoText(picassoBoard.memorySize + " [%ld %% used] @ " + picassoBoard.memoryClock)
+                                             .tagInfoText(picassoBoard.memorySize + " [%ld%% used] @ " + picassoBoard.memoryClock)
                                              .tagCurrent(100 - picassoBoard.freeMemoryPercent)
+                                             .object());
+                mPicasso96Boards.AddTail(MUI::ScaleBuilder()
+                                             .tagHoriz(true)
                                              .object());
             }
         }

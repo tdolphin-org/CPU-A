@@ -40,6 +40,6 @@ namespace Components
         mOSNumberText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::OSNR));
         mExecVersionText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::EXECVER));
         mWBVersionText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::WBVER));
-        mWBVersionText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::PPCOS));
+        mPowerPCOSText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::PPCOS));
     }
 }
