@@ -7,7 +7,7 @@ It serves as a comprehensive example of using [MUI C++ wrapper classes](https://
 ## Requirements to run on AmigaOS
 
 -   AmigaOS 3.0+
--   [MUI5](https://github.com/amiga-mui/muidev)
+-   [MUI3.8](https://aminet.net/package/util/libs/mui38usr)
 -   [Identify.library](https://github.com/shred/identify) (download [IdentifyUsr.lha](http://aminet.net/util/libs/IdentifyUsr.lha))
 -   optional [OpenURL.library](https://github.com/jens-maus/libopenurl) (download [OpenURL.lha](http://aminet.net/comm/www/OpenURL-7.18.lha))
 -   optional [Picasso96](http://wiki.icomp.de/wiki/P96)
