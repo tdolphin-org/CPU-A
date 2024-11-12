@@ -36,7 +36,7 @@ AOS_WRAPPER_SRC_DIRS = $(addprefix $(AOS_WRAPPER_PATH)/src/,$(AOS_WRAPPER_MODULE
 AOS_WRAPPER_SRCS = $(foreach sdir,$(AOS_WRAPPER_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
 
 MUI_COMPONENTS_PATH = ${MUICPP_PATH}/components
-MUI_COMPONENTS_MODULES = Components/Core Components/MCC Components/MCC/Core Components/Buttons
+MUI_COMPONENTS_MODULES = Components/Core Components/MCC Components/MCC/Core Components/Buttons Components/Tabs
 MUI_COMPONENTS_SRC_DIRS = $(addprefix $(MUI_COMPONENTS_PATH)/src/,$(MUI_COMPONENTS_MODULES))
 MUI_COMPONENTS_SRCS = $(foreach sdir,$(MUI_COMPONENTS_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
 

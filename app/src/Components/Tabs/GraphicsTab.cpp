@@ -57,31 +57,31 @@ namespace Components
 
         auto graphicsCards = AOS::Identify::Library::GetExpansions(AOS::Identify::ClassID::GFX);
         if (graphicsCards.empty())
-            mGraphicsCards.AddTail(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
+            mGraphicsCards.AddMember(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
         else
         {
-            mGraphicsCards.AddTail(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Name").object());
-            mGraphicsCards.AddTail(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Manufacturer").object());
+            mGraphicsCards.AddMember(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Name").object());
+            mGraphicsCards.AddMember(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Manufacturer").object());
 
             for (auto &graphicsCard : graphicsCards)
             {
-                mGraphicsCards.AddTail(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(graphicsCard.product).object());
-                mGraphicsCards.AddTail(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(graphicsCard.manufacturer).object());
+                mGraphicsCards.AddMember(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(graphicsCard.product).object());
+                mGraphicsCards.AddMember(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(graphicsCard.manufacturer).object());
             }
         }
 
         for (auto &monitorName : AOS::Graphics::Library::GetMonitors())
-            mMountedMonitors.AddTail(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(monitorName).object());
+            mMountedMonitors.AddMember(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(monitorName).object());
 
         if (!AppContext::instance().getPicasso96Base().isOpen())
         {
-            mPicasso96Boards.AddTail(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
+            mPicasso96Boards.AddMember(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
             return;
         }
 
         auto picassoBoards = AOS::Picasso96::Library::GetBoards();
         if (picassoBoards.empty())
-            mPicasso96Boards.AddTail(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
+            mPicasso96Boards.AddMember(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
         else
         {
             for (auto &picassoBoard : picassoBoards)
@@ -89,7 +89,7 @@ namespace Components
                 auto rgbFormats
                     = std::accumulate(picassoBoard.rgbFormats.begin(), picassoBoard.rgbFormats.end(), std::string(""),
                                       [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; });
-                mPicasso96Boards.AddTail(
+                mPicasso96Boards.AddMember(
                     MUI::GroupBuilder()
                         .tagColumns(3)
                         .tagChild(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Name").object())
@@ -99,21 +99,21 @@ namespace Components
                         .tagChild(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(picassoBoard.chip).object())
                         .tagChild(MUI::TextBuilder()
                                       .tagFrame(MUI::Frame::String)
+#ifdef MUIA_Text_Shorten
                                       .tagShorten(MUI::Text_Shorten::ElideRight)
+#endif
                                       .tagSetMin(false)
                                       .tagContents(rgbFormats)
                                       .tagShortHelp(rgbFormats)
                                       .object())
                         .object());
 
-                mPicasso96Boards.AddTail(MUI::GaugeBuilder()
+                mPicasso96Boards.AddMember(MUI::GaugeBuilder()
                                              .tagHoriz(true)
                                              .tagInfoText(picassoBoard.memorySize + " [%ld%% used] @ " + picassoBoard.memoryClock)
                                              .tagCurrent(100 - picassoBoard.freeMemoryPercent)
                                              .object());
-                mPicasso96Boards.AddTail(MUI::ScaleBuilder()
-                                             .tagHoriz(true)
-                                             .object());
+                mPicasso96Boards.AddMember(MUI::ScaleBuilder().tagHoriz(true).object());
             }
         }
     }

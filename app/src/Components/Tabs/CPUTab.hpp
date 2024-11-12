@@ -12,7 +12,6 @@
 #include "TabBase.hpp"
 
 #include "MUI/Group.hpp"
-#include "MUI/Image.hpp"
 #include "MUI/Text.hpp"
 
 namespace Components
@@ -31,7 +30,7 @@ namespace Components
         MUI::Text mCPUTechnologyText;
         MUI::Text mCPUPremiereYearText;
         MUI::Text mAdditionalUnits; // like MMU, FPU
-        MUI::Image mCPUImage;
+        MUI::Group mCPUImagesGroup;
         MUI::Text mCPUClockText;
         MUI::Text mCPUMultipler;
         MUI::Text mCPUBusSpeed;

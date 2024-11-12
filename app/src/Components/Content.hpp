@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include "Components/Tabs/TabsContainer.hpp"
 #include "Tabs/AboutTab.hpp"
 #include "Tabs/CPUTab.hpp"
 #include "Tabs/ExpansionsTab.hpp"
@@ -13,7 +14,6 @@
 #include "Tabs/MainboardTab.hpp"
 #include "Tabs/MemoryTab.hpp"
 #include "Tabs/OSTab.hpp"
-#include "Tabs/TabsContainer.hpp"
 
 #include "MUI/Text.hpp"
 

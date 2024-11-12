@@ -20,34 +20,29 @@
 #include "SDI/SDI_compiler.h"
 #include "SDI/SDI_hook.h"
 
-unsigned long ConstructEntry(UNUSED struct IClass *cl, UNUSED Object *obj, UNUSED struct MUIP_List_Construct *msg)
+// struct Towar *towar reg(a1), APTR mempool reg(a2)
+HOOKPROTO(ConstructEntry, unsigned long, APTR pool, ExpansionRef *expansionRef)
 {
-    auto expansionRef = (ExpansionRef *)msg->entry;
-
-    ExpansionRef *copy = (ExpansionRef *)AllocPooled(msg->pool, sizeof(ExpansionRef));
+    ExpansionRef *copy = (ExpansionRef *)AllocPooled(pool, sizeof(ExpansionRef));
     if (copy != nullptr)
         *copy = *expansionRef;
 
     return (unsigned long)copy;
 }
 
-unsigned long DestructEntry(UNUSED struct IClass *cl, UNUSED Object *obj, UNUSED struct MUIP_List_Destruct *msg)
+HOOKPROTO(DestructEntry, unsigned long, APTR pool, ExpansionRef *expansionRef)
 {
-    auto expansionRef = (ExpansionRef *)msg->entry;
     if (expansionRef)
-        FreePooled(msg->pool, (APTR)expansionRef, sizeof(ExpansionRef));
+        FreePooled(pool, (APTR)expansionRef, sizeof(ExpansionRef));
 
     return 0;
 }
 
-unsigned long DisplayEntry(UNUSED struct IClass *cl, UNUSED Object *obj, UNUSED struct MUIP_List_Display *msg)
+HOOKPROTO(DisplayEntry, unsigned long, char **array, ExpansionRef *expansionRef)
 {
     static ExpansionRef displayExpansionRef;
-    auto *array = msg->array;
-
-    if (msg->entry)
+    if (expansionRef)
     {
-        auto expansionRef = (ExpansionRef *)msg->entry;
         displayExpansionRef = *expansionRef;
 
         *array++ = displayExpansionRef.product;
@@ -55,9 +50,22 @@ unsigned long DisplayEntry(UNUSED struct IClass *cl, UNUSED Object *obj, UNUSED 
         *array++ = displayExpansionRef.manufacturer;
         *array = displayExpansionRef.additionalInfo;
     }
+    else
+    {
+        *array++ = MUIX_C "[ID] Product";
+        *array++ = MUIX_C "Class";
+        *array++ = MUIX_C "[ID] Manufacturer";
+        *array = MUIX_C "Info";
+    }
 
     return 0;
 }
+
+typedef unsigned long (*HOOKFUNC_)();
+
+struct Hook ConstructHook = { { nullptr, nullptr }, (HOOKFUNC_)ConstructEntry, nullptr, nullptr };
+struct Hook DestructHook = { { nullptr, nullptr }, (HOOKFUNC_)DestructEntry, nullptr, nullptr };
+struct Hook DisplayHook = { { nullptr, nullptr }, (HOOKFUNC_)DisplayEntry, nullptr, nullptr };
 
 DISPATCHER(ExpansionsListDispatcherFunc)
 {
@@ -67,12 +75,6 @@ DISPATCHER(ExpansionsListDispatcherFunc)
 
     switch (msg->MethodID)
     {
-        case MUIM_List_Construct:
-            return ConstructEntry(cl, obj, (MUIP_List_Construct *)msg);
-        case MUIM_List_Destruct:
-            return DestructEntry(cl, obj, (MUIP_List_Destruct *)msg);
-        case MUIM_List_Display:
-            return DisplayEntry(cl, obj, (MUIP_List_Display *)msg);
         default:
         {
             auto dispatchMethodResult = Components::MCC::dispatchMethod(msg->MethodID, cl, obj, msg);
@@ -89,6 +91,9 @@ namespace Components::MCC
     ExpansionsListBuilder::ExpansionsListBuilder()
       : MUI::ListBuilderTemplate<ExpansionsListBuilder, ActionRoot<MUI::List>>("ExpansionsList")
     {
+        PushTag(MUIA_List_ConstructHook, &ConstructHook);
+        PushTag(MUIA_List_DestructHook, &DestructHook);
+        PushTag(MUIA_List_DisplayHook, &DisplayHook);
     }
 
     ActionRoot<MUI::List> ExpansionsListBuilder::object()

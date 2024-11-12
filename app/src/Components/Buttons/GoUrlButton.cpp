@@ -17,7 +17,9 @@ namespace Components
       : BasicButton(label, shortHelp, weight)
       , mUrl(url)
     {
+#ifdef MUIA_PointerType
         muiRoot().setPointerType(MUI::PointerType::Link);
+#endif
     }
 
     unsigned long GoUrlButton::OnClick()

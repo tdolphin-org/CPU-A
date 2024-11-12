@@ -9,6 +9,7 @@
 #include "DataInfo/CPUSpec.hpp"
 #include "FileResources/CPUImages.hpp"
 #include "MUI/Core/MakeObject.hpp"
+#include "MUI/Image.hpp"
 
 #include <numeric>
 
@@ -41,13 +42,7 @@ namespace Components
       , mCPUTechnologyText(ValueText("Production Technology"))
       , mCPUPremiereYearText(ValueText("Year of Premiere"))
       , mAdditionalUnits(ValueText("Additional Units like FPU, MMU"))
-      , mCPUImage(MUI::ImageBuilder()
-                      .tagSpecPicture(CPUImageFile::none)
-                      .tagFixWidth(64)
-                      .tagFixHeight(64)
-                      .tagFreeHoriz(true)
-                      .tagFreeVert(true)
-                      .object())
+      , mCPUImagesGroup(MUI::GroupBuilder().tagPageMode().object())
       , mCPUClockText(ValueText("CPU clock"))
       , mCPUMultipler(ValueText("Multiplier", "x1"))
       , mCPUBusSpeed(ValueText("Bus Speed"))
@@ -89,7 +84,7 @@ namespace Components
                                                                                .object())
 
                                                                  .object())
-                                                   .tagChild(mCPUImage)
+                                                   .tagChild(mCPUImagesGroup)
                                                    .object())
                                      .object())
                        .tagChild(MUI::GroupBuilder()
@@ -140,6 +135,26 @@ namespace Components
                                      .object())
                        .object())
     {
+        for (auto &cpuInfo : mCPUInfos)
+        {
+            mCPUImagesGroup.AddMember(MUI::ImageBuilder()
+                                          .tagSpecPicture((cpuInfo.type == CpuType::MC68k) ? m68k_cpu2image.at(cpuInfo.model.m68k)
+                                                                                           : ppc_cpu2image.at(cpuInfo.model.ppc))
+                                          .tagFixWidth(64)
+                                          .tagFixHeight(64)
+                                          .tagFreeHoriz(true)
+                                          .tagFreeVert(true)
+                                          .object());
+        }
+
+        mCPUImagesGroup.AddMember(MUI::ImageBuilder()
+                                      .tagSpecPicture(CPUImageFile::none)
+                                      .tagFixWidth(64)
+                                      .tagFixHeight(64)
+                                      .tagFreeHoriz(true)
+                                      .tagFreeVert(true)
+                                      .object());
+
         ShowInfo(0);
     }
 
@@ -171,9 +186,7 @@ namespace Components
         mCPUTechnologyText.setContents(cpuSpec.technology);
         mCPUTDPText.setContents(cpuSpec.tdp);
         mCPUPremiereYearText.setContents(cpuSpec.premiere);
-        mCPUImage.setSpecPicture((cpuInfo.type == CpuType::MC68k) ? m68k_cpu2image.at(cpuInfo.model.m68k)
-                                                                  : ppc_cpu2image.at(cpuInfo.model.ppc));
-        mCPUImage.Relayout();
+        mCPUImagesGroup.setActivePage(cpuIndex);
         mAdditionalUnits.setContents(
             std::accumulate(cpuInfo.additionalUnits.begin(), cpuInfo.additionalUnits.end(), std::string(""),
                             [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; }));
@@ -207,8 +220,7 @@ namespace Components
         mCPUTechnologyText.setContents("--");
         mCPUTDPText.setContents("--");
         mCPUPremiereYearText.setContents("--");
-        mCPUImage.setSpecPicture(CPUImageFile::none);
-        mCPUImage.Relayout();
+        mCPUImagesGroup.setActivePageLast();
         mAdditionalUnits.setContents("--");
         mCPUL1Instructions.setContents("--");
         mCPUL1Data.setContents("--");

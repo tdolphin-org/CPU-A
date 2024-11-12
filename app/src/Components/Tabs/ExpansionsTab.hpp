@@ -16,8 +16,6 @@ namespace Components
 {
     class ExpansionsTab : public Root<MUI::Group>, public TabBase
     {
-        static const char *titles[];
-
         MUI::List mExpansionsList;
 
         MUI::Group mComponent;
