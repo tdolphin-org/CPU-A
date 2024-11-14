@@ -8,6 +8,7 @@
 
 namespace CPUImageFile
 {
+    const char *unknown = "PROGDIR:images/cpu/unknown.64x64.png";
     const char *none = "PROGDIR:images/cpu/none.64x64.png";
     const char *mc68000 = "PROGDIR:images/cpu/mc68000.64x64.png";
     const char *mc68010 = "PROGDIR:images/cpu/mc68010.64x64.png";

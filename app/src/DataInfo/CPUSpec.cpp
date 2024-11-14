@@ -25,10 +25,12 @@ namespace DataInfo
           { "Motorola / Freescale", "68LC060", "3.3 V", "0.42-0.6 um", "1993", "~2-7 W", 1, 1, 0, 0, 0, 0 } },
         { AOS::Identify::IDCPU::FPGA, { "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", 0, 0, 0, 0, 0, 0 } },
         { AOS::Identify::IDCPU::EMU68, { "Arm", "N/A", "N/A", "N/A", "N/A", "N/A", 0, 0, 0, 0, 0, 0 } },
+        { AOS::Identify::IDCPU::OTHER, { "??", "Unknown", "??", "??", "??", "??", 0, 0, 0, 0, 0, 0 } },
     };
 
     const std::map<AOS::Identify::IDPPC, CPUSpec> cpuPPC2spec {
         { AOS::Identify::IDPPC::NONE, { "--", "--", "--", "--", "--", "--", 0, 0, 0, 0, 0, 0 } },
+        { AOS::Identify::IDPPC::OTHER, { "??", "Unknown", "??", "??", "??", "??", 0, 0, 0, 0, 0, 0 } },
         { AOS::Identify::IDPPC::PPC602, { "Motorola/IBM", "602", "3.3 V", "0.5 um", "February 1995", "~1.2 W", 1, 1, 0, 0, 0, 0 } },
         { AOS::Identify::IDPPC::PPC603,
           { "Motorola/IBM", "603", "3.3 V", "0.5 um", "1994", "~2.2-3.5 W", 1, 1, 8 * 1024, 8 * 1024, 0, 0 } },

@@ -16,7 +16,7 @@ std::map<IDCPU, std::string> m68k_cpu2image = {
     { IDCPU::MC68000, CPUImageFile::mc68000 },   { IDCPU::MC68010, CPUImageFile::mc68010 },   { IDCPU::MC68020, CPUImageFile::mc68020 },
     { IDCPU::MC68030, CPUImageFile::mc68030 },   { IDCPU::MC68EC030, CPUImageFile::mc68030 }, { IDCPU::MC68040, CPUImageFile::mc68040 },
     { IDCPU::MC68LC040, CPUImageFile::mc68040 }, { IDCPU::MC68060, CPUImageFile::mc68060 },   { IDCPU::MC68LC060, CPUImageFile::mc68060 },
-    { IDCPU::FPGA, CPUImageFile::fpga },         { IDCPU::EMU68, CPUImageFile::emu68 },
+    { IDCPU::FPGA, CPUImageFile::fpga },         { IDCPU::EMU68, CPUImageFile::emu68 },       { IDCPU::OTHER, CPUImageFile::unknown },
 };
 
 std::map<IDPPC, std::string> ppc_cpu2image = {
@@ -30,8 +30,18 @@ namespace Components
     const char *CPUInfo::mCPUs[] = { "MC68k", "PowerPC", nullptr };
 
     CPUInfo::CPUInfo(const AOS::Identify::CpuInfo &cpuInfo)
-      : mCPUSpec(cpuInfo.type == CpuType::MC68k ? DataInfo::cpuMC68k2spec.at(cpuInfo.model.m68k)
-                                                : DataInfo::cpuPPC2spec.at(cpuInfo.model.ppc))
+      : mCPUSpec(cpuInfo.type == CpuType::MC68k ? DataInfo::cpuMC68k2spec.at([&]() {
+          auto pos = DataInfo::cpuMC68k2spec.find(cpuInfo.model.m68k);
+          if (pos != DataInfo::cpuMC68k2spec.end())
+              return cpuInfo.model.m68k;
+          return IDCPU::OTHER;
+      }())
+                                                : DataInfo::cpuPPC2spec.at([&]() {
+                                                      auto pos = DataInfo::cpuPPC2spec.find(cpuInfo.model.ppc);
+                                                      if (pos != DataInfo::cpuPPC2spec.end())
+                                                          return cpuInfo.model.ppc;
+                                                      return IDPPC::OTHER;
+                                                  }()))
       , mCPUVendorText(ValueText("Vendor of CPU", mCPUSpec.vendor))
       , mCPUModelText(ValueText("Model of CPU", mCPUSpec.modelName))
       , mCPURevisionText(ValueText("Revision of CPU", cpuInfo.clock))
@@ -48,7 +58,7 @@ namespace Components
                       .tagFreeHoriz(true)
                       .tagFreeVert(true)
                       .object())
-      , mCPUClockText(ValueText("CPU clock"))
+      , mCPUClockText(ValueText("CPU clock", cpuInfo.clock))
       , mCPUMultipler(ValueText("Multiplier", "x1"))
       , mCPUBusSpeed(ValueText("Bus Speed"))
       , mCPUL1Instructions(ValueText("Level 1 Instructions Cache size",

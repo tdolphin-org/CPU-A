@@ -8,6 +8,7 @@
 
 namespace CPUImageFile
 {
+    extern const char *unknown;
     extern const char *none;
     extern const char *mc68000;
     extern const char *mc68010;
