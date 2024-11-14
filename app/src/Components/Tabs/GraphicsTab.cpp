@@ -110,7 +110,7 @@ namespace Components
 
                 mPicasso96Boards.AddMember(MUI::GaugeBuilder()
                                              .tagHoriz(true)
-                                             .tagInfoText(picassoBoard.memorySize + " [%ld%% used] @ " + picassoBoard.memoryClock)
+                                             .tagInfoText(picassoBoard.usedMemory + " used [%ld%%] / " + picassoBoard.memorySize + " @ " + picassoBoard.memoryClock)
                                              .tagCurrent(100 - picassoBoard.freeMemoryPercent)
                                              .object());
                 mPicasso96Boards.AddMember(MUI::ScaleBuilder().tagHoriz(true).object());
