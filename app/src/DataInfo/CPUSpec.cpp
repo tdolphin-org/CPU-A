@@ -28,6 +28,7 @@ namespace DataInfo
     };
 
     const std::map<AOS::Identify::IDPPC, CPUSpec> cpuPPC2spec {
+        { AOS::Identify::IDPPC::NONE, { "--", "--", "--", "--", "--", "--", 0, 0, 0, 0, 0, 0 } },
         { AOS::Identify::IDPPC::PPC602, { "Motorola/IBM", "602", "3.3 V", "0.5 um", "February 1995", "~1.2 W", 1, 1, 0, 0, 0, 0 } },
         { AOS::Identify::IDPPC::PPC603,
           { "Motorola/IBM", "603", "3.3 V", "0.5 um", "1994", "~2.2-3.5 W", 1, 1, 8 * 1024, 8 * 1024, 0, 0 } },
