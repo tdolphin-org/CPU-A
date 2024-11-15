@@ -70,8 +70,12 @@ namespace Components
             }
         }
 
-        for (auto &monitorName : AOS::Graphics::Library::GetMonitors())
-            mMountedMonitors.AddMember(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(monitorName).object());
+        auto mountedMonitors = AOS::Graphics::Library::GetMonitors();
+        if (mountedMonitors.empty())
+            mMountedMonitors.AddMember(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
+        else
+            for (const auto &monitorName : mountedMonitors)
+                mMountedMonitors.AddMember(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(monitorName).object());
 
         if (!AppContext::instance().getPicasso96Base().isOpen())
         {
@@ -109,10 +113,11 @@ namespace Components
                         .object());
 
                 mPicasso96Boards.AddMember(MUI::GaugeBuilder()
-                                             .tagHoriz(true)
-                                             .tagInfoText(picassoBoard.usedMemory + " used [%ld%%] / " + picassoBoard.memorySize + " @ " + picassoBoard.memoryClock)
-                                             .tagCurrent(100 - picassoBoard.freeMemoryPercent)
-                                             .object());
+                                               .tagHoriz(true)
+                                               .tagInfoText(picassoBoard.usedMemory + " used [%ld%%] / " + picassoBoard.memorySize + " @ "
+                                                            + picassoBoard.memoryClock)
+                                               .tagCurrent(100 - picassoBoard.freeMemoryPercent)
+                                               .object());
                 mPicasso96Boards.AddMember(MUI::ScaleBuilder().tagHoriz(true).object());
             }
         }
