@@ -44,7 +44,7 @@ namespace Components
                                                   }()))
       , mCPUVendorText(ValueText("Vendor of CPU", mCPUSpec.vendor))
       , mCPUModelText(ValueText("Model of CPU", mCPUSpec.modelName))
-      , mCPURevisionText(ValueText("Revision of CPU", cpuInfo.clock))
+      , mCPURevisionText(ValueText("Revision of CPU", cpuInfo.revision))
       , mCPUTDPText(ValueText("Maximal Thermal Design Power", mCPUSpec.tdp))
       , mCPUCoreVoltageText(ValueText("CPU/Core Voltage", mCPUSpec.coreVoltage))
       , mCPUTechnologyText(ValueText("Production Technology", mCPUSpec.technology))
