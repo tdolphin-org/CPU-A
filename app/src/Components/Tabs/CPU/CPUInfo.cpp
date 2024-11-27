@@ -59,7 +59,7 @@ namespace Components
                       .tagFreeVert(true)
                       .object())
       , mCPUClockText(ValueText("CPU clock", cpuInfo.clock))
-      , mCPUMultipler(ValueText("Multiplier", "x1"))
+      , mCPUMultipler(ValueText("Multiplier", "--"))
       , mCPUBusSpeed(ValueText("Bus Speed"))
       , mCPUL1Instructions(ValueText("Level 1 Instructions Cache size",
                                      mCPUSpec.l1InstructionCache > 0 ? ToString::FromBytesValue(mCPUSpec.l1InstructionCache) : "--"))
