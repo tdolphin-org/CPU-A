@@ -22,6 +22,8 @@ namespace Components
         MUI::Text mWBVersionText;
         MUI::Text mPowerPCOSText;
 
+        MUI::Text mTCPStack;
+
         MUI::Group mComponent;
 
       public:
