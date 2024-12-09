@@ -25,6 +25,7 @@ namespace Components
         MUI::Text mDeniseText;
         MUI::Text mDeniseRevisionText;
         MUI::Text mPaulaText;
+        MUI::Text mChunkyToPlanarText;
         MUI::Text mRTCText;
         MUI::Text mBatteryClockText;
         MUI::Text mROMVersionText;

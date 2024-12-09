@@ -21,6 +21,7 @@ namespace Components
       , mDeniseText(ValueText("Denise/Lisa/.. Model"))
       , mDeniseRevisionText(ValueText("Denise/Lisa/.. Revision"))
       , mPaulaText(ValueText("Paula/Arne/Mary/.."))
+      , mChunkyToPlanarText(ValueText("Chunky To Planar Hardware"))
       , mRTCText(ValueText("Realtime Clock"))
       , mBatteryClockText(ValueText("Battery Backed Up Clock"))
       , mROMVersionText(ValueText("ROM Version"))
@@ -56,6 +57,8 @@ namespace Components
                                      .tagChild(mDeniseRevisionText)
                                      .tagChild(LabelText(MUIX_R "Sound Controller"))
                                      .tagChild(mPaulaText)
+                                     .tagChild(LabelText(MUIX_R "Chunky To Planar"))
+                                     .tagChild(mChunkyToPlanarText)
                                      .object())
                        .tagChild(MUI::GroupBuilder()
                                      .tagFrame(MUI::Frame::Group)
@@ -89,6 +92,8 @@ namespace Components
         mDeniseText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::DENISE));
         mDeniseRevisionText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::DENISEREV));
         mPaulaText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::PAULA));
+        mChunkyToPlanarText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::CHUNKYPLANAR));
+
         mRTCText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::RTC));
         mBatteryClockText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::BATTCLOCK));
 
