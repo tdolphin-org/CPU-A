@@ -41,12 +41,11 @@ namespace Components
                               .object())
                 .tagChild(
                     MUI::ListviewBuilder()
-                        .tagInput(true)
+                        .tagInput(false)
                         .tagList(
                             MUI::FloattextBuilder()
                                 .tagFrame(MUI::Frame::ReadList)
                                 .tagBackground(MUI::ImageOrBackground::ReadListBack)
-                                .tagFont(MUI::Font::Tiny)
                                 .tagText(
                                     "CAS double access and CAS normal access refer to different methods of accessing data in RAM.\n" MUIX_B
                                     "CAS normal access" MUIX_N ": A standard access mode where the memory controller needs to specify both "
