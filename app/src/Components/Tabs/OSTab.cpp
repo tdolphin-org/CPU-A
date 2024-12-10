@@ -6,7 +6,9 @@
 
 #include "OSTab.hpp"
 
+#include "AOS/Exec/Library.hpp"
 #include "AOS/Identify/Library.hpp"
+#include "MUI/Listview.hpp"
 
 namespace Components
 {
@@ -17,6 +19,7 @@ namespace Components
       , mWBVersionText(ValueText("Workbench Version"))
       , mPowerPCOSText(ValueText("PowerPC OS"))
       , mTCPStack(ValueText("TCP/IP Stack"))
+      , mLoadedLibrariesList(MUI::ListBuilder().tagConstructHookString().tagDestructHookString().object())
       , mComponent(MUI::GroupBuilder()
                        .vertical()
                        .tagChild(MUI::GroupBuilder()
@@ -35,6 +38,12 @@ namespace Components
                                      .tagChild(LabelText(MUIX_R "PowerPC OS"))
                                      .tagChild(mPowerPCOSText)
                                      .object())
+                       .tagChild(MUI::ListviewBuilder()
+                                     .tagFrame(MUI::Frame::Group)
+                                     .tagFrameTitle("Loaded Libraries, Datatypes, ...")
+                                     .tagBackground(MUI::ImageOrBackground::WindowBack)
+                                     .tagList(mLoadedLibrariesList)
+                                     .object())
                        .tagChild(MUI::GroupBuilder()
                                      .tagFrame(MUI::Frame::Group)
                                      .tagBackground(MUI::ImageOrBackground::WindowBack)
@@ -51,5 +60,11 @@ namespace Components
         mWBVersionText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::WBVER));
         mPowerPCOSText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::PPCOS));
         mTCPStack.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::TCPIP));
+        mLoadedLibrariesList.InsertSorted([]() -> std::vector<std::string> {
+            std::vector<std::string> result;
+            for (const auto &entry : AOS::Exec::Library::GetAllLibraryNames())
+                result.push_back(entry.libName + " (v" + entry.version + ")");
+            return result;
+        }());
     }
 }

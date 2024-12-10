@@ -11,6 +11,7 @@
 
 #include "MUI/Group.hpp"
 #include "MUI/Text.hpp"
+#include "MUI/List.hpp"
 
 namespace Components
 {
@@ -23,6 +24,8 @@ namespace Components
         MUI::Text mPowerPCOSText;
 
         MUI::Text mTCPStack;
+
+        MUI::List mLoadedLibrariesList;
 
         MUI::Group mComponent;
 
