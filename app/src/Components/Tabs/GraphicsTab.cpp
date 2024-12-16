@@ -30,7 +30,6 @@ namespace Components
                              .tagFrame(MUI::Frame::Group)
                              .tagBackground(MUI::ImageOrBackground::WindowBack)
                              .tagFrameTitle("Mounted Devs Monitor(s)")
-                             .tagColumns(4)
                              .object())
       , mPicasso96Boards(MUI::GroupBuilder()
                              .tagFrame(MUI::Frame::Group)
@@ -74,8 +73,11 @@ namespace Components
         if (mountedMonitors.empty())
             mMountedMonitors.AddMember(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
         else
+        {
+            mMountedMonitors.setColumns(mountedMonitors.size() < 4 ? mountedMonitors.size() : 4);
             for (const auto &monitorName : mountedMonitors)
                 mMountedMonitors.AddMember(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(monitorName).object());
+        }
 
         if (!AppContext::instance().getPicasso96Base().isOpen())
         {
