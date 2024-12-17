@@ -35,3 +35,8 @@ Picasso96BaseScope &AppContextCore::getPicasso96Base() const
 {
     return App::instance().picasso96BaseScope;
 }
+
+CybergraphicsBaseScope &AppContextCore::getCybergraphicsBase() const
+{
+    return App::instance().cybergraphicsBaseScope;
+}

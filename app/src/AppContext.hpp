@@ -8,6 +8,7 @@
 
 #include "AOS/OpenURL/OpenURLBaseScope.hpp"
 #include "AOS/Picasso96/Picasso96BaseScope.hpp"
+#include "AOS/Cybergraphics/CybergraphicsBaseScope.hpp"
 #include "Core/Singleton.hpp"
 
 class AppContextCore
@@ -20,6 +21,7 @@ class AppContextCore
   public:
     OpenURLBaseScope &getOpenURLBase() const;
     Picasso96BaseScope &getPicasso96Base() const;
+    CybergraphicsBaseScope &getCybergraphicsBase() const;
 };
 
 /// @brief main AppContext (singleton) object
