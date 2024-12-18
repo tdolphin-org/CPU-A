@@ -4,10 +4,9 @@
 //  (c) 2024 TDolphin
 //
 
-#include "GfxBoards.hpp"
+#include "P96Boards.hpp"
 #include "AppContext.hpp"
 
-#include "AOS/Identify/Library.hpp"
 #include "AOS/Picasso96/Library.hpp"
 #include "MUI/Core/MakeObject.hpp"
 #include "MUI/Gauge.hpp"
@@ -17,7 +16,7 @@
 
 namespace Components
 {
-    GfxBoards::GfxBoards()
+    P96Boards::P96Boards()
       : mComponent(MUI::GroupBuilder()
                        .tagFrame(MUI::Frame::Group)
                        .tagBackground(MUI::ImageOrBackground::WindowBack)
@@ -27,7 +26,7 @@ namespace Components
     {
         if (!AppContext::instance().getPicasso96Base().isOpen())
         {
-            mComponent.AddMember(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
+            mComponent.AddMember(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("Picasso96 not detected")));
             return;
         }
 

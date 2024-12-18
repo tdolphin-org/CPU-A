@@ -1,4 +1,3 @@
-
 //
 //  CPU-A
 //
@@ -8,23 +7,18 @@
 #pragma once
 
 #include "Components/Core/Root.hpp"
-#include "TabBase.hpp"
+#include "Components/Tabs/TabBase.hpp"
 
 #include "MUI/Group.hpp"
 
 namespace Components
 {
-    class GraphicsTab : public Root<MUI::Group>, public TabBase
+    class CgxBoards : public Root<MUI::Group>, public TabBase
     {
-        MUI::Text mGfxSystemText;
-        MUI::Group mGraphicsCards;
-        MUI::Group mMountedMonitors;
-        MUI::Group mGfxBoards;
-
         MUI::Group mComponent;
 
       public:
-        GraphicsTab();
+        CgxBoards();
 
       protected:
         MUI::Group &muiRoot() const

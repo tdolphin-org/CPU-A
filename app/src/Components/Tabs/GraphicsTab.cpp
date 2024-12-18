@@ -8,7 +8,10 @@
 
 #include "AOS/Graphics/Library.hpp"
 #include "AOS/Identify/Library.hpp"
+#include "Graphics/CgxBoards.hpp"
+#include "Graphics/P96Boards.hpp"
 #include "MUI/Core/MakeObject.hpp"
+#include "MUI/Core/NullObject.hpp"
 
 namespace Components
 {
@@ -25,6 +28,17 @@ namespace Components
                              .tagBackground(MUI::ImageOrBackground::WindowBack)
                              .tagFrameTitle("Mounted Devs Monitor(s)")
                              .object())
+      , mGfxBoards([]() -> MUI::Root {
+          switch (AOS::Identify::Library::GetGraphicOS())
+          {
+              case AOS::Identify::IDGOS::PICASSO96:
+                  return P96Boards();
+              case AOS::Identify::IDGOS::CGX4:
+                  return CgxBoards();
+              default:
+                  return MUI::NullObject();
+          }
+      }())
       , mComponent(MUI::GroupBuilder()
                        .vertical()
                        .tagChild(MUI::GroupBuilder()
