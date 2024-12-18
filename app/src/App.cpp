@@ -13,7 +13,9 @@
 #include <proto/alib.h>
 #include <proto/exec.h>
 
-using namespace std;
+#ifdef TRACE
+#include <iostream>
+#endif
 
 AppCore::AppCore()
   : openUrlBaseScope(true)
@@ -24,6 +26,10 @@ AppCore::AppCore()
 
 void AppCore::Run()
 {
+#ifdef TRACE
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+#endif
+
     // special class, on destructor Dispose all custom classes
     MUI::CustomClassesLifeTimeScope customClassesLifeTimeScope;
 
@@ -42,7 +48,7 @@ void AppCore::Run()
 
     // main application loop
     ULONG signals = 0;
-    while (DoMethod(muiApplication.muiObject(), MUIM_Application_NewInput, &signals) != MUIV_Application_ReturnID_Quit)
+    while (DoMethod(muiApplication.muiObject(), MUIM_Application_NewInput, &signals) != (unsigned long)MUIV_Application_ReturnID_Quit)
     {
         if (signals)
         {

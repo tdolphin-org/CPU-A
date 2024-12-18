@@ -41,6 +41,11 @@ HOOKPROTO(DestructEntry, unsigned long, APTR pool, ExpansionRef *expansionRef)
 HOOKPROTO(DisplayEntry, unsigned long, char **array, ExpansionRef *expansionRef)
 {
     static ExpansionRef displayExpansionRef;
+    static auto *product = MUIX_C "[ID] Product";
+    static auto *productClass = MUIX_C "Class";
+    static auto *manufacturer = MUIX_C "[ID] Manufacturer";
+    static auto *additionalInfo = MUIX_C "Info";
+
     if (expansionRef)
     {
         displayExpansionRef = *expansionRef;
@@ -52,10 +57,10 @@ HOOKPROTO(DisplayEntry, unsigned long, char **array, ExpansionRef *expansionRef)
     }
     else
     {
-        *array++ = MUIX_C "[ID] Product";
-        *array++ = MUIX_C "Class";
-        *array++ = MUIX_C "[ID] Manufacturer";
-        *array = MUIX_C "Info";
+        *array++ = (char *)product;
+        *array++ = (char *)productClass;
+        *array++ = (char *)manufacturer;
+        *array = (char *)additionalInfo;
     }
 
     return 0;

@@ -15,6 +15,10 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+#ifdef TRACE
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+#endif
+
     try
     {
         App::instance().Run();

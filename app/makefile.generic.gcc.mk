@@ -18,7 +18,7 @@ MORE_CPP_FLAGS_X = $(shell echo $(MORE_CPP_FLAGS) | tr ',' ' ')
 MORE_LFLAGS_X = $(shell echo $(MORE_LFLAGS) | tr ',' ' ')
 
 # trace/debug flags
-DEBUG_FLAGS =
+DEBUG_FLAGS = #-DTRACE -DTRACE_CUSTOM_COMPONENTS
 
 CPP_FLAGS = $(DEBUG_FLAGS) $(MORE_CPP_FLAGS_X) -Wall\
 	-Isrc -I${AOSCPP_PATH}/wrappers/src -I${MUICPP_PATH}/wrappers/src -I${MUICPP_PATH}/components/src
