@@ -18,6 +18,7 @@ using namespace std;
 AppCore::AppCore()
   : openUrlBaseScope(true)
   , picasso96BaseScope(true)
+  , cybergraphicsBaseScope(true)
 {
 }
 

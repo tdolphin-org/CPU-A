@@ -23,7 +23,7 @@ namespace Components
                                         "[" + expansion.productId + "] " + expansion.product, expansion.productClass,
                                         !expansion.additionalInfo.empty() ? expansion.additionalInfo.at(0) : "" };
             mExpansionsList.InsertSingleBottom(&expansionRef);
-            for (auto i = 1; i < expansion.additionalInfo.size(); i++)
+            for (std::size_t i = 1; i < expansion.additionalInfo.size(); i++)
             {
                 ExpansionRef expansionRef { "", "", "", expansion.additionalInfo.at(i) };
                 mExpansionsList.InsertSingleBottom(&expansionRef);

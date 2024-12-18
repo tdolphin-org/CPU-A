@@ -20,7 +20,7 @@ MORE_LFLAGS_X = $(shell echo $(MORE_LFLAGS) | tr ',' ' ')
 # trace/debug flags
 DEBUG_FLAGS =
 
-CPP_FLAGS = $(DEBUG_FLAGS) $(MORE_CPP_FLAGS_X)\
+CPP_FLAGS = $(DEBUG_FLAGS) $(MORE_CPP_FLAGS_X) -Wall\
 	-Isrc -I${AOSCPP_PATH}/wrappers/src -I${MUICPP_PATH}/wrappers/src -I${MUICPP_PATH}/components/src
 LFLAGS = -L${MUICPP_PATH}/wrappers/lib/$(SUB_BUILD_PATH) -lMUIcpp $(MORE_LFLAGS_X)
 

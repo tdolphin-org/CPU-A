@@ -51,7 +51,7 @@ namespace Components
                                     "CAS normal access" MUIX_N ": A standard access mode where the memory controller needs to specify both "
                                     "the row (RAS) and column (CAS) address for every operation. This involves a full refresh cycle and is "
                                     "generally slower.\n" MUIX_B "CAS double access" MUIX_N ": An optimized mode allowing access to two "
-                                    " adjacent columns in one CAS operation, improving efficiency for sequential data access by reducing "
+                                    "adjacent columns in one CAS operation, improving efficiency for sequential data access by reducing "
                                     "clock cycles.")
                                 .tagJustify(true)
                                 .object())
