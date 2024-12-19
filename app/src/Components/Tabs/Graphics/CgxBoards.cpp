@@ -8,9 +8,8 @@
 #include "AppContext.hpp"
 
 #include "AOS/Cybergraphics/Library.hpp"
+#include "DataInfo/GfxBoardSpec.hpp"
 #include "MUI/Core/MakeObject.hpp"
-
-#include <iostream>
 
 namespace Components
 {
@@ -33,15 +32,16 @@ namespace Components
             mComponent.AddMember(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("none")));
         else
         {
-            for (auto &cgxBoard : cgxBoards)
+            for (auto cgxBoardID : cgxBoards)
             {
+                auto const &cgxBoard = DataInfo::gfxBoard2spec.at(cgxBoardID);
                 mComponent.AddMember(
                     MUI::GroupBuilder()
                         .tagColumns(3)
                         .tagChild(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Name").object())
                         .tagChild(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Manufacturer").object())
                         .tagChild(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Premiere").object())
-                        .tagChild(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(cgxBoard.name).object())
+                        .tagChild(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(cgxBoard.modelName).object())
                         .tagChild(MUI::TextBuilder()
                                       .tagFrame(MUI::Frame::String)
 #ifdef MUIA_Text_Shorten
