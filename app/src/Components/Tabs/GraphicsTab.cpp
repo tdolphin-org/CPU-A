@@ -8,7 +8,7 @@
 
 #include "AOS/Graphics/Library.hpp"
 #include "AOS/Identify/Library.hpp"
-#include "Graphics/CgxBoards.hpp"
+#include "Graphics/CGXBoards.hpp"
 #include "Graphics/P96Boards.hpp"
 #include "MUI/Core/MakeObject.hpp"
 #include "MUI/Core/NullObject.hpp"
@@ -34,7 +34,7 @@ namespace Components
               case AOS::Identify::IDGOS::PICASSO96:
                   return P96Boards();
               case AOS::Identify::IDGOS::CGX4:
-                  return CgxBoards();
+                  return CGXBoards();
               default:
                   return MUI::NullObject();
           }

@@ -4,7 +4,7 @@
 //  (c) 2024 TDolphin
 //
 
-#include "CgxBoards.hpp"
+#include "CGXBoards.hpp"
 #include "AppContext.hpp"
 
 #include "AOS/Cybergraphics/Library.hpp"
@@ -13,7 +13,7 @@
 
 namespace Components
 {
-    CgxBoards::CgxBoards()
+    CGXBoards::CGXBoards()
       : mComponent(MUI::GroupBuilder()
                        .tagFrame(MUI::Frame::Group)
                        .tagBackground(MUI::ImageOrBackground::WindowBack)
@@ -56,7 +56,11 @@ namespace Components
                         .tagChild(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Video Memory Size").object())
                         .tagChild(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Iterface").object())
                         .tagChild(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(cgxBoard.chip).object())
-                        .tagChild(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(cgxBoard.memorySize).object())
+                        .tagChild(MUI::TextBuilder()
+                                      .tagBackground(MUI::ImageOrBackground::Fill)
+                                      .tagFrame(MUI::Frame::String)
+                                      .tagContents(cgxBoard.memorySize)
+                                      .object())
                         .tagChild(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(cgxBoard.interface).object())
                         .object());
             }

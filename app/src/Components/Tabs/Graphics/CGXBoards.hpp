@@ -13,12 +13,12 @@
 
 namespace Components
 {
-    class CgxBoards : public Root<MUI::Group>, public TabBase
+    class CGXBoards : public Root<MUI::Group>, public TabBase
     {
         MUI::Group mComponent;
 
       public:
-        CgxBoards();
+        CGXBoards();
 
       protected:
         MUI::Group &muiRoot() const
