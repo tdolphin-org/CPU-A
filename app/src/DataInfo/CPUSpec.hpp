@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "AOS/Identify/ValueType/IDCPU.hpp"
-#include "AOS/Identify/ValueType/IDPPC.hpp"
+#include "AOS/Identify/ValueTypes/IDCPU.hpp"
+#include "AOS/Identify/ValueTypes/IDPPC.hpp"
 
 #include <map>
 #include <string>
