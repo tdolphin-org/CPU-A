@@ -17,6 +17,7 @@ AppContextCore::AppContextCore()
 #ifdef TRACE
     std::cout << __PRETTY_FUNCTION__ << std::endl;
 #endif
+    mExpansions = AOS::Identify::Library::GetExpansions();
 }
 
 AppContextCore::~AppContextCore()
