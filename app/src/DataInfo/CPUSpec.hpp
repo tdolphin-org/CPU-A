@@ -14,6 +14,11 @@
 
 namespace DataInfo
 {
+    enum class FPGAID
+    {
+        ACA68080
+    };
+
     struct CPUSpec
     {
         std::string vendor;
@@ -31,6 +36,6 @@ namespace DataInfo
     };
 
     extern const std::map<AOS::Identify::IDCPU, CPUSpec> cpuMC68k2spec;
-
     extern const std::map<AOS::Identify::IDPPC, CPUSpec> cpuPPC2spec;
+    extern const std::map<FPGAID, CPUSpec> fpga2spec;
 }

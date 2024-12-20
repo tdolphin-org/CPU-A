@@ -6,6 +6,8 @@
 
 #include "CPUInfo.hpp"
 
+#include "AOS/Expansion/ValueTypes/ManufacturerID.hpp"
+#include "AppContext.hpp"
 #include "FileResources/CPUImages.hpp"
 
 #include <numeric>
@@ -30,18 +32,23 @@ namespace Components
     const char *CPUInfo::mCPUs[] = { "MC68k", "PowerPC", nullptr };
 
     CPUInfo::CPUInfo(const AOS::Identify::CpuInfo &cpuInfo)
-      : mCPUSpec(cpuInfo.type == CpuType::MC68k ? DataInfo::cpuMC68k2spec.at([&]() {
-          auto pos = DataInfo::cpuMC68k2spec.find(cpuInfo.model.m68k);
-          if (pos != DataInfo::cpuMC68k2spec.end())
-              return cpuInfo.model.m68k;
-          return IDCPU::OTHER;
-      }())
-                                                : DataInfo::cpuPPC2spec.at([&]() {
-                                                      auto pos = DataInfo::cpuPPC2spec.find(cpuInfo.model.ppc);
-                                                      if (pos != DataInfo::cpuPPC2spec.end())
-                                                          return cpuInfo.model.ppc;
-                                                      return IDPPC::OTHER;
-                                                  }()))
+      : mCPUSpec(cpuInfo.type == CpuType::MC68k
+                     ? (cpuInfo.model.m68k == IDCPU::FPGA
+                                && AppContext::instance().hasOneOfExpansions((unsigned short)AOS::Expansion::ManufacturerID::Apollo,
+                                                                             { 1, 2, 3, 4, 5, 6, 7 })
+                            ? DataInfo::fpga2spec.at(DataInfo::FPGAID::ACA68080)
+                            : DataInfo::cpuMC68k2spec.at([&]() {
+                                  auto pos = DataInfo::cpuMC68k2spec.find(cpuInfo.model.m68k);
+                                  if (pos != DataInfo::cpuMC68k2spec.end())
+                                      return cpuInfo.model.m68k;
+                                  return IDCPU::OTHER;
+                              }()))
+                     : DataInfo::cpuPPC2spec.at([&]() {
+                           auto pos = DataInfo::cpuPPC2spec.find(cpuInfo.model.ppc);
+                           if (pos != DataInfo::cpuPPC2spec.end())
+                               return cpuInfo.model.ppc;
+                           return IDPPC::OTHER;
+                       }()))
       , mCPUVendorText(ValueText("Vendor of CPU", mCPUSpec.vendor))
       , mCPUModelText(ValueText("Model of CPU", mCPUSpec.modelName))
       , mCPURevisionText(ValueText("Revision of CPU", cpuInfo.revision))

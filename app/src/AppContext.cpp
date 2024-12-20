@@ -41,3 +41,21 @@ CybergraphicsBaseScope &AppContextCore::getCybergraphicsBase() const
 {
     return App::instance().cybergraphicsBaseScope;
 }
+
+bool AppContextCore::hasExpansion(const unsigned short manufacturerId, const unsigned char productId) const
+{
+    for (const auto &expansion : mExpansions)
+        if (expansion.manufacturerId == manufacturerId && expansion.productId == productId)
+            return true;
+
+    return false;
+}
+
+bool AppContextCore::hasOneOfExpansions(const unsigned short manufacturerId, const std::set<unsigned char> &productIds) const
+{
+    for (const auto &expansion : mExpansions)
+        if (expansion.manufacturerId == manufacturerId && productIds.find(expansion.productId) != productIds.end())
+            return true;
+
+    return false;
+}

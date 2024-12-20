@@ -6,11 +6,13 @@
 
 #pragma once
 
-#include "AOS/OpenURL/OpenURLBaseScope.hpp"
-#include "AOS/Picasso96/Picasso96BaseScope.hpp"
 #include "AOS/Cybergraphics/CybergraphicsBaseScope.hpp"
 #include "AOS/Identify/Library.hpp"
+#include "AOS/OpenURL/OpenURLBaseScope.hpp"
+#include "AOS/Picasso96/Picasso96BaseScope.hpp"
 #include "Core/Singleton.hpp"
+
+#include <set>
 
 class AppContextCore
 {
@@ -30,6 +32,9 @@ class AppContextCore
     {
         return mExpansions;
     }
+
+    bool hasExpansion(const unsigned short manufacturerId, const unsigned char productId) const;
+    bool hasOneOfExpansions(const unsigned short manufacturerId, const std::set<unsigned char> &productIds) const;
 };
 
 /// @brief main AppContext (singleton) object
