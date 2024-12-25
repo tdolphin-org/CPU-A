@@ -9,6 +9,7 @@
 #include "MUI/Notifier/Notifier.hpp"
 #include "ProgDefines.hpp"
 #include "Version.hpp"
+#include "WindowManager.hpp"
 
 namespace Components
 {
@@ -21,6 +22,7 @@ namespace Components
                        .tagTitle(APP_NAME)
                        .tagVersion(AMIGAOS_VER_PREFIX " " CMD_NAME " " APP_VERSION " " APP_DATE)
                        .tagWindow(mAppWindow)
+                       .tagWindows(WindowManager::instance().getAllWindows())
                        .object())
     {
     }
