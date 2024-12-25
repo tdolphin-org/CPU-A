@@ -35,6 +35,12 @@ namespace Components
             for (auto cgxBoardID : cgxBoards)
             {
                 auto const &cgxBoard = DataInfo::gfxBoard2spec.at(cgxBoardID);
+                std::string chipNames = [&]() -> std::string {
+                    std::string result;
+                    for (auto const chip : cgxBoard.chips)
+                        result += (result.empty() ? "" : " or ") + DataInfo::gfxChip2spec.at(chip).modelName;
+                    return result;
+                }();
                 mComponent.AddMember(
                     MUI::GroupBuilder()
                         .tagColumns(3)
@@ -55,7 +61,7 @@ namespace Components
                         .tagChild(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Chip").object())
                         .tagChild(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Video Memory Size").object())
                         .tagChild(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Iterface").object())
-                        .tagChild(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(cgxBoard.chip).object())
+                        .tagChild(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(chipNames).object())
                         .tagChild(MUI::TextBuilder()
                                       .tagBackground(MUI::ImageOrBackground::Fill)
                                       .tagFrame(MUI::Frame::String)

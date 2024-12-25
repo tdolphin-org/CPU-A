@@ -6,10 +6,12 @@
 
 #pragma once
 
-#include "AOS/Cybergraphics//ValueTypes/BoardID.hpp"
+#include "AOS/Cybergraphics/ValueTypes/BoardID.hpp"
+#include "GfxChipSpec.hpp"
 
 #include <map>
 #include <string>
+#include <vector>
 
 namespace DataInfo
 {
@@ -17,7 +19,7 @@ namespace DataInfo
     {
         std::string modelName;
         std::string manufacturer;
-        std::string chip;
+        std::vector<GfxChipID> chips; // possible or
         std::string memorySize;
         int premiere; // year
         std::string interface;
