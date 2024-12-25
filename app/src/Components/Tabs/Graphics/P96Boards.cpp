@@ -11,18 +11,14 @@
 #include "MUI/Core/MakeObject.hpp"
 #include "MUI/Gauge.hpp"
 #include "MUI/Scale.hpp"
+#include "MUI/Text.hpp"
 
 #include <numeric>
 
 namespace Components
 {
     P96Boards::P96Boards()
-      : mComponent(MUI::GroupBuilder()
-                       .tagFrame(MUI::Frame::Group)
-                       .tagBackground(MUI::ImageOrBackground::WindowBack)
-                       .tagFrameTitle("Picasso96 Board(s)")
-                       .vertical()
-                       .object())
+      : BoardsBase("Picasso96 Board(s)")
     {
         if (!AppContext::instance().getPicasso96Base().isOpen())
         {

@@ -7,25 +7,19 @@
 #pragma once
 
 #include "Components/Core/Root.hpp"
-#include "TabBase.hpp"
-#include "Graphics/BoardsBase.hpp"
 
 #include "MUI/Group.hpp"
 
 namespace Components
 {
-    class GraphicsTab : public Root<MUI::Group>, public TabBase
+    class BoardsBase : public Root<MUI::Group>
     {
-        MUI::Text mGfxSystemText;
-        MUI::Group mGraphicsCards;
-        MUI::Group mMountedMonitors;
-        BoardsBase *mGfxBoards;
-
+      protected:
         MUI::Group mComponent;
 
       public:
-        GraphicsTab();
-        ~GraphicsTab();
+        BoardsBase(const std::string &frameTitle);
+        virtual ~BoardsBase() = default;
 
       protected:
         MUI::Group &muiRoot() const

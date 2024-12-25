@@ -14,12 +14,7 @@
 namespace Components
 {
     CGXBoards::CGXBoards()
-      : mComponent(MUI::GroupBuilder()
-                       .tagFrame(MUI::Frame::Group)
-                       .tagBackground(MUI::ImageOrBackground::WindowBack)
-                       .tagFrameTitle("Cybergraphics Board(s)")
-                       .vertical()
-                       .object())
+      : BoardsBase("Cybergraphics Board(s)")
     {
         if (!AppContext::instance().getCybergraphicsBase().isOpen())
         {
@@ -41,6 +36,9 @@ namespace Components
                         result += (result.empty() ? "" : " or ") + DataInfo::gfxChip2spec.at(chip).modelName;
                     return result;
                 }();
+
+                mGfxChipSpecButtons.push_back(new GfxChipSpecButton(cgxBoard.chips));
+
                 mComponent.AddMember(
                     MUI::GroupBuilder()
                         .tagColumns(3)
@@ -61,7 +59,11 @@ namespace Components
                         .tagChild(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Chip").object())
                         .tagChild(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Video Memory Size").object())
                         .tagChild(MUI::TextBuilder().tagFont(MUI::Font::Tiny).tagContents("Iterface").object())
-                        .tagChild(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(chipNames).object())
+                        .tagChild(MUI::GroupBuilder()
+                                      .horizontal()
+                                      .tagChild(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(chipNames).object())
+                                      .tagChild(*mGfxChipSpecButtons.back())
+                                      .object())
                         .tagChild(MUI::TextBuilder()
                                       .tagBackground(MUI::ImageOrBackground::Fill)
                                       .tagFrame(MUI::Frame::String)
@@ -71,5 +73,11 @@ namespace Components
                         .object());
             }
         }
+    }
+
+    CGXBoards::~CGXBoards()
+    {
+        for (const auto *pButton : mGfxChipSpecButtons)
+            delete pButton;
     }
 }

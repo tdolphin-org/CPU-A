@@ -28,15 +28,15 @@ namespace Components
                              .tagBackground(MUI::ImageOrBackground::WindowBack)
                              .tagFrameTitle("Mounted Devs Monitor(s)")
                              .object())
-      , mGfxBoards([]() -> MUI::Root {
+      , mGfxBoards([]() -> BoardsBase * {
           switch (AOS::Identify::Library::GetGraphicOS())
           {
               case AOS::Identify::IDGOS::PICASSO96:
-                  return P96Boards();
+                  return new P96Boards();
               case AOS::Identify::IDGOS::CGX4:
-                  return CGXBoards();
+                  return new CGXBoards();
               default:
-                  return MUI::NullObject();
+                  return nullptr;
           }
       }())
       , mComponent(MUI::GroupBuilder()
@@ -51,7 +51,7 @@ namespace Components
                                      .object())
                        .tagChild(mMountedMonitors)
                        .tagChild(mGraphicsCards)
-                       .tagChild(mGfxBoards)
+                       .tagChild(mGfxBoards ? (*mGfxBoards).muiObject() : MUI::NullObject())
                        .object())
     {
         mGfxSystemText.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::GFXSYS));
@@ -80,5 +80,11 @@ namespace Components
             for (const auto &monitorName : mountedMonitors)
                 mMountedMonitors.AddMember(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(monitorName).object());
         }
+    }
+
+    GraphicsTab::~GraphicsTab()
+    {
+        if (mGfxBoards)
+            delete mGfxBoards;
     }
 }
