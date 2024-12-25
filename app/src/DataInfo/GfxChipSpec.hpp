@@ -14,25 +14,25 @@ namespace DataInfo
 {
     enum class GfxChipID
     {
-        S3_86C764_Trio64,
-        S3_86C325_ViRGE,
+        Texas_Instruments_TMS34010,
+        Inmos_G360,
+        Inmos_G364G_10S,
+        Inmos_G365,
+        Tseng_Labs_ET4000,
         Cirrus_Logic_GD5426,
         Cirrus_Logic_GD5428,
         Cirrus_Logic_GD5434,
         Cirrus_Logic_GD5446,
-        Tseng_Labs_ET4000,
         NCR_77C32BLT,
-        Inmos_G360,
-        Inmos_G364G_10S,
-        Inmos_G365,
+        S3_86C764_Trio64,
+        S3_86C325_ViRGE,
         _3D_Labs_Permedia_2,
     };
 
-    struct GfxBoardSpec
+    struct GfxChipSpec
     {
         std::string manufacturer;
-        std::string modelName;
-        std::string codeName;
+        std::string modelName; // chip/model name
         std::string premiere;
         std::string interface; // interface/bus
         std::string technology;
@@ -41,5 +41,5 @@ namespace DataInfo
         std::string memory; // memory spec bit@clock (speed MB/s)
     };
 
-    extern const std::map<GfxChipID, GfxBoardSpec> gfxBoard2spec;
+    extern const std::map<GfxChipID, GfxChipSpec> gfxChip2spec;
 }
