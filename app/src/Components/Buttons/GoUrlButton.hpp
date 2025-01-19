@@ -1,14 +1,12 @@
 //
 //  CPU-A
 //
-//  (c) 2024 TDolphin
+//  (c) 2024-2025 TDolphin
 //
 
 #pragma once
 
 #include "Components/Buttons/BasicButton.hpp"
-
-#include "MUI/Group.hpp"
 
 namespace Components
 {

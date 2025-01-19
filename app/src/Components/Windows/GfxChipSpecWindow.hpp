@@ -1,7 +1,7 @@
 //
 //  CPU-A
 //
-//  (c) 2024 TDolphin
+//  (c) 2024-2025 TDolphin
 //
 
 #include "Components/Core/Root.hpp"
