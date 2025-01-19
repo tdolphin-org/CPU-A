@@ -42,6 +42,8 @@ build_aos_m68k:
 	cp data/icons/CPU-A.drawer.info $(OUT_PATH)/CPU-A.info
 	cp data/icons/CPU-A.info $(OUT_APP_PATH)
 	cp data/icons/CPU-A.readme.info $(OUT_APP_PATH)
+	cp LICENSE $(OUT_APP_PATH)
+	cp data/icons/LICENSE.info $(OUT_APP_PATH)
 
 clean.obj:
 	@for dir in $(SUB_PROJECTS); do \
