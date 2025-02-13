@@ -17,6 +17,7 @@ namespace CPUImageFile
     extern const char *mc68040;
     extern const char *mc68060;
     extern const char *fpga;
+    extern const char *ac68080;
     extern const char *emu68;
     extern const char *other;
     extern const char *ppc602;

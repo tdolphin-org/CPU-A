@@ -16,7 +16,7 @@ namespace DataInfo
 {
     enum class FPGAID
     {
-        ACA68080
+        // put here custom id of fpga
     };
 
     struct CPUSpec

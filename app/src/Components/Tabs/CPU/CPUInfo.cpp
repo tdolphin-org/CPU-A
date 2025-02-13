@@ -18,7 +18,8 @@ std::map<IDCPU, std::string> m68k_cpu2image = {
     { IDCPU::MC68000, CPUImageFile::mc68000 },   { IDCPU::MC68010, CPUImageFile::mc68010 },   { IDCPU::MC68020, CPUImageFile::mc68020 },
     { IDCPU::MC68030, CPUImageFile::mc68030 },   { IDCPU::MC68EC030, CPUImageFile::mc68030 }, { IDCPU::MC68040, CPUImageFile::mc68040 },
     { IDCPU::MC68LC040, CPUImageFile::mc68040 }, { IDCPU::MC68060, CPUImageFile::mc68060 },   { IDCPU::MC68LC060, CPUImageFile::mc68060 },
-    { IDCPU::FPGA, CPUImageFile::fpga },         { IDCPU::EMU68, CPUImageFile::emu68 },       { IDCPU::OTHER, CPUImageFile::unknown },
+    { IDCPU::FPGA, CPUImageFile::fpga },         { IDCPU::EMU68, CPUImageFile::emu68 },       { IDCPU::AC68080, CPUImageFile::ac68080 },
+    { IDCPU::OTHER, CPUImageFile::unknown },
 };
 
 std::map<IDPPC, std::string> ppc_cpu2image = {
@@ -32,23 +33,12 @@ namespace Components
     const char *CPUInfo::mCPUs[] = { "MC68k", "PowerPC", nullptr };
 
     CPUInfo::CPUInfo(const AOS::Identify::CpuInfo &cpuInfo)
-      : mCPUSpec(cpuInfo.type == CpuType::MC68k
-                     ? (cpuInfo.model.m68k == IDCPU::FPGA
-                                && AppContext::instance().hasOneOfExpansions((unsigned short)AOS::Expansion::ManufacturerID::Apollo,
-                                                                             { 1, 2, 3, 4, 5, 6, 7 })
-                            ? DataInfo::fpga2spec.at(DataInfo::FPGAID::ACA68080)
-                            : DataInfo::cpuMC68k2spec.at([&]() {
-                                  auto pos = DataInfo::cpuMC68k2spec.find(cpuInfo.model.m68k);
-                                  if (pos != DataInfo::cpuMC68k2spec.end())
-                                      return cpuInfo.model.m68k;
-                                  return IDCPU::OTHER;
-                              }()))
-                     : DataInfo::cpuPPC2spec.at([&]() {
-                           auto pos = DataInfo::cpuPPC2spec.find(cpuInfo.model.ppc);
-                           if (pos != DataInfo::cpuPPC2spec.end())
-                               return cpuInfo.model.ppc;
-                           return IDPPC::OTHER;
-                       }()))
+      : mCPUSpec(cpuInfo.type == CpuType::MC68k ? get68kSpec(cpuInfo) : DataInfo::cpuPPC2spec.at([&]() {
+          auto pos = DataInfo::cpuPPC2spec.find(cpuInfo.model.ppc);
+          if (pos != DataInfo::cpuPPC2spec.end())
+              return cpuInfo.model.ppc;
+          return IDPPC::OTHER;
+      }()))
       , mCPUVendorText(ValueText("Vendor of CPU", mCPUSpec.vendor))
       , mCPUModelText(ValueText("Model of CPU", mCPUSpec.modelName))
       , mCPURevisionText(ValueText("Revision of CPU", cpuInfo.revision))
@@ -147,5 +137,23 @@ namespace Components
         mAdditionalUnits.setContents(
             std::accumulate(cpuInfo.additionalUnits.begin(), cpuInfo.additionalUnits.end(), std::string(""),
                             [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; }));
+    }
+
+    DataInfo::CPUSpec CPUInfo::get68kSpec(const AOS::Identify::CpuInfo &cpuInfo)
+    {
+        if (cpuInfo.model.m68k == IDCPU::FPGA)
+        {
+            // detect custom FPGA, for example by checking expansions
+            // example:
+            // (AppContext::instance().hasOneOfExpansions((unsigned short)AOS::Expansion::ManufacturerID::NAME, { 1, 2, 3, 4 })
+            // return DataInfo::fpga2spec.at(DataInfo::FPGAID::CUSTOM_FPGA_ID)
+        }
+
+        return DataInfo::cpuMC68k2spec.at([&]() {
+            auto pos = DataInfo::cpuMC68k2spec.find(cpuInfo.model.m68k);
+            if (pos != DataInfo::cpuMC68k2spec.end())
+                return cpuInfo.model.m68k;
+            return IDCPU::OTHER;
+        }());
     }
 }

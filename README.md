@@ -9,7 +9,7 @@ It serves as a comprehensive example of using [MUI C++ wrapper classes](https://
 -   AmigaOS 3.0+
 -   PNG datatype
 -   [MUI3.8](https://aminet.net/package/util/libs/mui38usr)
--   [Identify.library](https://github.com/shred/identify) (download [IdentifyUsr.lha](http://aminet.net/util/libs/IdentifyUsr.lha))
+-   [Identify.library](https://codeberg.org/shred/identify) (download [IdentifyUsr.lha](http://aminet.net/util/libs/IdentifyUsr.lha))
 -   optional [OpenURL.library](https://github.com/jens-maus/libopenurl) (download [OpenURL.lha](http://aminet.net/comm/www/OpenURL-7.18.lha))
 -   optional [Picasso96](http://wiki.icomp.de/wiki/P96)
 -   optional [CyberGraphX 4+](https://aminet.net/package/driver/video/CyberGraphX_4.3rc6)

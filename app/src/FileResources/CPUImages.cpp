@@ -17,6 +17,7 @@ namespace CPUImageFile
     const char *mc68040 = "PROGDIR:images/cpu/mc68040.64x64.png";
     const char *mc68060 = "PROGDIR:images/cpu/mc68060.64x64.png";
     const char *fpga = "PROGDIR:images/cpu/fpga.64x64.png";
+    const char *ac68080 = "PROGDIR:images/cpu/fpga.ac68080.64x64.png";
     const char *emu68 = "PROGDIR:images/cpu/emu68.64x64.png";
     const char *other = "PROGDIR:images/cpu/ppc.64x64.png";
     const char *ppc602 = "PROGDIR:images/cpu/ppc602.64x64.png";

@@ -27,6 +27,7 @@ namespace DataInfo
           { "Motorola / Freescale", "68LC060", "3.3 V", "0.42-0.6 um", "1993", "~2-7 W", 1, 1, 0, 0, 0, 0 } },
         { AOS::Identify::IDCPU::FPGA, { "??", "N/A", "N/A", "N/A", "N/A", "N/A", 0, 0, 0, 0, 0, 0 } },
         { AOS::Identify::IDCPU::EMU68, { "Arm", "N/A", "N/A", "N/A", "N/A", "N/A", 0, 0, 0, 0, 0, 0 } },
+        { AOS::Identify::IDCPU::AC68080, { "Apollo", "AC 68080", "N/A", "N/A", "2013", "N/A", 0, 0, 0, 0, 0, 0 } },
         { AOS::Identify::IDCPU::OTHER, { "??", "Unknown", "??", "??", "??", "??", 0, 0, 0, 0, 0, 0 } },
     };
 
@@ -46,7 +47,5 @@ namespace DataInfo
         { AOS::Identify::IDPPC::PPC620, { "Motorola", "620", "3.3 V", "0.35-0.5 um", "1997", "~30 W", 1, 1, 32 * 1024, 32 * 1024, 0, 0 } },
     };
 
-    const std::map<FPGAID, CPUSpec> fpga2spec {
-        { FPGAID::ACA68080, { "Apollo", "AC 68080", "N/A", "N/A", "2013", "N/A", 0, 0, 0, 0, 0, 0 } },
-    };
+    const std::map<FPGAID, CPUSpec> fpga2spec {};
 }

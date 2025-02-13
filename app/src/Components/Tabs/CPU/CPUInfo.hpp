@@ -50,5 +50,8 @@ namespace Components
         {
             return const_cast<MUI::Group &>(mComponent);
         }
+
+      public:
+        static DataInfo::CPUSpec get68kSpec(const AOS::Identify::CpuInfo &cpuInfo);
     };
 }
