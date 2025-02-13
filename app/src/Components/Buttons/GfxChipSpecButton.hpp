@@ -17,6 +17,7 @@ namespace Components
 
       public:
         GfxChipSpecButton(const std::vector<DataInfo::GfxChipID> &chips);
+        virtual ~GfxChipSpecButton() = default;
 
       protected:
         unsigned long OnClick();
