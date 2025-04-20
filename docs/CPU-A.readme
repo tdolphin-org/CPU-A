@@ -21,8 +21,16 @@ README
 
 REQUIREMENTS
 
- AmigaOS 3.x + MUI3.8 + Identify.library
+ Required:
+  - AmigaOS 3.x
+  - MUI 3.8
+  - Identify.library
+  - PNG datatype
 
+ Optional:
+  - OpenURL.library
+  - Picasso96
+  - CyberGraphX 4+
 
 AUTHORS
 
