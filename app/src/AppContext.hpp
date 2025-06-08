@@ -21,16 +21,22 @@ class AppContextCore
     AppContextCore();
     ~AppContextCore();
 
-    std::vector<AOS::Identify::Expansion> mExpansions;
+    std::vector<AOS::Identify::ExpansionData> mExpansions;
+    std::vector<AOS::Identify::ExpansionData> mPciExpansions;
 
   public:
     OpenURLBaseScope &getOpenURLBase() const;
     Picasso96BaseScope &getPicasso96Base() const;
     CybergraphicsBaseScope &getCybergraphicsBase() const;
 
-    std::vector<AOS::Identify::Expansion> getExpansions() const
+    const std::vector<AOS::Identify::ExpansionData> &getExpansions() const
     {
         return mExpansions;
+    }
+
+    const std::vector<AOS::Identify::ExpansionData> &getPciExpansions() const
+    {
+        return mPciExpansions;
     }
 
     bool hasExpansion(const unsigned short manufacturerId, const unsigned char productId) const;

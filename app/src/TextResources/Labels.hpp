@@ -24,5 +24,8 @@ namespace Label
     extern const char *BenchTab;
     extern const char *AboutTab;
 
+    extern const char *NativeExpansions;
+    extern const char *PciExpansions;
+
     extern const char *AboutContent;
 }

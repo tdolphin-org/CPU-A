@@ -17,7 +17,15 @@ AppContextCore::AppContextCore()
 #ifdef TRACE
     std::cout << __PRETTY_FUNCTION__ << std::endl;
 #endif
-    mExpansions = AOS::Identify::Library::GetExpansions();
+    // normal expansions
+    auto expansions = AOS::Identify::Library::GetExpansions();
+    for (const auto &expansion : expansions)
+        mExpansions.push_back(expansion.data);
+
+    // pci expansions
+    auto pciExpansions = AOS::Identify::Library::GetPciExpansions();
+    for (const auto &pciExpansion : pciExpansions)
+        mPciExpansions.push_back(pciExpansion.data);
 }
 
 AppContextCore::~AppContextCore()

@@ -7,18 +7,19 @@
 #pragma once
 
 #include "Components/Core/Root.hpp"
-#include "Components/MCC/ExpansionsList.hpp"
-#include "TabBase.hpp"
+#include "Expansions/ExpansionsList.hpp"
+#include "Components/Tabs/TabsContainer.hpp"
 
 #include "MUI/Group.hpp"
 
 namespace Components
 {
-    class ExpansionsTab : public Root<MUI::Group>, public TabBase
+    class ExpansionsTab : public Root<MUI::Group>
     {
-        MUI::List mExpansionsList;
+        ExpansionsList mNativeExpansionsList;
+        ExpansionsList mPciExpansionsList;
 
-        MUI::Group mComponent;
+        TabsContainer mComponent;
 
       public:
         ExpansionsTab();
@@ -26,7 +27,7 @@ namespace Components
       protected:
         MUI::Group &muiRoot() const
         {
-            return const_cast<MUI::Group &>(mComponent);
+            return mComponent;
         }
     };
 }
