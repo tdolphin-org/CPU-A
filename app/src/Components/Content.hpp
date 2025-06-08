@@ -15,8 +15,6 @@
 #include "Tabs/MemoryTab.hpp"
 #include "Tabs/OSTab.hpp"
 
-#include "MUI/Text.hpp"
-
 namespace Components
 {
     class Content : public Root<MUI::Group>

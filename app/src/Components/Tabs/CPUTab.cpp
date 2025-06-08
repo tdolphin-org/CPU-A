@@ -34,7 +34,7 @@ namespace Components
                                      .horizontal()
                                      .tagFrame(MUI::Frame::Group)
                                      .tagBackground(MUI::ImageOrBackground::WindowBack)
-                                     .tagChild(LabelText(MUIX_R "Selection"))
+                                     .tagChild(LabelText(MUIX_R "Architecture"))
                                      .tagChild(mSelectionCycle)
                                      .tagChild(LabelText(MUIX_R "Cores"))
                                      .tagChild(mCPUCores)

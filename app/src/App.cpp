@@ -47,7 +47,7 @@ void AppCore::Run()
     MUI::WindowScope window(appWindow);
 
     // main application loop
-    ULONG signals = 0;
+    uint32_t signals = 0;
     while (DoMethod(muiApplication.muiObject(), MUIM_Application_NewInput, &signals) != (unsigned long)MUIV_Application_ReturnID_Quit)
     {
         if (signals)
