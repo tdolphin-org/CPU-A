@@ -22,6 +22,7 @@ class AppContextCore
     ~AppContextCore();
 
     std::vector<AOS::Identify::ExpansionData> mExpansions;
+    AOS::Identify::PciExpansionsResultCode mPciExpansionsResultCode;
     std::vector<AOS::Identify::ExpansionData> mPciExpansions;
 
   public:
@@ -32,6 +33,11 @@ class AppContextCore
     const std::vector<AOS::Identify::ExpansionData> &getExpansions() const
     {
         return mExpansions;
+    }
+
+    AOS::Identify::PciExpansionsResultCode getPciExpansionsResultCode() const
+    {
+        return mPciExpansionsResultCode;
     }
 
     const std::vector<AOS::Identify::ExpansionData> &getPciExpansions() const

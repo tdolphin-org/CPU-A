@@ -24,8 +24,10 @@ AppContextCore::AppContextCore()
 
     // pci expansions
     auto pciExpansions = AOS::Identify::Library::GetPciExpansions();
-    for (const auto &pciExpansion : pciExpansions)
-        mPciExpansions.push_back(pciExpansion.data);
+    mPciExpansionsResultCode = pciExpansions.first;
+    if (pciExpansions.first == AOS::Identify::PciExpansionsResultCode::Success)
+        for (const auto &pciExpansion : pciExpansions.second)
+            mPciExpansions.push_back(pciExpansion.data);
 }
 
 AppContextCore::~AppContextCore()

@@ -18,6 +18,7 @@ namespace Components
     {
         ExpansionsList mNativeExpansionsList;
         ExpansionsList mPciExpansionsList;
+        MUI::Group mPciExpansionsGroup;
 
         TabsContainer mComponent;
 
