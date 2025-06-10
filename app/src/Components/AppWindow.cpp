@@ -6,6 +6,7 @@
 
 #include "AppWindow.hpp"
 
+#include "AOS/Identify/Library.hpp"
 #include "IDs.hpp"
 #include "MUI/Context/ApplicationContext.hpp"
 #include "MUI/Core/MakeObject.hpp"
@@ -17,8 +18,9 @@
 namespace Components
 {
     AppWindow::AppWindow()
-      : mContent()
-      , mCloseButton(MUI::MakeObject::SimpleButton("_Close"))
+      : mUsedIdentifyVersion("identify.library v" + AOS::Identify::Library::GetVersion())
+      , mContent()
+      , mExitButton(MUI::MakeObject::SimpleButton("E_xit"))
       , mComponent(MUI::WindowBuilder()
                        .tagTitle(APP_NAME)
                        .tagScreenTitle(SCREEN_TITLE)
@@ -35,19 +37,21 @@ namespace Components
                                                                       .tagContents(MUIX_PH MUIX_B APP_NAME MUIX_N MUIX_PT
                                                                                    " ver. " APP_VERSION " " APP_DATE)
                                                                       .object())
+                                                        .tagChild(MUI::MakeObject::VBar(0))
+                                                        .tagChild(MUI::MakeObject::FreeCLabel1(mUsedIdentifyVersion))
                                                         .tagChild(MUI::MakeObject::HVSpace())
-                                                        .tagChild(mCloseButton)
+                                                        .tagChild(mExitButton)
                                                         .object())
                                           .object())
                        .object())
     {
-        mCloseButton.setCycleChain();
+        mExitButton.setCycleChain();
     }
 
     void AppWindow::RegisterEvents()
     {
         auto app = MUI::ApplicationContext::instance().getApplication();
 
-        MUI::Notifier::from(MUI::Area(mCloseButton)).onPressed(false).notifyObject(app).returnIDQuit();
+        MUI::Notifier::from(MUI::Area(mExitButton)).onPressed(false).notifyObject(app).returnIDQuit();
     }
 }

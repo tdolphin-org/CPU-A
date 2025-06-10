@@ -15,8 +15,9 @@ namespace Components
 {
     class AppWindow : public Root<MUI::Window>
     {
+        std::string mUsedIdentifyVersion;
         Content mContent;
-        MUI::Area mCloseButton;
+        MUI::Area mExitButton;
         MUI::Window mComponent;
 
       public:
