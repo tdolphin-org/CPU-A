@@ -21,16 +21,16 @@ class AppContextCore
     AppContextCore();
     ~AppContextCore();
 
-    std::vector<AOS::Identify::ExpansionData> mExpansions;
+    std::vector<AOS::Identify::Expansion> mExpansions;
     AOS::Identify::PciExpansionsResultCode mPciExpansionsResultCode;
-    std::vector<AOS::Identify::ExpansionData> mPciExpansions;
+    std::vector<AOS::Identify::PciExpansion> mPciExpansions;
 
   public:
     OpenURLBaseScope &getOpenURLBase() const;
     Picasso96BaseScope &getPicasso96Base() const;
     CybergraphicsBaseScope &getCybergraphicsBase() const;
 
-    const std::vector<AOS::Identify::ExpansionData> &getExpansions() const
+    const std::vector<AOS::Identify::Expansion> &getExpansions() const
     {
         return mExpansions;
     }
@@ -40,7 +40,7 @@ class AppContextCore
         return mPciExpansionsResultCode;
     }
 
-    const std::vector<AOS::Identify::ExpansionData> &getPciExpansions() const
+    const std::vector<AOS::Identify::PciExpansion> &getPciExpansions() const
     {
         return mPciExpansions;
     }

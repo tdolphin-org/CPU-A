@@ -18,16 +18,12 @@ AppContextCore::AppContextCore()
     std::cout << __PRETTY_FUNCTION__ << std::endl;
 #endif
     // normal expansions
-    auto expansions = AOS::Identify::Library::GetExpansions();
-    for (const auto &expansion : expansions)
-        mExpansions.push_back(expansion.data);
+    mExpansions = AOS::Identify::Library::GetExpansions();
 
     // pci expansions
     auto pciExpansions = AOS::Identify::Library::GetPciExpansions();
     mPciExpansionsResultCode = pciExpansions.first;
-    if (pciExpansions.first == AOS::Identify::PciExpansionsResultCode::Success)
-        for (const auto &pciExpansion : pciExpansions.second)
-            mPciExpansions.push_back(pciExpansion.data);
+    mPciExpansions = pciExpansions.second;
 }
 
 AppContextCore::~AppContextCore()

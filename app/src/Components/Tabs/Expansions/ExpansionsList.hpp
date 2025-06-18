@@ -19,7 +19,8 @@ namespace Components
         MUI::List mComponent;
 
       public:
-        ExpansionsList(const std::vector<AOS::Identify::ExpansionData> &expansions);
+        ExpansionsList(const std::vector<AOS::Identify::Expansion> &expansions);
+        ExpansionsList(const std::vector<AOS::Identify::PciExpansion> &expansions);
 
       protected:
         MUI::List &muiRoot() const
