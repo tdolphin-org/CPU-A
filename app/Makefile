@@ -29,9 +29,6 @@ amigaos_m68k: out/amigaos/m68k
 out/amigaos/m68k:
 	$(dir_guard)
 
-out/morphos/ppc:
-	$(dir_guard)
-
 clean.obj:
 	rm -f -R ../../AmigaOS.cpp.wrapper/wrappers/obj/*
 	rm -f -R ../../AmigaOS.MUI.cpp.wrapper/components/obj/*
