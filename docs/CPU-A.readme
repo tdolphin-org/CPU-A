@@ -14,7 +14,7 @@ README
 
  This tool uses Identify.library and optionally Picasso96 to gather and display useful information about the system.
 
- It serves as a comprehensive example of using MUI C++ wrapper classes (https://github.com/tdolphin-org/AmigaOS.MUI.cpp.wrapper).
+ It serves as a comprehensive example of using MUI C++ wrapper classes (https://github.com/tdolphin-org/AmigaOS.MUI.cpp.wrapper) and AmigaOS C++ wrapper classes (https://github.com/tdolphin-org/AmigaOS.cpp.wrapper).
 
  The source code for CPU-A is available on GitHub (https://github.com/tdolphin-org/CPU-A).
 
@@ -36,6 +36,7 @@ REQUIREMENTS
 AUTHORS
 
  Rafal Zabdyr - author
+ Dominik Zabdyr - program icon
 
 
 COPYING / LICENSE
