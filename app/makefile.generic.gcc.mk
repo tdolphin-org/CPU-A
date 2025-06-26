@@ -23,7 +23,7 @@ DEBUG_FLAGS = #-DTRACE -DTRACE_CUSTOM_COMPONENTS
 CPP_FLAGS = $(DEBUG_FLAGS) $(MORE_CPP_FLAGS_X) -Wall\
 	-Isrc -I${AOSCPP_PATH}/wrappers/src -I${MUICPP_PATH}/wrappers/src -I${MUICPP_PATH}/components/src\
 	-fno-rtti -ffunction-sections -fdata-sections
-LFLAGS = -L${MUICPP_PATH}/wrappers/lib/$(SUB_BUILD_PATH) -lMUIcpp $(MORE_LFLAGS_X) -Wl,--gc-sections
+LFLAGS = -L${MUICPP_PATH}/wrappers/lib/$(SUB_BUILD_PATH) -lMUIcpp.light $(MORE_LFLAGS_X) -Wl,--gc-sections
 
 dir_guard = mkdir -p $(@D)
 
@@ -35,6 +35,7 @@ AOS_WRAPPER_PATH = ${AOSCPP_PATH}/wrappers
 AOS_WRAPPER_MODULES = AOS/Exec AOS/Exec AOS/AmigaLib AOS/Identify AOS/OpenURL AOS/Picasso96 AOS/Graphics AOS/Cybergraphics AOS/Expansion
 AOS_WRAPPER_SRC_DIRS = $(addprefix $(AOS_WRAPPER_PATH)/src/,$(AOS_WRAPPER_MODULES))
 AOS_WRAPPER_SRCS = $(foreach sdir,$(AOS_WRAPPER_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
+AOS_WRAPPER_CPP_FLAGS_LIGHT = $(CPP_FLAGS)
 
 MUI_COMPONENTS_PATH = ${MUICPP_PATH}/components
 MUI_COMPONENTS_MODULES = Components/Core Components/MCC Components/MCC/Core Components/Buttons Components/Tabs
@@ -48,7 +49,7 @@ MODULES = $(MODULES_COMPONENTS) FileResources TextResources DataInfo
 SRC_DIRS = src $(addprefix src/,$(MODULES))
 SRCS = $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.cpp))
 OBJS = $(patsubst src/%.cpp,obj/$(SUB_BUILD_PATH)/%.o,$(SRCS))\
-	$(patsubst $(AOS_WRAPPER_PATH)/src/%.cpp,$(AOS_WRAPPER_PATH)/obj/$(SUB_BUILD_PATH)/%.o,$(AOS_WRAPPER_SRCS))\
+	$(patsubst $(AOS_WRAPPER_PATH)/src/%.cpp,$(AOS_WRAPPER_PATH)/obj/$(SUB_BUILD_PATH)/light/%.o,$(AOS_WRAPPER_SRCS))\
 	$(patsubst $(MUI_COMPONENTS_PATH)/src/%.cpp,$(MUI_COMPONENTS_PATH)/obj/$(SUB_BUILD_PATH)/%.o,$(MUI_COMPONENTS_SRCS))
 
 HEADERS = src/ProgDefines.hpp
@@ -59,7 +60,7 @@ $(BINPATH)/$(APP_FILE_NAME): $(OBJS)
 	@echo "## Linking ..."
 	$(CPPC) $^ $(LFLAGS) -o $@_nonstripped
 	@echo "## Stripping ..."
-	$(STRIP) --remove-section=.comment $@_nonstripped -o $@
+	$(STRIP) --strip-all $@_nonstripped -o $@
 	$(OBJDUMP) --syms --reloc --disassemble-all $@_nonstripped > $@_disassembled
 	@echo "## Finished :)"
 
@@ -67,9 +68,9 @@ obj/$(SUB_BUILD_PATH)/%.o: src/%.cpp src/%.hpp $(HEADERS)
 	$(dir_guard)
 	$(CPPC) $(CPP_FLAGS) -c $< -o $@
 
-$(AOS_WRAPPER_PATH)/obj/$(SUB_BUILD_PATH)/%.o: $(AOS_WRAPPER_PATH)/src/%.cpp $(AOS_WRAPPER_PATH)/src/%.hpp
+$(AOS_WRAPPER_PATH)/obj/$(SUB_BUILD_PATH)/light/%.o: $(AOS_WRAPPER_PATH)/src/%.cpp $(AOS_WRAPPER_PATH)/src/%.hpp
 	$(dir_guard)
-	$(CPPC) $(CPP_FLAGS) -c $< -o $@
+	$(CPPC) $(AOS_WRAPPER_CPP_FLAGS_LIGHT) -c $< -o $@
 
 $(MUI_COMPONENTS_PATH)/obj/$(SUB_BUILD_PATH)/%.o: $(MUI_COMPONENTS_PATH)/src/%.cpp $(MUI_COMPONENTS_PATH)/src/%.hpp
 	$(dir_guard)
