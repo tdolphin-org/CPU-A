@@ -13,10 +13,10 @@ namespace DataInfo
 {
     const std::map<AOS::Identify::IDCPU, CPUSpec> cpuMC68k2spec {
         { AOS::Identify::IDCPU::MC68000, { "Motorola", "68000", "3.3 V, 5 V", "2.0-3.5 um", "1979", "~0.7-1.5 W", 1, 1, 0, 0, 0, 0 } },
-        { AOS::Identify::IDCPU::MC68010, { "Motorola", "68010", "5V", "2.0 um", "1982", "~1-2 W", 1, 1, 0, 0, 0, 0 } },
-        { AOS::Identify::IDCPU::MC68020, { "Motorola", "68020", "5V", "1.5 um", "1984", "~2-4 W", 1, 1, 256, 0, 0, 0 } },
-        { AOS::Identify::IDCPU::MC68030, { "Motorola", "68030", "5V", "1.0 um", "1987", "~2-5 W", 1, 1, 256, 256, 0, 0 } },
-        { AOS::Identify::IDCPU::MC68EC030, { "Motorola", "68EC030", "5V", "1.0 um", "1987", "~2-5 W", 1, 1, 256, 256, 0, 0 } },
+        { AOS::Identify::IDCPU::MC68010, { "Motorola", "68010", "5 V", "2.0 um", "1982", "~1-2 W", 1, 1, 0, 0, 0, 0 } },
+        { AOS::Identify::IDCPU::MC68020, { "Motorola", "68020", "5 V", "1.5 um", "1984", "~2-4 W", 1, 1, 256, 0, 0, 0 } },
+        { AOS::Identify::IDCPU::MC68030, { "Motorola", "68030", "5 V", "1.0 um", "1987", "~2-5 W", 1, 1, 256, 256, 0, 0 } },
+        { AOS::Identify::IDCPU::MC68EC030, { "Motorola", "68EC030", "5 V", "1.0 um", "1987", "~2-5 W", 1, 1, 256, 256, 0, 0 } },
         { AOS::Identify::IDCPU::MC68040,
           { "Motorola", "68040", "5 V", "0.57-0.8 um", "1990", "~3.5-8 W", 1, 1, 4 * 1024, 4 * 1024, 0, 0 } },
         { AOS::Identify::IDCPU::MC68LC040,
