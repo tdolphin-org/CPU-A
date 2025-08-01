@@ -18,7 +18,7 @@ namespace Components
     {
         if (!AppContext::instance().getCybergraphicsBase().isOpen())
         {
-            mComponent.AddMember(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("Cybergraphics not detected")));
+            mComponent.AddMember(MUI::MakeObject::HCenter(MUI::MakeObject::FreeLabel("CyberGraphX not detected")));
             return;
         }
 
