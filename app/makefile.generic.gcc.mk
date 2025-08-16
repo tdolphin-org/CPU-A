@@ -18,7 +18,7 @@ MORE_CPP_FLAGS_X = $(shell echo $(MORE_CPP_FLAGS) | tr ',' ' ')
 MORE_LFLAGS_X = $(shell echo $(MORE_LFLAGS) | tr ',' ' ')
 
 # trace/debug flags
-DEBUG_FLAGS = #-DTRACE -DTRACE_CUSTOM_COMPONENTS
+DEBUG_FLAGS = #-DTRACE -DTRACE_CUSTOM_COMPONENTS -DTRACE_AMIGAOS
 
 CPP_FLAGS = $(DEBUG_FLAGS) $(MORE_CPP_FLAGS_X) -Wall\
 	-Isrc -I${AOSCPP_PATH}/wrappers/src -I${MUICPP_PATH}/wrappers/src -I${MUICPP_PATH}/components/src\
@@ -35,7 +35,7 @@ AOS_WRAPPER_PATH = ${AOSCPP_PATH}/wrappers
 AOS_WRAPPER_MODULES = AOS/Exec AOS/Exec AOS/AmigaLib AOS/Identify AOS/OpenURL AOS/Picasso96 AOS/Graphics AOS/Cybergraphics AOS/Expansion
 AOS_WRAPPER_SRC_DIRS = $(addprefix $(AOS_WRAPPER_PATH)/src/,$(AOS_WRAPPER_MODULES))
 AOS_WRAPPER_SRCS = $(foreach sdir,$(AOS_WRAPPER_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
-AOS_WRAPPER_CPP_FLAGS_LIGHT = $(CPP_FLAGS)
+AOS_WRAPPER_CPP_FLAGS_LIGHT = $(CPP_FLAGS) -DSTD_LIGHT
 
 MUI_COMPONENTS_PATH = ${MUICPP_PATH}/components
 MUI_COMPONENTS_MODULES = Components/Core Components/MCC Components/MCC/Core Components/Buttons Components/Tabs

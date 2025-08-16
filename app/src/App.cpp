@@ -14,7 +14,7 @@
 #include <proto/exec.h>
 
 #ifdef TRACE
-#include <iostream>
+#include "amiga_std_light/iostream.hpp"
 #endif
 
 AppCore::AppCore()

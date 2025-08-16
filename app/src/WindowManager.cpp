@@ -7,7 +7,7 @@
 #include "WindowManager.hpp"
 
 #ifdef TRACE_MANAGERS
-#include <iostream>
+#include "amiga_std_light/iostream.hpp"
 #endif
 
 WindowManagerCore::WindowManagerCore()

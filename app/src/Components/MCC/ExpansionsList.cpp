@@ -7,7 +7,7 @@
 #include "ExpansionsList.hpp"
 
 #ifdef TRACE_CUSTOM_COMPONENTS
-#include <iostream>
+#include "amiga_std_light/iostream.hpp"
 #endif
 
 #include <proto/alib.h>

@@ -1,6 +1,6 @@
 src/Version.cpp: FORCE
 	rm -f $@
-	echo "#include <iostream>" >> $@
+	echo "#include \"amiga_std_light/iostream.hpp\"" >> $@
 	echo "#include \"Version.hpp\"" >> $@
 	echo "#include \"ProgDefines.hpp\"" >> $@
 	echo "#pragma GCC diagnostic push" >> $@

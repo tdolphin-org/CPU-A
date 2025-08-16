@@ -9,7 +9,7 @@
 #include "App.hpp"
 
 #ifdef TRACE
-#include <iostream>
+#include "amiga_std_light/iostream.hpp"
 #endif
 
 AppContextCore::AppContextCore()
