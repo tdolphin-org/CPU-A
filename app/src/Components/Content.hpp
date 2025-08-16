@@ -8,6 +8,7 @@
 
 #include "Components/Tabs/TabsContainer.hpp"
 #include "Tabs/AboutTab.hpp"
+#include "Tabs/BenchTab.hpp"
 #include "Tabs/CPUTab.hpp"
 #include "Tabs/ExpansionsTab.hpp"
 #include "Tabs/GraphicsTab.hpp"
@@ -25,7 +26,7 @@ namespace Components
         GraphicsTab mGraphicsTab;
         ExpansionsTab mExpansionsTab;
         OSTab mOperatingSystemTab;
-        MUI::Group mBenchGroup;
+        BenchTab mBenchTab;
         AboutTab mAboutTab;
 
         TabsContainer mComponent;
