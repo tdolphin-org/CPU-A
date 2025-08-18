@@ -32,23 +32,26 @@ BINPATH = out/$(SUB_BUILD_PATH)
 include makefile.gen.version.mk
 
 AOS_WRAPPER_PATH = ${AOSCPP_PATH}/wrappers
-AOS_WRAPPER_MODULES = AOS/Exec AOS/Exec AOS/AmigaLib AOS/Identify AOS/OpenURL AOS/Picasso96 AOS/Graphics AOS/Cybergraphics AOS/Expansion AOS/Dos
+AOS_WRAPPER_MODULES = AOS/Exec AOS/Exec AOS/AmigaLib AOS/Identify AOS/OpenURL AOS/Picasso96 AOS/Graphics AOS/Cybergraphics AOS/Expansion AOS/Dos \
+	AOS/Devices/Timer
 AOS_WRAPPER_SRC_DIRS = $(addprefix $(AOS_WRAPPER_PATH)/src/,$(AOS_WRAPPER_MODULES))
 AOS_WRAPPER_SRCS = $(foreach sdir,$(AOS_WRAPPER_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
 AOS_WRAPPER_CPP_FLAGS_LIGHT = $(CPP_FLAGS) -DSTD_LIGHT
 
 MUI_COMPONENTS_PATH = ${MUICPP_PATH}/components
-MUI_COMPONENTS_MODULES = Components/Core Components/MCC Components/MCC/Core Components/Buttons Components/Tabs
+MUI_COMPONENTS_MODULES = Benchmark Components/Core Components/MCC Components/MCC/Core Components/Buttons Components/Tabs
 MUI_COMPONENTS_SRC_DIRS = $(addprefix $(MUI_COMPONENTS_PATH)/src/,$(MUI_COMPONENTS_MODULES))
 MUI_COMPONENTS_SRCS = $(foreach sdir,$(MUI_COMPONENTS_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
 
 MODULES_COMPONENTS = Components Components/Buttons Components/Core Components/Tabs Components/Tabs/CPU Components/Tabs/Expansions Components/Tabs/Graphics \
-	Components/MCC	Components/Windows
+	Components/MCC	Components/Windows Benchmark
 MODULES = $(MODULES_COMPONENTS) FileResources TextResources DataInfo
 
 SRC_DIRS = src $(addprefix src/,$(MODULES))
 SRCS = $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.cpp))
+ASM_SRCS = $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.asm))
 OBJS = $(patsubst src/%.cpp,obj/$(SUB_BUILD_PATH)/%.o,$(SRCS))\
+	$(patsubst src/%.asm,obj/$(SUB_BUILD_PATH)/%.o,$(ASM_SRCS))\
 	$(patsubst $(AOS_WRAPPER_PATH)/src/%.cpp,$(AOS_WRAPPER_PATH)/obj/$(SUB_BUILD_PATH)/light/%.o,$(AOS_WRAPPER_SRCS))\
 	$(patsubst $(MUI_COMPONENTS_PATH)/src/%.cpp,$(MUI_COMPONENTS_PATH)/obj/$(SUB_BUILD_PATH)/%.o,$(MUI_COMPONENTS_SRCS))
 
@@ -67,6 +70,10 @@ $(BINPATH)/$(APP_FILE_NAME): $(OBJS)
 obj/$(SUB_BUILD_PATH)/%.o: src/%.cpp src/%.hpp $(HEADERS)
 	$(dir_guard)
 	$(CPPC) $(CPP_FLAGS) -c $< -o $@
+
+obj/$(SUB_BUILD_PATH)/%.o: src/%.asm
+	$(dir_guard)
+	$(VASM) -m68000 -Faout -o $@ $<
 
 $(AOS_WRAPPER_PATH)/obj/$(SUB_BUILD_PATH)/light/%.o: $(AOS_WRAPPER_PATH)/src/%.cpp $(AOS_WRAPPER_PATH)/src/%.hpp
 	$(dir_guard)

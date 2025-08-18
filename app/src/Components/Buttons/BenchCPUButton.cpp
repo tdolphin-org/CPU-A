@@ -8,6 +8,7 @@
 
 #include "AppContext.hpp"
 #include "ProgDefines.hpp"
+#include "Benchmark/Benchmark.hpp"
 
 namespace Components
 {
@@ -19,7 +20,7 @@ namespace Components
     unsigned long BenchCPUButton::OnClick()
     {
         // TODO implement benchmark logic
-        MuiAlert("Benchmarking MC68k CPU... Not implemented yet");
+        Benchmark::MC68k::Benchmark01();
         return 0;
     }
 }
