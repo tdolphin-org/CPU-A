@@ -49,9 +49,9 @@ MODULES = $(MODULES_COMPONENTS) FileResources TextResources DataInfo
 
 SRC_DIRS = src $(addprefix src/,$(MODULES))
 SRCS = $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.cpp))
-ASM_SRCS = $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.asm))
+ASM_SRCS = $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.s))
 OBJS = $(patsubst src/%.cpp,obj/$(SUB_BUILD_PATH)/%.o,$(SRCS))\
-	$(patsubst src/%.asm,obj/$(SUB_BUILD_PATH)/%.o,$(ASM_SRCS))\
+	$(patsubst src/%.s,obj/$(SUB_BUILD_PATH)/%.o,$(ASM_SRCS))\
 	$(patsubst $(AOS_WRAPPER_PATH)/src/%.cpp,$(AOS_WRAPPER_PATH)/obj/$(SUB_BUILD_PATH)/light/%.o,$(AOS_WRAPPER_SRCS))\
 	$(patsubst $(MUI_COMPONENTS_PATH)/src/%.cpp,$(MUI_COMPONENTS_PATH)/obj/$(SUB_BUILD_PATH)/%.o,$(MUI_COMPONENTS_SRCS))
 
@@ -71,9 +71,9 @@ obj/$(SUB_BUILD_PATH)/%.o: src/%.cpp src/%.hpp $(HEADERS)
 	$(dir_guard)
 	$(CPPC) $(CPP_FLAGS) -c $< -o $@
 
-obj/$(SUB_BUILD_PATH)/%.o: src/%.asm
+obj/$(SUB_BUILD_PATH)/%.o: src/%.s
 	$(dir_guard)
-	$(VASM) -m68000 -Faout -o $@ $<
+	$(CC) -c $< -o $@
 
 $(AOS_WRAPPER_PATH)/obj/$(SUB_BUILD_PATH)/light/%.o: $(AOS_WRAPPER_PATH)/src/%.cpp $(AOS_WRAPPER_PATH)/src/%.hpp
 	$(dir_guard)
