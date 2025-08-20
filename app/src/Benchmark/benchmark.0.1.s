@@ -27,15 +27,15 @@ DestBuffer:    .space 256*4
 
 _Benchmark01asm:
         link.w %a5,#0
-        move.l 8(%a5),%d0        | first parameter (loops)
-        move.l 12(%a5),%d1       | second parameter (repeat)
+        move.l 8(%a5),%d0               | first parameter (loops)
+        move.l 12(%a5),%d1              | second parameter (repeat)
         movem.l %d2-%d7/%a2-%a6,-(%a7)  | save all non-scratch registers
-        cmp.l   #0,%d0           | check if loop count is zero
-        beq     .exit_early     | if zero, exit immediately
-        cmp.l   #0,%d1           | check if bench repeat count is zero
-        beq     .exit_early     | if zero, exit immediately
-        move.l  %d0,%d7           | use d7 as main loop counter
-        move.l  %d0,BenchRepeatCount  | store to variable directly like Benchmark02asm
+        cmp.l   #0,%d0                  | check if loop count is zero
+        beq     .exit_early             | if zero, exit immediately
+        cmp.l   #0,%d1                  | check if bench repeat count is zero
+        beq     .exit_early             | if zero, exit immediately
+        move.l  %d0,%d7                 | use d7 as main loop counter
+        move.l  %d0,BenchRepeatCount    | store to variable directly like Benchmark02asm
 .loop_benchmarks:
         jsr _BenchmarkAdd
         jsr _BenchmarkMuls
@@ -48,7 +48,6 @@ _Benchmark01asm:
         subq.l  #1,%d7
         bne     .loop_benchmarks
 .exit_early:
-        move.l BenchRepeatCount,%d0  | load from variable directly like Benchmark02asm
         movem.l (%a7)+,%d2-%d7/%a2-%a6  | restore all non-scratch registers
         unlk %a5
         rts
