@@ -6,20 +6,19 @@
 
 #include "BenchTab.hpp"
 
+#include "DataInfo/BenchmarkData.hpp"
 #include "MUI/Core/MakeObject.hpp"
 #include "ProgDefines.hpp"
 #include "TextResources/Labels.hpp"
 
 namespace Components
 {
-    const char *BenchTab::mReferences[] = { "68030@50MHz (Amiga 500+ 68030TK v2)", nullptr };
-
-    const static long maxBenchValue = 1000;
+    const static long defaultMaxBenchValue = 100;
 
     BenchTab::BenchTab()
-      : mThisProcessorResultGauge(MUI::GaugeBuilder().tagHoriz(true).tagInfoText("%ld").tagCurrent(30).tagMax(maxBenchValue).object())
-      , mReferenceProcessorResultGauge(MUI::GaugeBuilder().tagHoriz(true).tagInfoText("%ld").tagCurrent(50).tagMax(maxBenchValue).object())
-      , mSelectionCycle(MCC::ActionCycleBuilder().tagEntries(mReferences).object(*this))
+      : mThisProcessorResultGauge(MUI::GaugeBuilder().tagHoriz(true).tagInfoText("%ld").tagMax(defaultMaxBenchValue).object())
+      , mReferenceProcessorResultGauge(MUI::GaugeBuilder().tagHoriz(true).tagInfoText("%ld").tagMax(defaultMaxBenchValue).object())
+      , mSelectionCycle(MCC::ActionCycleBuilder().tagEntries(DataInfo::benchmarkReferences).object(*this))
       , mSingleCPUThreadGroup(
             MUI::GroupBuilder()
                 .tagFrame(MUI::Frame::Group)
@@ -35,7 +34,7 @@ namespace Components
                 .tagChild(
                     MUI::GroupBuilder().horizontal().tagChild(MUI::MakeObject::FreeLabel1("Reference")).tagChild(mSelectionCycle).object())
                 .object())
-      , mBenchCPUButton(MUIX_C "Bench MC68k CPU", "Run MC68k benchmark", -1)
+      , mBenchCPUButton(mThisProcessorResultGauge, MUIX_C "Bench MC68k CPU", "Run MC68k benchmark", -1)
       , mComponent(MUI::GroupBuilder()
                        .vertical()
                        .tagChild(MUI::MakeObject::HVSpace())
@@ -49,12 +48,13 @@ namespace Components
                        .tagChild(MUI::MakeObject::HVSpace())
                        .object())
     {
+        BenchTab::OnCycle();
     }
 
     unsigned long BenchTab::OnCycle()
     {
         auto selection = mSelectionCycle.getActive();
-        // TODO
+        mReferenceProcessorResultGauge.setCurrent(DataInfo::reference2benchData.at((DataInfo::ReferenceID)selection).benchmark01result);
         return 0;
     }
 }

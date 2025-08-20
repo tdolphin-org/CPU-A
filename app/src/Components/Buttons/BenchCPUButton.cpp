@@ -7,20 +7,65 @@
 #include "BenchCPUButton.hpp"
 
 #include "AppContext.hpp"
-#include "ProgDefines.hpp"
 #include "Benchmark/Benchmark.hpp"
+#include "MUI/Application.hpp"
+#include "ProgDefines.hpp"
+
+#include <cmath>
+
+#ifdef TRACE
+#include "amiga_std_light/iostream.hpp"
+#endif
 
 namespace Components
 {
-    BenchCPUButton::BenchCPUButton(const std::string &label, const std::string &shortHelp, const long weight)
+    BenchCPUButton::BenchCPUButton(MUI::Gauge &resultGauge, const std::string &label, const std::string &shortHelp, const long weight)
       : BasicButton(label, shortHelp, weight)
+      , mResultGauge(resultGauge)
     {
     }
 
     unsigned long BenchCPUButton::OnClick()
     {
+        static const int multiplier = 5;
+        static const int maxRetries = 5;
+        static const int minDuration = 5;
+
+        MUI::ApplicationSleepScope scope;
         // TODO implement benchmark logic
-        Benchmark::MC68k::Benchmark01();
+        Benchmark::MC68k::BenchResult result;
+        for (int i = 0; i < maxRetries; ++i)
+        {
+            Benchmark::MC68k::Benchmark01(result);
+#ifdef TRACE
+            std::cout << "Benchmark completed:" << std::endl;
+            std::cout << "Operations in bench: " << result.operationsPerBench << std::endl;
+            std::cout << "Duration (ticks): " << result.durationTicks << std::endl;
+            std::cout << "Duration (seconds): " << result.durationInSeconds << std::endl;
+            std::cout << "Final operations per second: " << result.operationsPerSecond << std::endl;
+#endif
+
+            if (result.durationInSeconds < minDuration)
+            {
+#ifdef TRACE
+                std::cout << "#### Benchmark too short. Try a higher operation count." << std::endl;
+#endif
+                result.operationsPerBench *= multiplier; // increase operations
+            }
+            else
+                break;
+        }
+
+        auto max = mResultGauge.getMax();
+        if (result.operationsPerSecond > max)
+        {
+            unsigned long newMax = static_cast<unsigned long>(std::pow(10, std::ceil(std::log10(result.operationsPerSecond))));
+            if (newMax < 100)
+                newMax = 100; // min is 100
+            mResultGauge.setMax(newMax);
+        }
+        mResultGauge.setCurrent(result.operationsPerSecond);
+
         return 0;
     }
 }

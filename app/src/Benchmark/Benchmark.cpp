@@ -30,7 +30,7 @@ namespace Benchmark::MC68k
         return (operations * frequency) / ticks;
     }
 
-        void Benchmark01(BenchResult &result)
+    void Benchmark01(BenchResult &result)
     {
         static const long benchRepeatCount = 1000;
         struct EClockVal tvBegin = {}, tvEnd = {};

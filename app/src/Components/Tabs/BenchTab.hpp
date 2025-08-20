@@ -18,8 +18,6 @@ namespace Components
 {
     class BenchTab : public Root<MUI::Group>, public TabBase, public MCC::ActionCycleDispatcher
     {
-        static const char *mReferences[];
-
         MUI::Gauge mThisProcessorResultGauge;
         MUI::Gauge mReferenceProcessorResultGauge;
 
