@@ -7,16 +7,18 @@
 #pragma once
 
 #include "Components/Buttons/BasicButton.hpp"
-#include "MUI/Gauge.hpp"
+
+#include <functional>
 
 namespace Components
 {
     class BenchCPUButton : public BasicButton
     {
-        MUI::Gauge &mResultGauge;
+        std::function<void(uint64_t)> mCallback;
 
       public:
-        BenchCPUButton(MUI::Gauge &resultGauge, const std::string &label, const std::string &shortHelp, const long weight = -1);
+        BenchCPUButton(std::function<void(uint64_t)> callback, const std::string &label, const std::string &shortHelp,
+                       const long weight = -1);
 
       protected:
         unsigned long OnClick();

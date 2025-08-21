@@ -6,20 +6,19 @@
 
 #pragma once
 
+#include "Benchmark/ResultAndCompareGroup.hpp"
 #include "Components/Buttons/BenchCPUButton.hpp"
 #include "Components/Core/Root.hpp"
 #include "TabBase.hpp"
 
 #include "Components/MCC/ActionCycle.hpp"
-#include "MUI/Gauge.hpp"
 #include "MUI/Group.hpp"
 
 namespace Components
 {
     class BenchTab : public Root<MUI::Group>, public TabBase, public MCC::ActionCycleDispatcher
     {
-        MUI::Gauge mThisProcessorResultGauge;
-        MUI::Gauge mReferenceProcessorResultGauge;
+        ResultAndCompareGroup mResultAndCompareGroup;
 
         MUI::Cycle mSelectionCycle;
         MUI::Group mSingleCPUThreadGroup;

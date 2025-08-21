@@ -19,9 +19,10 @@
 
 namespace Components
 {
-    BenchCPUButton::BenchCPUButton(MUI::Gauge &resultGauge, const std::string &label, const std::string &shortHelp, const long weight)
+    BenchCPUButton::BenchCPUButton(std::function<void(uint64_t)> callback, const std::string &label, const std::string &shortHelp,
+                                   const long weight)
       : BasicButton(label, shortHelp, weight)
-      , mResultGauge(resultGauge)
+      , mCallback(callback)
     {
     }
 
@@ -56,15 +57,9 @@ namespace Components
                 break;
         }
 
-        auto max = mResultGauge.getMax();
-        if (result.operationsPerSecond > max)
-        {
-            unsigned long newMax = static_cast<unsigned long>(std::pow(10, std::ceil(std::log10(result.operationsPerSecond))));
-            if (newMax < 100)
-                newMax = 100; // min is 100
-            mResultGauge.setMax(newMax);
-        }
-        mResultGauge.setCurrent(result.operationsPerSecond);
+        // Call the callback function with the result
+        if (mCallback)
+            mCallback(result.operationsPerSecond);
 
         return 0;
     }
