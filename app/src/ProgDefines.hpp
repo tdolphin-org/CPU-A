@@ -9,6 +9,7 @@
 #define AMIGAOS_VER_PREFIX "$VER:"
 
 #define AUTHORS "Rafal Zabdyr"
+#define ICON_AUTHOR "Dominik Zabdyr"
 
 #define CMD_NAME "CPU-A"
 #define APP_NAME "CPU-A"

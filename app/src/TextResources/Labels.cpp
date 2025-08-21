@@ -26,5 +26,6 @@ namespace Label
     const char *PciExpansions = "PCI Expansions";
 
     const char *AboutContent = MUIX_C MUIX_B APP_NAME "\n\n" MUIX_N "Version " APP_VERSION " " APP_DATE "\n\n" APP_DESCRIPTION
-                                                      "\n\n" MUIX_B APP_TDOLPHIN_COPYRIGHTS MUIX_N "\n\nAuthor: " AUTHORS "\n";
+                                                      "\n\n" MUIX_B APP_TDOLPHIN_COPYRIGHTS MUIX_N "\n\nAuthor: " AUTHORS "\n"
+                                                      "Icon by " ICON_AUTHOR "\n";
 }
