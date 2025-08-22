@@ -8,6 +8,7 @@
 
 #include "DataInfo/BenchmarkData.hpp"
 #include "MUI/Core/MakeObject.hpp"
+#include "MUI/Floattext.hpp"
 #include "ProgDefines.hpp"
 #include "TextResources/Labels.hpp"
 
@@ -29,18 +30,24 @@ namespace Components
                 .object())
       , mBenchCPUButton([this](uint64_t operationsPerSecond) { mResultAndCompareGroup.UpdateThisProcessorResult(operationsPerSecond); },
                         MUIX_C "Bench MC68k CPU", "Run MC68k benchmark", -1)
-      , mComponent(MUI::GroupBuilder()
-                       .vertical()
-                       .tagChild(MUI::MakeObject::HVSpace())
-                       .tagChild(mSingleCPUThreadGroup)
-                       .tagChild(MUI::GroupBuilder()
-                                     .horizontal()
-                                     .tagChild(MUI::MakeObject::HVSpace())
-                                     .tagChild(mBenchCPUButton)
-                                     .tagChild(MUI::MakeObject::HVSpace())
-                                     .object())
-                       .tagChild(MUI::MakeObject::HVSpace())
-                       .object())
+      , mComponent(
+            MUI::GroupBuilder()
+                .vertical()
+                .tagChild(MUI::MakeObject::HVSpace())
+                .tagChild(mSingleCPUThreadGroup)
+                .tagChild(MUI::FloattextBuilder()
+                              .tagFrame(MUI::Frame::ReadList)
+                              .tagText("The current benchmark is " MUIX_B "highly experimental" MUIX_N
+                                       ". Its results are only indicative and should not be treated as a definitive performance metric.")
+                              .object())
+                .tagChild(MUI::GroupBuilder()
+                              .horizontal()
+                              .tagChild(MUI::MakeObject::HVSpace())
+                              .tagChild(mBenchCPUButton)
+                              .tagChild(MUI::MakeObject::HVSpace())
+                              .object())
+                .tagChild(MUI::MakeObject::HVSpace())
+                .object())
     {
         BenchTab::OnCycle();
     }
