@@ -24,6 +24,11 @@ namespace Components
       : BasicButton(label, shortHelp, weight)
       , mCallback(callback)
     {
+        if (callback == nullptr)
+        {
+            auto error = std::string { __PRETTY_FUNCTION__ } + " nullptr callback!";
+            throw std::runtime_error(error);
+        }
     }
 
     unsigned long BenchCPUButton::OnClick()

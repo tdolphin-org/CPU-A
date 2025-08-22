@@ -15,8 +15,10 @@ namespace Components
     const static long defaultMaxBenchValue = 100;
 
     ResultAndCompareGroup::ResultAndCompareGroup()
-      : mThisProcessorResultGauge(MUI::GaugeBuilder().tagHoriz(true).tagInfoText("%ld").tagMax(defaultMaxBenchValue).object())
-      , mReferenceProcessorResultGauge(MUI::GaugeBuilder().tagHoriz(true).tagInfoText("%ld").tagMax(defaultMaxBenchValue).object())
+      : mThisProcessorResultGauge(
+            MUI::GaugeBuilder().tagHoriz(true).tagInfoText("Not benchmarked yet").tagMax(defaultMaxBenchValue).object())
+      , mReferenceProcessorResultGauge(
+            MUI::GaugeBuilder().tagHoriz(true).tagInfoText("%ld").tagCurrent(0).tagMax(defaultMaxBenchValue).object())
       , mComponent(MUI::GroupBuilder()
                        .tagColumns(2)
                        .tagChild(MUI::MakeObject::FreeLabel1("This Processor"))
@@ -25,21 +27,34 @@ namespace Components
                        .tagChild(mReferenceProcessorResultGauge)
                        .object())
     {
-        // Constructor implementation
     }
 
     void ResultAndCompareGroup::UpdateForSelection(long selection)
     {
-        mReferenceProcessorResultGauge.setCurrent(DataInfo::reference2benchData.at((DataInfo::ReferenceID)selection).benchmark01result);
+        Update(mThisProcessorResultGauge.getCurrent(),
+               DataInfo::reference2benchData.at((DataInfo::ReferenceID)selection).benchmark01result);
     }
 
     void ResultAndCompareGroup::UpdateThisProcessorResult(uint64_t operationsPerSecond)
     {
-        mThisProcessorResultGauge.setCurrent(operationsPerSecond);
-        auto max = RecalculateMax(operationsPerSecond, mReferenceProcessorResultGauge.getCurrent());
+        if (operationsPerSecond > 0)
+            mThisProcessorResultGauge.setInfoText("%ld");
 
-        mThisProcessorResultGauge.setMax(max);
+        Update(operationsPerSecond, mReferenceProcessorResultGauge.getCurrent());
+    }
+
+    void ResultAndCompareGroup::Update(const uint64_t operationsPerSecond, const uint64_t referenceOperationsPerSecond)
+    {
+        auto max = RecalculateMax(operationsPerSecond, referenceOperationsPerSecond);
+
+        if (operationsPerSecond > 0)
+        {
+            mThisProcessorResultGauge.setMax(max);
+            mThisProcessorResultGauge.setCurrent(operationsPerSecond);
+        }
+
         mReferenceProcessorResultGauge.setMax(max);
+        mReferenceProcessorResultGauge.setCurrent(referenceOperationsPerSecond);
     }
 
     unsigned long ResultAndCompareGroup::RecalculateMax(const uint64_t operationsPerSecond, const uint64_t referenceOperationsPerSecond)

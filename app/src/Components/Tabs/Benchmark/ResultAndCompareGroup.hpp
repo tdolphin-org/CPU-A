@@ -32,6 +32,8 @@ namespace Components
         }
 
       private:
+        void Update(const uint64_t operationsPerSecond, const uint64_t referenceOperationsPerSecond);
+
         unsigned long RecalculateMax(const uint64_t operationsPerSecond, const uint64_t referenceOperationsPerSecond);
     };
 }
