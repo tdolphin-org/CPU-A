@@ -61,10 +61,18 @@ namespace Components
     {
         auto max = std::max(operationsPerSecond, referenceOperationsPerSecond);
 
-        unsigned long newMax = static_cast<unsigned long>(std::pow(10, std::ceil(std::log10(max))));
-        if (newMax < 100)
-            newMax = defaultMaxBenchValue;
+        if (max < 100)
+            return defaultMaxBenchValue;
 
-        return newMax;
+        if (max < 1000)
+            return (max + 100) % 1000; // round to hundred
+
+        if (max < 10000)
+            return (max + 1000) % 10000; // round to thousand
+
+        if (max < 100000)
+            return (max + 10000) % 100000; // round to ten thousand
+
+        return static_cast<unsigned long>(std::pow(10, std::ceil(std::log10(max))));
     }
 }
