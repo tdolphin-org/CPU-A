@@ -13,11 +13,14 @@ namespace DataInfo
 {
     enum class GfxChipID
     {
+        Emulated, // special case for emulated chips, like "UAE GFX"
         Texas_Instruments_TMS34010,
         Inmos_G360,
         Inmos_G364G_10S,
         Inmos_G365,
         Tseng_Labs_ET4000,
+        Tseng_Labs_ET4000AX,
+        Tseng_Labs_ET4000_W32,
         Cirrus_Logic_GD5426,
         Cirrus_Logic_GD5428,
         Cirrus_Logic_GD5434,

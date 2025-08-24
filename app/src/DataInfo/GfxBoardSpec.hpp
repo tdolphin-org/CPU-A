@@ -25,5 +25,8 @@ namespace DataInfo
         std::string interface;
     };
 
-    extern const std::map<AOS::Cybergraphics::BoardID, GfxBoardSpec> gfxBoard2spec;
+    extern const std::vector<GfxBoardSpec> gfxBoardSpecs;
+
+    extern const std::map<AOS::Cybergraphics::BoardID, size_t> cgxBoardId2specIdx;
+    extern const std::map<std::string, size_t> p96cardName2specIdx;
 }
