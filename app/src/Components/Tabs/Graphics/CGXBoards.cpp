@@ -29,7 +29,10 @@ namespace Components
         {
             for (auto cgxBoardID : cgxBoards)
             {
-                auto const &gfxBoard = DataInfo::gfxBoardSpecs.at(DataInfo::cgxBoardId2specIdx.at(cgxBoardID));
+                if (DataInfo::gfxBoard2spec.find(cgxBoardID) == DataInfo::gfxBoard2spec.end())
+                    continue; // not in our database
+
+                auto const &gfxBoard = DataInfo::gfxBoard2spec.at(cgxBoardID);
                 std::string chipNames = [&]() -> std::string {
                     std::string result;
                     for (auto const chip : gfxBoard.chips)

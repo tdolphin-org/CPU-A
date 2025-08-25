@@ -34,17 +34,20 @@ namespace Components
         {
             for (auto &picassoBoard : picassoBoards)
             {
-                auto rgbFormats
-                    = std::accumulate(picassoBoard.rgbFormats.begin(), picassoBoard.rgbFormats.end(), std::string(""),
-                                      [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; });
+                if (DataInfo::gfxBoard2spec.find(picassoBoard.id) == DataInfo::gfxBoard2spec.end())
+                    continue; // not in our database
 
-                auto const &gfxBoard = DataInfo::gfxBoardSpecs.at(DataInfo::p96cardName2specIdx.at(picassoBoard.name));
+                auto const &gfxBoard = DataInfo::gfxBoard2spec.at(picassoBoard.id);
                 std::string chipNames = [&]() -> std::string {
                     std::string result;
                     for (auto const chip : gfxBoard.chips)
                         result += (result.empty() ? "" : " or ") + DataInfo::gfxChip2spec.at(chip).modelName;
                     return result;
                 }();
+
+                auto rgbFormats
+                    = std::accumulate(picassoBoard.rgbFormats.begin(), picassoBoard.rgbFormats.end(), std::string(""),
+                                      [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; });
 
                 mGfxChipSpecButtons.push_back(new GfxChipSpecButton(gfxBoard.chips));
 

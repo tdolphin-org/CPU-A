@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "AOS/Cybergraphics/ValueTypes/BoardID.hpp"
+#include "AOS/Common/ValueTypes/BoardID.hpp"
 #include "GfxChipSpec.hpp"
 
 #include <map>
@@ -25,8 +25,5 @@ namespace DataInfo
         std::string interface;
     };
 
-    extern const std::vector<GfxBoardSpec> gfxBoardSpecs;
-
-    extern const std::map<AOS::Cybergraphics::BoardID, size_t> cgxBoardId2specIdx;
-    extern const std::map<std::string, size_t> p96cardName2specIdx;
+    extern const std::map<AOS::Common::BoardID, GfxBoardSpec> gfxBoard2spec;
 }
