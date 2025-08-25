@@ -54,7 +54,7 @@ namespace Components
             if (result.durationInSeconds < minDuration)
             {
 #ifdef TRACE
-                std::cout << "#### Benchmark too short. Try a higher operation count." << std::endl;
+                std::cout << "#### Benchmark interval too short. Try a higher operation count." << std::endl;
 #endif
                 result.operationsPerBench *= multiplier; // increase operations
             }

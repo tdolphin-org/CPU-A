@@ -12,7 +12,7 @@
 namespace DataInfo
 {
     const std::map<GfxChipID, GfxChipSpec> gfxChip2spec {
-        { GfxChipID::Emulated, { "Various", "Emulated Chip", "??", "??", "??", 0, "--", "--" } },
+        { GfxChipID::Emulated, { "Various", "Emulated Chip", "--", "--", "--", 0, "--", "--" } },
         { GfxChipID::Texas_Instruments_TMS34010, { "Texas Instruments", "TMS34010", "1986", "??", "??", 40, "--", "16/32bit" } },
         { GfxChipID::Inmos_G360, { "Inmos", "IMS G360", "~1991", "??", "??", 0, "--", "??" } },
         { GfxChipID::Inmos_G364G_10S, { "Inmos", "IMS G364G-10S", "~1991", "??", "??", 0, "--", "64bit" } },
