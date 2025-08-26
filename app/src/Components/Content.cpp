@@ -6,7 +6,6 @@
 
 #include "Content.hpp"
 
-#include "MUI/Core/MakeObject.hpp"
 #include "TextResources/Labels.hpp"
 
 namespace Components

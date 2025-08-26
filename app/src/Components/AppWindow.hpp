@@ -8,7 +8,6 @@
 
 #include "Components/Core/Root.hpp"
 #include "Content.hpp"
-#include "MUI/Text.hpp"
 #include "MUI/Window.hpp"
 
 namespace Components
