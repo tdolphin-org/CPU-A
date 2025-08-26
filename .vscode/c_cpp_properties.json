@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "amiga",
+            "name": "cross_amiga",
             "includePath": [
                 "../AmigaOS.cpp.wrapper/wrappers/src/",
                 "../AmigaOS.MUI.cpp.wrapper/wrappers/src/",

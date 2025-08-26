@@ -1,7 +1,7 @@
 #
-# Makefile for CPU-A project
+#  Makefile for CPU-A project
 #
-# (c) 2024-2025 TDolphin
+#  (c) 2024-2025 TDolphin
 #
 
 SUB_PROJECTS = app
@@ -13,17 +13,17 @@ OUT_APP_PATH = $(OUT_PATH)/$(APP_DRAWER_NAME)
 include app/appversion.txt
 
 all:
-	@echo "make aos_m68k - AmigaOS m68k build (cross compilation on linux)"
+	@echo "make cross_aos_m68k - AmigaOS m68k build (cross compilation on linux)"
 	@echo "make clean.obj - remove all obj files"
 	@echo "make clean - remove all obj files and executable files"
 
-aos_m68k: sub_projects_aos_m68k build_aos_m68k
+cross_aos_m68k: sub_projects_aos_m68k build_aos_m68k
 
 sub_projects_aos_m68k:
 	@echo "------------------------------------------------"
 	@date
 	@for dir in $(SUB_PROJECTS); do \
-		$(MAKE) amigaos_m68k -C $$dir; \
+		$(MAKE) cross_amigaos_m68k -C $$dir; \
 	done
 	@date
 	@echo "------------------------------------------------"
@@ -56,4 +56,4 @@ clean: clean.obj
 		$(MAKE) clean -C $$dir; \
 	done
 
-rebuild_aos_m68k: clean aos_m68k build_aos_m68k
+rebuild_aos_m68k: clean cross_aos_m68k build_aos_m68k
