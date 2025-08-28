@@ -13,17 +13,13 @@
 #  	  requires: AmigaOS MUI C++ wrapper classes (https://github.com/tdolphin-org/AmigaOS.MUI.cpp.wrapper)
 #
 
-# replace , => space
-MORE_CPP_FLAGS_X = $(shell echo $(MORE_CPP_FLAGS) | tr ',' ' ')
-MORE_LFLAGS_X = $(shell echo $(MORE_LFLAGS) | tr ',' ' ')
-
 # trace/debug flags
 DEBUG_FLAGS = #-DTRACE -DTRACE_CUSTOM_COMPONENTS -DTRACE_AMIGAOS
 
-CPP_FLAGS = $(DEBUG_FLAGS) $(MORE_CPP_FLAGS_X) -Wall\
+CPP_FLAGS = $(DEBUG_FLAGS) $(MORE_CPP_FLAGS) -Wall\
 	-Isrc -I${AOSCPP_PATH}/wrappers/src -I${MUICPP_PATH}/wrappers/src -I${MUICPP_PATH}/components/src\
 	-fno-rtti -ffunction-sections -fdata-sections
-LFLAGS = -L${MUICPP_PATH}/wrappers/lib/$(SUB_BUILD_PATH) -lMUIcpp.light $(MORE_LFLAGS_X) -Wl,--gc-sections
+LFLAGS = -L${MUICPP_PATH}/wrappers/lib/$(SUB_BUILD_PATH) -lMUIcpp.light $(MORE_LFLAGS) -Wl,--gc-sections
 
 dir_guard = mkdir -p $(@D)
 
