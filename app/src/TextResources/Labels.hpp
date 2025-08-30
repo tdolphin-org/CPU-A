@@ -28,4 +28,6 @@ namespace Label
     extern const char *PciExpansions;
 
     extern const char *AboutContent;
+
+    extern const char *_ProceedOr_Cancel;
 }

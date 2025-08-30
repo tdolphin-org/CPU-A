@@ -10,6 +10,7 @@
 #include "Benchmark/Benchmark.hpp"
 #include "MUI/Application.hpp"
 #include "ProgDefines.hpp"
+#include "TextResources/Labels.hpp"
 
 #include <cmath>
 
@@ -36,6 +37,13 @@ namespace Components
         static const int multiplier = 5;
         static const int maxRetries = 5;
         static const int minDuration = 5;
+
+        if (MuiRequest("Benchmark Warning",
+                       "Warning: This benchmark will suspend multitasking, and your system may be unresponsive for up to one "
+                       "minute. Do you want to proceed?",
+                       Label::_ProceedOr_Cancel)
+            == 0)
+            return 0;
 
         MUI::ApplicationSleepScope scope;
         // TODO implement benchmark logic

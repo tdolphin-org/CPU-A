@@ -28,4 +28,6 @@ namespace Label
     const char *AboutContent = MUIX_C MUIX_B APP_NAME "\n\n" MUIX_N "Version " APP_VERSION " " APP_DATE "\n\n" APP_DESCRIPTION
                                                       "\n\n" MUIX_B APP_TDOLPHIN_COPYRIGHTS MUIX_N "\n\nAuthor: " AUTHORS "\n"
                                                       "Icon by " ICON_AUTHOR "\n";
+
+    const char *_ProceedOr_Cancel = "_Proceed|_Cancel";
 }

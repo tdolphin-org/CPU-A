@@ -7,6 +7,7 @@
 #include "Benchmark.hpp"
 
 #include "AOS/Devices/Timer/TimerDevice.hpp"
+#include "AOS/Exec/Library.hpp"
 
 #include <clib/timer_protos.h>
 #include <proto/exec.h>
@@ -46,9 +47,11 @@ namespace Benchmark::MC68k
 
         // benchmarking
 
+        AOS::Exec::Library::libForbid();
         AOS::Devices::TimerDevice::instance().devReadEClock(tvBegin);
         Benchmark01asm(result.operationsPerBench, benchRepeatCount);
         AOS::Devices::TimerDevice::instance().devReadEClock(tvEnd);
+        AOS::Exec::Library::libPermit();
 
         result.durationTicks = AOS::Devices::TimerDevice::instance().EClockDiff(tvBegin, tvEnd);
         result.durationInSeconds = result.durationTicks / frequency;
