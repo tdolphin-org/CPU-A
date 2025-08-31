@@ -32,7 +32,7 @@ namespace Components
 {
     const char *CPUInfo::mCPUs[] = { "MC68k", "PowerPC", nullptr };
 
-    CPUInfo::CPUInfo(const AOS::Identify::CpuInfo &cpuInfo)
+    CPUInfo::CPUInfo(const AOS::Identify::CPUInfo &cpuInfo)
       : mCPUSpec(cpuInfo.type == CpuType::MC68k ? get68kSpec(cpuInfo) : DataInfo::cpuPPC2spec.at([&]() {
           auto pos = DataInfo::cpuPPC2spec.find(cpuInfo.model.ppc);
           if (pos != DataInfo::cpuPPC2spec.end())
@@ -139,7 +139,7 @@ namespace Components
                             [](const std::string &a, const std::string &b) { return a + (a.empty() ? "" : ", ") + b; }));
     }
 
-    DataInfo::CPUSpec CPUInfo::get68kSpec(const AOS::Identify::CpuInfo &cpuInfo)
+    DataInfo::CPUSpec CPUInfo::get68kSpec(const AOS::Identify::CPUInfo &cpuInfo)
     {
         if (cpuInfo.model.m68k == IDCPU::FPGA)
         {

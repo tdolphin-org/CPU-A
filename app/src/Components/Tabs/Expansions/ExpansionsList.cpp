@@ -37,7 +37,7 @@ namespace Components
         }
     }
 
-    ExpansionsList::ExpansionsList(const std::vector<AOS::Identify::PciExpansion> &pciExpansions)
+    ExpansionsList::ExpansionsList(const std::vector<AOS::Identify::PCIExpansion> &pciExpansions)
       : mComponent(MCC::ExpansionsListBuilder().tagFormat("BAR,BAR,BAR,").tagTitle(true).tagFrame(MUI::Frame::Group).object())
     {
         for (auto &expansion : pciExpansions)

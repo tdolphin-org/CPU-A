@@ -20,7 +20,7 @@ namespace Components
 
       public:
         ExpansionsList(const std::vector<AOS::Identify::Expansion> &expansions);
-        ExpansionsList(const std::vector<AOS::Identify::PciExpansion> &expansions);
+        ExpansionsList(const std::vector<AOS::Identify::PCIExpansion> &expansions);
 
       protected:
         MUI::List &muiRoot() const

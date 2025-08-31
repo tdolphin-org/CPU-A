@@ -25,7 +25,7 @@ namespace Label
     extern const char *AboutTab;
 
     extern const char *NativeExpansions;
-    extern const char *PciExpansions;
+    extern const char *PCIExpansions;
 
     extern const char *AboutContent;
 

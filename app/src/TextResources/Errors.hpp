@@ -15,9 +15,9 @@
 
 namespace Error
 {
-    extern const char *NoPciLib;
-    extern const char *NoPciDb;
-    extern const char *BadPciDb;
+    extern const char *NoPCILib;
+    extern const char *NoPCIDb;
+    extern const char *BadPCIDb;
     extern const char *Missing45;
     extern const char *UnknownError;
 }

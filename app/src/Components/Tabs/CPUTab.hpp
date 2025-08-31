@@ -11,7 +11,6 @@
 #include "Components/Core/Root.hpp"
 #include "Components/MCC/ActionCycle.hpp"
 #include "Components/Tabs/TabBase.hpp"
-
 #include "MUI/Group.hpp"
 #include "MUI/Text.hpp"
 
@@ -21,7 +20,7 @@ namespace Components
     {
         static const char *mCPUs[];
 
-        std::vector<AOS::Identify::CpuInfo> mCPUInfos;
+        std::vector<AOS::Identify::CPUInfo> mCPUInfos;
 
         CPUInfo mM68kCPUInfo;
         CPUInfo mPowerPCCPUInfo;

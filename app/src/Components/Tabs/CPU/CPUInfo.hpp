@@ -43,7 +43,7 @@ namespace Components
         MUI::Group mComponent;
 
       public:
-        CPUInfo(const AOS::Identify::CpuInfo &cpuInfo);
+        CPUInfo(const AOS::Identify::CPUInfo &cpuInfo);
 
       protected:
         MUI::Group &muiRoot() const
@@ -52,6 +52,6 @@ namespace Components
         }
 
       public:
-        static DataInfo::CPUSpec get68kSpec(const AOS::Identify::CpuInfo &cpuInfo);
+        static DataInfo::CPUSpec get68kSpec(const AOS::Identify::CPUInfo &cpuInfo);
     };
 }

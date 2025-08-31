@@ -18,22 +18,22 @@ namespace Components
 {
     ExpansionsTab::ExpansionsTab()
       : mNativeExpansionsList(AppContext::instance().getExpansions())
-      , mPciExpansionsList(AppContext::instance().getPciExpansions())
-      , mPciExpansionsGroup(MUI::GroupBuilder()
+      , mPCIExpansionsList(AppContext::instance().getPCIExpansions())
+      , mPCIExpansionsGroup(MUI::GroupBuilder()
                                 .tagPageMode(true)
-                                .tagChild(mPciExpansionsList)
+                                .tagChild(mPCIExpansionsList)
                                 .tagChild(MUI::GroupBuilder()
                                               .tagChild(MUI::MakeObject::HVSpace())
                                               .tagChild(MUI::MakeObject::CLabel1([&]() -> const char * {
-                                                  switch (AppContext::instance().getPciExpansionsResultCode())
+                                                  switch (AppContext::instance().getPCIExpansionsResultCode())
                                                   {
-                                                      case AOS::Identify::PciExpansionsResultCode::NoPciLib:
-                                                          return Error::NoPciLib;
-                                                      case AOS::Identify::PciExpansionsResultCode::NoPciDb:
-                                                          return Error::NoPciDb;
-                                                      case AOS::Identify::PciExpansionsResultCode::BadPciDb:
-                                                          return Error::BadPciDb;
-                                                      case AOS::Identify::PciExpansionsResultCode::Missing45:
+                                                      case AOS::Identify::PCIExpansionsResultCode::NoPCILib:
+                                                          return Error::NoPCILib;
+                                                      case AOS::Identify::PCIExpansionsResultCode::NoPCIDb:
+                                                          return Error::NoPCIDb;
+                                                      case AOS::Identify::PCIExpansionsResultCode::BadPCIDb:
+                                                          return Error::BadPCIDb;
+                                                      case AOS::Identify::PCIExpansionsResultCode::Missing45:
                                                           return Error::Missing45;
                                                   }
                                                   return Error::UnknownError;
@@ -43,12 +43,12 @@ namespace Components
                                 .object())
       , mComponent({
             { Label::NativeExpansions, mNativeExpansionsList },
-            { Label::PciExpansions, mPciExpansionsGroup },
+            { Label::PCIExpansions, mPCIExpansionsGroup },
         })
     {
-        if (AppContext::instance().getPciExpansionsResultCode() == AOS::Identify::PciExpansionsResultCode::Success)
-            mPciExpansionsGroup.setActivePageFirst();
+        if (AppContext::instance().getPCIExpansionsResultCode() == AOS::Identify::PCIExpansionsResultCode::Success)
+            mPCIExpansionsGroup.setActivePageFirst();
         else
-            mPciExpansionsGroup.setActivePageLast();
+            mPCIExpansionsGroup.setActivePageLast();
     }
 }

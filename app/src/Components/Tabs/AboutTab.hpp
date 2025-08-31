@@ -18,6 +18,7 @@ namespace Components
     {
         GoUrlButton mGoHomePageButton;
         GoUrlButton mGoGitRepositoryButton;
+
         MUI::Group mComponent;
 
       public:

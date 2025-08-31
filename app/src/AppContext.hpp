@@ -22,8 +22,8 @@ class AppContextCore
     ~AppContextCore();
 
     std::vector<AOS::Identify::Expansion> mExpansions;
-    AOS::Identify::PciExpansionsResultCode mPciExpansionsResultCode;
-    std::vector<AOS::Identify::PciExpansion> mPciExpansions;
+    AOS::Identify::PCIExpansionsResultCode mPCIExpansionsResultCode;
+    std::vector<AOS::Identify::PCIExpansion> mPCIExpansions;
 
   public:
     OpenURLBaseScope &getOpenURLBase() const;
@@ -35,14 +35,14 @@ class AppContextCore
         return mExpansions;
     }
 
-    AOS::Identify::PciExpansionsResultCode getPciExpansionsResultCode() const
+    AOS::Identify::PCIExpansionsResultCode getPCIExpansionsResultCode() const
     {
-        return mPciExpansionsResultCode;
+        return mPCIExpansionsResultCode;
     }
 
-    const std::vector<AOS::Identify::PciExpansion> &getPciExpansions() const
+    const std::vector<AOS::Identify::PCIExpansion> &getPCIExpansions() const
     {
-        return mPciExpansions;
+        return mPCIExpansions;
     }
 
     bool hasExpansion(const unsigned short manufacturerId, const unsigned char productId) const;
