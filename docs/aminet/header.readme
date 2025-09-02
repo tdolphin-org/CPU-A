@@ -5,5 +5,5 @@ Type:         util/moni
 Version:      %VERSION%
 Architecture: m68k-amigaos >= 3.0
 Distribution: Aminet
-URL:          http://www.tdolphin.org/projects.php#cpu-a
+URL:          https://www.tdolphin.org/projects.php#cpu-a
 
