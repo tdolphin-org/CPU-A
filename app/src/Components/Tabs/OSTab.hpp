@@ -10,8 +10,8 @@
 #include "TabBase.hpp"
 
 #include "MUI/Group.hpp"
-#include "MUI/Text.hpp"
 #include "MUI/List.hpp"
+#include "MUI/Text.hpp"
 
 namespace Components
 {
@@ -23,9 +23,9 @@ namespace Components
         MUI::Text mWBVersionText;
         MUI::Text mPowerPCOSText;
 
-        MUI::Text mTCPStack;
-
         MUI::List mLoadedLibrariesList;
+
+        MUI::Text mTCPStack;
 
         MUI::Group mComponent;
 
