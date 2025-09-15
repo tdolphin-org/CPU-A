@@ -17,6 +17,7 @@ namespace Components
     class AboutTab : public Root<MUI::Group>, public TabBase
     {
         GoUrlButton mGoHomePageButton;
+        GoUrlButton mMailToButton;
         GoUrlButton mGoGitRepositoryButton;
 
         MUI::Group mComponent;
