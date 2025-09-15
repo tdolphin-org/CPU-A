@@ -29,7 +29,7 @@ include makefile.gen.version.mk
 
 AOS_WRAPPER_PATH = ${AOSCPP_PATH}/wrappers
 AOS_WRAPPER_MODULES = AOS/Exec AOS/Exec AOS/AmigaLib AOS/Identify AOS/OpenURL AOS/Picasso96 AOS/Graphics AOS/Cybergraphics AOS/Dos \
-	AOS/Devices/Timer
+	AOS/Devices/Timer AOS/Icon
 AOS_WRAPPER_SRC_DIRS = $(addprefix $(AOS_WRAPPER_PATH)/src/,$(AOS_WRAPPER_MODULES))
 AOS_WRAPPER_SRCS = $(foreach sdir,$(AOS_WRAPPER_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
 AOS_WRAPPER_CPP_FLAGS_LIGHT = $(CPP_FLAGS) -DSTD_LIGHT

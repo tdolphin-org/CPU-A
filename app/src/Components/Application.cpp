@@ -14,7 +14,8 @@
 namespace Components
 {
     Application::Application()
-      : mComponent(MUI::ApplicationBuilder()
+      : mAppIcon(AOS::Icon::DiskObjectScope("PROGDIR:" CMD_NAME))
+      , mComponent(MUI::ApplicationBuilder()
                        .tagAuthor(AUTHORS)
                        .tagBase(CMD_NAME)
                        .tagCopyright(APP_TDOLPHIN_COPYRIGHTS)
@@ -23,6 +24,7 @@ namespace Components
                        .tagVersion(AMIGAOS_VER_PREFIX " " CMD_NAME " " APP_VERSION " " APP_DATE)
                        .tagWindow(mAppWindow)
                        .tagWindows(WindowManager::instance().getAllWindows())
+                       .tagDiskObject(*mAppIcon.diskObject())
                        .object())
     {
     }
