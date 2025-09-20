@@ -6,11 +6,12 @@
 
 #pragma once
 
-#include "AOS/Identify/Library.hpp"
 #include "CPU/CPUInfo.hpp"
+#include "Components/Tabs/TabBase.hpp"
+
+#include "AOS/Identify/Library.hpp"
 #include "Components/Core/Root.hpp"
 #include "Components/MCC/ActionCycle.hpp"
-#include "Components/Tabs/TabBase.hpp"
 #include "MUI/Group.hpp"
 #include "MUI/Text.hpp"
 

@@ -1,3 +1,9 @@
+//
+//  CPU-A
+//
+//  (c) 2024-2025 TDolphin
+//
+
 #include "BoardsBase.hpp"
 
 namespace Components
