@@ -35,6 +35,8 @@ namespace Components
                                                           return Error::BadPCIDb;
                                                       case AOS::Identify::PCIExpansionsResultCode::Missing45:
                                                           return Error::Missing45;
+                                                          //   case AOS::Identify::PCIExpansionsResultCode::Success:
+                                                          //       return Error::Success;
                                                   }
                                                   return Error::UnknownError;
                                               }()))

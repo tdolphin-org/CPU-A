@@ -9,6 +9,7 @@
 #include <cstring>
 #include <libraries/identify.h>
 
+// expansion reference structure for MUI list
 struct ExpansionRef
 {
     char manufacturer[IDENTIFYBUFLEN + 9]; // prefix: "[0xffff] ".size()

@@ -60,7 +60,7 @@ namespace Components
                         .tagChild(MUI::TextBuilder().tagFrame(MUI::Frame::String).tagContents(gfxBoard.modelName).object())
                         .tagChild(MUI::TextBuilder()
                                       .tagFrame(MUI::Frame::String)
-#ifdef MUIA_Text_Shorten
+#ifdef MUIV_Text_Shorten_ElideRight
                                       .tagShorten(MUI::Text_Shorten::ElideRight)
 #endif
                                       .tagSetMin(false)

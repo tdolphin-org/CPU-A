@@ -17,8 +17,8 @@ namespace Components
     class ExpansionsTab : public Root<MUI::Group>
     {
         ExpansionsList mNativeExpansionsList;
-        ExpansionsList mPciExpansionsList;
-        MUI::Group mPciExpansionsGroup;
+        ExpansionsList mPCIExpansionsList;
+        MUI::Group mPCIExpansionsGroup;
 
         TabsContainer mComponent;
 

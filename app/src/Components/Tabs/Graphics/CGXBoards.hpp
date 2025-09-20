@@ -9,8 +9,6 @@
 #include "BoardsBase.hpp"
 #include "Components/Buttons/GfxChipSpecButton.hpp"
 
-#include "MUI/Group.hpp"
-
 namespace Components
 {
     class CGXBoards : public BoardsBase
