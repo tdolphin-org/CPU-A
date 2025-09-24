@@ -4,6 +4,5 @@ Author:       Rafal Zabdyr
 Type:         util/moni
 Version:      %VERSION%
 Architecture: m68k-amigaos >= 3.0
-Distribution: Aminet
 URL:          https://www.tdolphin.org/projects.php#cpu-a
 

@@ -62,8 +62,8 @@ namespace Components
         mTCPStack.setContents(AOS::Identify::Library::libIdHardware(AOS::Identify::IDHW::TCPIP));
         mLoadedLibrariesList.InsertSorted([]() -> std::vector<std::string> {
             std::vector<std::string> result;
-            for (const auto &entry : AOS::Exec::Library::GetAllLibraryNames())
-                result.push_back(entry.libName + " (v" + entry.version + ")");
+            for (const auto &entry : AOS::Exec::Library::GetAllLibraryNodeNames())
+                result.push_back(entry.name + " (v" + entry.version + ")");
             return result;
         }());
     }
