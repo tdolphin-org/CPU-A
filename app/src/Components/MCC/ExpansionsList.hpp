@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Components/MCC/Core/Dispatcher/OnActiveEntryDispatcher.hpp"
+#include "Components/MCC/Core/ActionRoot.hpp"
 #include "MUI/List.hpp"
 
 namespace Components::MCC
@@ -17,6 +17,5 @@ namespace Components::MCC
         ExpansionsListBuilder();
 
         ActionRoot<MUI::List> object();
-        ActionRoot<MUI::List> object(OnActiveEntryDispatcher &dispatcher);
     };
 }

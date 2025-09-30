@@ -72,25 +72,6 @@ struct Hook ConstructHook = { { nullptr, nullptr }, (HOOKFUNC_)ConstructEntry, n
 struct Hook DestructHook = { { nullptr, nullptr }, (HOOKFUNC_)DestructEntry, nullptr, nullptr };
 struct Hook DisplayHook = { { nullptr, nullptr }, (HOOKFUNC_)DisplayEntry, nullptr, nullptr };
 
-DISPATCHER(ExpansionsListDispatcherFunc)
-{
-    // Be careful with std::cout, when here is some "debug" info !!!
-    // It causes that MUI interface hangs during "drag&drop"!
-    // std::cout << __PRETTY_FUNCTION__ << std::hex << "MethodID: 0x" << msg->MethodID << std::endl;
-
-    switch (msg->MethodID)
-    {
-        default:
-        {
-            auto dispatchMethodResult = Components::MCC::dispatchMethod(msg->MethodID, cl, obj, msg);
-            if (dispatchMethodResult.dispatchResult)
-                return dispatchMethodResult.methodResult;
-        }
-    }
-
-    return DoSuperMethodA(cl, obj, msg);
-}
-
 namespace Components::MCC
 {
     ExpansionsListBuilder::ExpansionsListBuilder()
@@ -106,25 +87,7 @@ namespace Components::MCC
 #ifdef TRACE_CUSTOM_COMPONENTS
         std::cout << __PRETTY_FUNCTION__ << std::endl;
 #endif
-        auto list = MUI::ListBuilderTemplate<ExpansionsListBuilder, ActionRoot<MUI::List>>::object(sizeof(CustomObjectData),
-                                                                                                   ENTRY(ExpansionsListDispatcherFunc));
-        return list;
-    }
-
-    ActionRoot<MUI::List> ExpansionsListBuilder::object(OnActiveEntryDispatcher &dispatcher)
-    {
-#ifdef TRACE_CUSTOM_COMPONENTS
-        std::cout << __PRETTY_FUNCTION__ << std::endl;
-#endif
-        PushTag(MUIA_ActionDispatcher, (void *)&dispatcher);
-
-        auto list = MUI::ListBuilderTemplate<ExpansionsListBuilder, ActionRoot<MUI::List>>::object(sizeof(CustomObjectData),
-                                                                                                   ENTRY(ExpansionsListDispatcherFunc));
-
-        // any entry selected
-        // -> call dispatcher method
-        MUI::Notifier::from(list).onActiveEveryTime().notifySelf().method(MUIM_ActionOnActiveEntry);
-
+        auto list = MUI::ListBuilderTemplate<ExpansionsListBuilder, ActionRoot<MUI::List>>::object(sizeof(CustomObjectData));
         return list;
     }
 }
