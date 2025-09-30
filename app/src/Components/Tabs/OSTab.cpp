@@ -63,7 +63,7 @@ namespace Components
         mLoadedLibrariesList.InsertSorted([]() -> std::vector<std::string> {
             std::vector<std::string> result;
             for (const auto &entry : AOS::Exec::Library::GetAllLibraryNodeNames())
-                result.push_back(entry.name + " (v" + entry.version + ")");
+                result.push_back(entry.name + " (v" + entry.version.value_or("??") + ")");
             return result;
         }());
     }
