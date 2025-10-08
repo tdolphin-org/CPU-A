@@ -25,15 +25,4 @@ v0.4.0
 
 ![CPU-A v0.1.9.expansions](/docs/assets/CPU-A.0.4.0.expansions.png)
 
-v0.1.9
-
-![CPU-A v0.1.9.graphics](/docs/assets/CPU-A.0.1.9.graphics.png)
-
-v0.1.7
-
-![CPU-A v0.1.7.cpu](/docs/assets/CPU-A.0.1.7.cpu.png)
-![CPU-A v0.1.7.mainboard](/docs/assets/CPU-A.0.1.7.mainboard.png)
-![CPU-A v0.1.7.memory](/docs/assets/CPU-A.0.1.7.memory.png)
-![CPU-A v0.1.7.graphics](/docs/assets/CPU-A.0.1.7.graphics.png)
-
 [previous interface](/docs/OldInterface.md)
