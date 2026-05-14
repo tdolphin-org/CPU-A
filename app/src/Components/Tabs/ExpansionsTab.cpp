@@ -1,7 +1,7 @@
 //
 //  CPU-A
 //
-//  (c) 2024-2025 TDolphin
+//  (c) 2024-2026 TDolphin
 //
 
 #include "ExpansionsTab.hpp"
@@ -35,8 +35,10 @@ namespace Components
                                                           return Error::BadPCIDb;
                                                       case AOS::Identify::PCIExpansionsResultCode::Missing45:
                                                           return Error::Missing45;
-                                                          //   case AOS::Identify::PCIExpansionsResultCode::Success:
-                                                          //       return Error::Success;
+                                                    //   case AOS::Identify::PCIExpansionsResultCode::Success:
+                                                    //       return Error::Success;
+                                                      default:
+                                                          break;
                                                   }
                                                   return Error::UnknownError;
                                               }()))
