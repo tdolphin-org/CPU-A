@@ -1,7 +1,7 @@
 #
 #  Makefile for CPU-A project
 #
-#  (c) 2024-2025 TDolphin
+#  (c) 2024-2026 TDolphin
 #
 
 SUB_PROJECTS = app
@@ -11,6 +11,8 @@ OUT_PATH = out
 OUT_APP_PATH = $(OUT_PATH)/$(APP_DRAWER_NAME)
 
 include app/appversion.txt
+
+help: all
 
 all:
 	@echo "make cross_aos_m68k - AmigaOS m68k build (cross compilation on linux)"
