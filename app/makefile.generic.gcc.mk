@@ -1,7 +1,7 @@
 #
 #  CPU-A
 #
-#  (c) 2024-2025 TDolphin
+#  (c) 2024-2026 TDolphin
 #
 #  generic makefile for gcc
 #
@@ -19,7 +19,7 @@ DEBUG_FLAGS = #-DTRACE -DTRACE_CUSTOM_COMPONENTS -DTRACE_AMIGAOS
 CPP_FLAGS = $(DEBUG_FLAGS) $(MORE_CPP_FLAGS) -Wall\
 	-Isrc -I${AOSCPP_PATH}/wrappers/src -I${MUICPP_PATH}/wrappers/src -I${MUICPP_PATH}/components/src\
 	-fno-rtti -ffunction-sections -fdata-sections
-LFLAGS = -L${MUICPP_PATH}/wrappers/lib/$(SUB_BUILD_PATH) -lMUIcpp.light $(MORE_LFLAGS) -Wl,--gc-sections
+LFLAGS = -L${MUICPP_PATH}/wrappers/lib/$(SUB_BUILD_PATH) $(MORE_LFLAGS) -lMUIcpp -Wl,--gc-sections
 
 dir_guard = mkdir -p $(@D)
 
@@ -32,7 +32,6 @@ AOS_WRAPPER_MODULES = AOS/Exec AOS/Exec AOS/AmigaLib AOS/Identify AOS/OpenURL AO
 	AOS/Devices/Timer AOS/Icon
 AOS_WRAPPER_SRC_DIRS = $(addprefix $(AOS_WRAPPER_PATH)/src/,$(AOS_WRAPPER_MODULES))
 AOS_WRAPPER_SRCS = $(foreach sdir,$(AOS_WRAPPER_SRC_DIRS),$(wildcard $(sdir)/*.cpp))
-AOS_WRAPPER_CPP_FLAGS_LIGHT = $(CPP_FLAGS) -DSTD_LIGHT
 
 MUI_COMPONENTS_PATH = ${MUICPP_PATH}/components
 MUI_COMPONENTS_MODULES = Components/Core Components/MCC Components/MCC/Core Components/Buttons Components/Tabs
@@ -48,7 +47,7 @@ SRCS = $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.cpp))
 ASM_SRCS = $(foreach sdir,$(SRC_DIRS),$(wildcard $(sdir)/*.s))
 OBJS = $(patsubst src/%.cpp,obj/$(SUB_BUILD_PATH)/%.o,$(SRCS))\
 	$(patsubst src/%.s,obj/$(SUB_BUILD_PATH)/%.o,$(ASM_SRCS))\
-	$(patsubst $(AOS_WRAPPER_PATH)/src/%.cpp,$(AOS_WRAPPER_PATH)/obj/$(SUB_BUILD_PATH)/light/%.o,$(AOS_WRAPPER_SRCS))\
+	$(patsubst $(AOS_WRAPPER_PATH)/src/%.cpp,$(AOS_WRAPPER_PATH)/obj/$(SUB_BUILD_PATH)/%.o,$(AOS_WRAPPER_SRCS))\
 	$(patsubst $(MUI_COMPONENTS_PATH)/src/%.cpp,$(MUI_COMPONENTS_PATH)/obj/$(SUB_BUILD_PATH)/%.o,$(MUI_COMPONENTS_SRCS))
 
 HEADERS = src/ProgDefines.hpp
@@ -71,9 +70,9 @@ obj/$(SUB_BUILD_PATH)/%.o: src/%.s
 	$(dir_guard)
 	$(CC) -c $< -o $@
 
-$(AOS_WRAPPER_PATH)/obj/$(SUB_BUILD_PATH)/light/%.o: $(AOS_WRAPPER_PATH)/src/%.cpp $(AOS_WRAPPER_PATH)/src/%.hpp
+$(AOS_WRAPPER_PATH)/obj/$(SUB_BUILD_PATH)/%.o: $(AOS_WRAPPER_PATH)/src/%.cpp $(AOS_WRAPPER_PATH)/src/%.hpp
 	$(dir_guard)
-	$(CPPC) $(AOS_WRAPPER_CPP_FLAGS_LIGHT) -c $< -o $@
+	$(CPPC) $(CPP_FLAGS) -c $< -o $@
 
 $(MUI_COMPONENTS_PATH)/obj/$(SUB_BUILD_PATH)/%.o: $(MUI_COMPONENTS_PATH)/src/%.cpp $(MUI_COMPONENTS_PATH)/src/%.hpp
 	$(dir_guard)

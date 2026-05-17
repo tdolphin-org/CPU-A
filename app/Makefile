@@ -1,7 +1,7 @@
 #
 #  MakeFile for CPU-A
 #
-#  (c) 2024-2025 TDolphin
+#  (c) 2024-2026 TDolphin
 #
 
 include appversion.txt
@@ -22,7 +22,7 @@ cross_amigaos_m68k: out/amigaos/m68k
 	MUICPP_PATH=../../AmigaOS.MUI.cpp.wrapper \
 	CPPC=m68k-amigaos-g++ CC=m68k-amigaos-gcc STRIP=m68k-amigaos-strip OBJDUMP=m68k-amigaos-objdump \
 	MORE_CPP_FLAGS="-std=c++17 -Os" \
-	MORE_LFLAGS="-lamiga -noixemul" \
+	MORE_LFLAGS="-lamiga -noixemul -lmui" \
 	all
 
 out/amigaos/m68k:
