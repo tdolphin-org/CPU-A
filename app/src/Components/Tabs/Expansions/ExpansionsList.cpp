@@ -1,16 +1,17 @@
 //
 //  CPU-A
 //
-//  (c) 2024-2025 TDolphin
+//  (c) 2024-2026 TDolphin
 //
 
 #include "ExpansionsList.hpp"
 
 #include "Components/DataType/ExpansionRef.hpp"
 #include "Components/MCC/ExpansionsList.hpp"
+#include "Core/ToString.hpp"
 
-#include <iomanip>
-#include <sstream>
+#include <cstdio>
+#include <string>
 
 namespace Components
 {
@@ -19,14 +20,11 @@ namespace Components
     {
         for (auto &expansion : expansions)
         {
-            std::stringstream manufacturerIdStream, productIdStream;
-            if (expansion.manufacturerId != 0)
-                manufacturerIdStream << "0x" << std::setfill('0') << std::setw(4) << std::hex << expansion.manufacturerId;
-            if (expansion.productId != 0)
-                productIdStream << "0x" << std::setfill('0') << std::setw(2) << std::hex << (int)expansion.productId;
+            const std::string manufacturerId = expansion.manufacturerId != 0 ? ToString::FromHexValue(expansion.manufacturerId, 4) : "";
+            const std::string productId = expansion.productId != 0 ? ToString::FromHexValue(expansion.productId, 2) : "";
 
-            ExpansionRef expansionRef { "[" + manufacturerIdStream.str() + "] " + expansion.manufacturerName,
-                                        "[" + productIdStream.str() + "] " + expansion.productName, expansion.productClass,
+            ExpansionRef expansionRef { "[" + manufacturerId + "] " + expansion.manufacturerName,
+                                        "[" + productId + "] " + expansion.productName, expansion.productClass,
                                         !expansion.additionalInfo.empty() ? expansion.additionalInfo.at(0) : "" };
             mComponent.InsertSingleBottom(&expansionRef);
             for (std::size_t i = 1; i < expansion.additionalInfo.size(); i++)
@@ -42,14 +40,11 @@ namespace Components
     {
         for (auto &expansion : pciExpansions)
         {
-            std::stringstream manufacturerIdStream, productIdStream;
-            if (expansion.manufacturerId != 0)
-                manufacturerIdStream << "0x" << std::setfill('0') << std::setw(4) << std::hex << expansion.manufacturerId;
-            if (expansion.productId != 0)
-                productIdStream << "0x" << std::setfill('0') << std::setw(4) << std::hex << (int)expansion.productId;
+            const std::string manufacturerId = expansion.manufacturerId != 0 ? ToString::FromHexValue(expansion.manufacturerId, 4) : "";
+            const std::string productId = expansion.productId != 0 ? ToString::FromHexValue(expansion.productId, 4) : "";
 
-            ExpansionRef expansionRef { "[" + manufacturerIdStream.str() + "] " + expansion.manufacturerName,
-                                        "[" + productIdStream.str() + "] " + expansion.productName, expansion.productClass, "" };
+            ExpansionRef expansionRef { "[" + manufacturerId + "] " + expansion.manufacturerName,
+                                        "[" + productId + "] " + expansion.productName, expansion.productClass, "" };
             mComponent.InsertSingleBottom(&expansionRef);
         }
     }
