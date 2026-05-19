@@ -1,7 +1,7 @@
 //
 //  CPU-A
 //
-//  (c) 2024-2025 TDolphin
+//  (c) 2024-2026 TDolphin
 //
 
 #include "Labels.hpp"
@@ -9,7 +9,7 @@
 #include "ProgDefines.hpp"
 #include "Version.hpp"
 
-#include <libraries/mui.h>
+#include "mui.hpp"
 
 namespace Label
 {
