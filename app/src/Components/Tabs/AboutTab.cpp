@@ -1,7 +1,7 @@
 //
 //  CPU-A
 //
-//  (c) 2024-2025 TDolphin
+//  (c) 2024-2026 TDolphin
 //
 
 #include "AboutTab.hpp"
@@ -21,24 +21,9 @@ namespace Components
                        .vertical()
                        .tagChild(MUI::MakeObject::HVSpace())
                        .tagChild(MUI::TextBuilder().tagContents(Label::AboutContent).object())
-                       .tagChild(MUI::GroupBuilder()
-                                     .horizontal()
-                                     .tagChild(MUI::MakeObject::HSpace(-1))
-                                     .tagChild(mGoHomePageButton)
-                                     .tagChild(MUI::MakeObject::HSpace(-1))
-                                     .object())
-                       .tagChild(MUI::GroupBuilder()
-                                     .horizontal()
-                                     .tagChild(MUI::MakeObject::HSpace(-1))
-                                     .tagChild(mMailToButton)
-                                     .tagChild(MUI::MakeObject::HSpace(-1))
-                                     .object())
-                       .tagChild(MUI::GroupBuilder()
-                                     .horizontal()
-                                     .tagChild(MUI::MakeObject::HSpace(-1))
-                                     .tagChild(mGoGitRepositoryButton)
-                                     .tagChild(MUI::MakeObject::HSpace(-1))
-                                     .object())
+                       .tagChild(MUI::MakeObject::HCenter(mGoHomePageButton))
+                       .tagChild(MUI::MakeObject::HCenter(mMailToButton))
+                       .tagChild(MUI::MakeObject::HCenter(mGoGitRepositoryButton))
                        .tagChild(MUI::MakeObject::HVSpace())
                        .object())
     {
