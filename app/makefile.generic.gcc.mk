@@ -19,9 +19,9 @@ DEBUG_FLAGS = #-DTRACE -DTRACE_CUSTOM_COMPONENTS -DTRACE_AMIGAOS
 CPP_FLAGS = $(DEBUG_FLAGS) $(MORE_CPP_FLAGS) -Wall\
 	-Isrc -I${AOSCPP_PATH}/wrappers/src -I${MUICPP_PATH}/wrappers/src -I${MUICPP_PATH}/components/src\
 	-fno-rtti -ffunction-sections -fdata-sections\
-	-DAOS_MUI38
+	-DAOS_MUI38 -flto
 LFLAGS = -L${AOSCPP_PATH}/wrappers/lib/$(SUB_BUILD_PATH) -L${MUICPP_PATH}/wrappers/lib/$(SUB_BUILD_PATH) -lamiga_std_light\
-	$(MORE_LFLAGS) -lMUIcpp38
+	$(MORE_LFLAGS) -lMUIcpp38 -flto
 
 dir_guard = mkdir -p $(@D)
 
